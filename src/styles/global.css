@@ -40,6 +40,8 @@
     --color-black-800: #454545;
     --color-black-900: #3d3d3d;
     --color-black-950: #000000;
+    --shadow-cetzz: 0 0 30px -5px #ff655788;
+    --shadow-labs: 0 0 30px -5px #20c0e788;
 
     --transition-duration-pro: .25s;
 }
@@ -65,7 +67,23 @@
 }
 
 .card {
-    @apply py-12 px-6 rounded-2xl bg-black-900/10 backdrop-blur-lg shadow-lg hover:scale-105 transition-transform;
+    @apply py-12 px-6 rounded-2xl bg-black-900/10 backdrop-blur-lg shadow-lg hover:scale-105 hover:outline hover:outline-accent-400 hover:shadow-cetzz transition-all duration-pro;
+}
+
+.process-card {
+    @apply flex flex-col items-center bg-gradient-to-br from-primary-400/10 rounded-lg p-12 px-6 backdrop-blur-lg hover:shadow-labs outline outline-primary-400/50 hover:outline-primary-400 hover:scale-105 transition-all duration-pro ;
+}
+
+.process-arrow {
+    @apply text-primary-400/70 drop-shadow-md drop-shadow-primary-400 hover:scale-105 transition-transform duration-pro;
+}
+
+.process-card:hover {
+    animation: card-animation 1s alternate infinite;
+}
+
+.process-icon {
+    @apply size-14 flex items-center justify-center rounded-full text-xl font-bold shadow-md shadow-primary-400 mb-6;
 }
 
 .icon-size {
@@ -92,11 +110,27 @@
     @apply text-3xl font-bold mb-4;
 }
 
+.title-card {
+    @apply text-xl font-semibold mb-4;
+}
+
 @keyframes icon-animation {
     0% {
         transform: translateY(0px);
     }
     100% {
         transform: translateY(-10px);
+    }
+}
+
+@keyframes card-animation {
+    0% {
+        transform: rotate(-6deg);
+    }
+    50% {
+        transform: rotate(6deg);
+    }
+    100% {
+        transform: rotate(0deg);
     }
 }

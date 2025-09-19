@@ -1,86 +1,76 @@
+---
+import { NotebookPen } from "@lucide/astro";
+import Arrow1 from "./svg/Arrow1.astro";
+import Arrow2 from "./svg/Arrow2.astro";
+import Arrow3 from "./svg/Arrow3.astro";
+---
+
 <section
     id="proceso"
-    class="py-20 bg-gradient-to-br from-[#18183a] to-[#49537e] text-white"
+    class="py-20 bg-radial from-labs to-black-950 to-60% relative"
 >
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-bold mb-4">Así trabajamos</h2>
+    <div class="container-labs text-center">
+        <h2 class="title-secundary title-style">Así trabajamos</h2>
         <p class="text-lg mb-16 text-gray-300">
             Nuestro proceso es simple, claro y pensado para que tengas tu web
             lista sin complicaciones.
         </p>
-
-        <!-- Camino de números con flechas -->
-        <div class="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
-            <!-- Paso 1 -->
-            <div class="flex flex-col items-center md:w-1/4" data-aos="fade-up">
-                <div
-                    class="w-14 h-14 flex items-center justify-center rounded-full bg-azul-claro text-white text-xl font-bold shadow-lg"
-                >
-                    1
-                </div>
-                <h3 class="mt-4 text-lg font-semibold">Reunión inicial</h3>
+        <div class="relative grid grid-cols-4 grid-rows-2 gap-6 md:gap-10">
+            <div class="col-start-1 row-start-2 flex items-center justify-center rotate-12 text-primary-400/70 hover:text-primary-300 hover:scale-105 transition-transform duration-pro">
+                <NotebookPen class="size-20" />
+            </div>
+            <div class="process-card">
+                <div class="process-icon">1</div>
+                <h3 class="title-card">Reunión inicial</h3>
                 <p class="text-gray-300 text-sm mt-2">
-                    Conversamos sobre tus ideas y lo que necesitas para tu negocio.
+                    Conversamos sobre tus ideas y lo que necesitas para tu
+                    negocio.
                 </p>
             </div>
 
-            <!-- Flecha -->
-            <div class="hidden md:flex text-4xl text-azul-claro">➝</div>
+            <div
+                class="col-start-2 row-start-1 rotate-45 flex items-end justify-end pb-10 process-arrow"
+            >
+                <Arrow2 />
+            </div>
 
-            <!-- Paso 2 -->
-            <div class="flex flex-col items-center md:w-1/4" data-aos="fade-up" data-aos-delay="100">
-                <div
-                    class="w-14 h-14 flex items-center justify-center rounded-full bg-azul-claro text-white text-xl font-bold shadow-lg"
-                >
-                    2
-                </div>
-                <h3 class="mt-4 text-lg font-semibold">Diseño</h3>
+            <div class="process-card col-start-2 row-start-2">
+                <div class="process-icon">2</div>
+                <h3 class="title-card">Diseño</h3>
                 <p class="text-gray-300 text-sm mt-2">
-                    Creamos un diseño único adaptado a tu marca y te mostramos un prototipo.
+                    Creamos un diseño único adaptado a tu marca y te mostramos
+                    un prototipo.
                 </p>
             </div>
 
-            <!-- Flecha -->
-            <div class="hidden md:flex text-4xl text-azul-claro">➝</div>
+            <div
+                class="col-start-3 row-start-2 rotate-[220deg] flex items-end justify-end pr-8 pb-8 process-arrow"
+            >
+                <Arrow1 />
+            </div>
 
-            <!-- Paso 3 -->
-            <div class="flex flex-col items-center md:w-1/4" data-aos="fade-up" data-aos-delay="200">
-                <div
-                    class="w-14 h-14 flex items-center justify-center rounded-full bg-azul-claro text-white text-xl font-bold shadow-lg"
-                >
-                    3
-                </div>
-                <h3 class="mt-4 text-lg font-semibold">Desarrollo</h3>
+            <div class="process-card col-start-3 row-start-1">
+                <div class="process-icon">3</div>
+                <h3 class="title-card">Desarrollo</h3>
                 <p class="text-gray-300 text-sm mt-2">
-                    Construimos tu web optimizada, responsive y lista para Google.
+                    Construimos tu web optimizada, responsive y lista para
+                    Google.
                 </p>
             </div>
 
-            <!-- Flecha -->
-            <div class="hidden md:flex text-4xl text-azul-claro">➝</div>
+            <div
+            class="col-start-4 row-start-1 rotate-[75deg] flex items-end justify-end pb-8 process-arrow"
+        >
+            <Arrow3 />
+        </div>
 
-            <!-- Paso 4 -->
-            <div class="flex flex-col items-center md:w-1/4" data-aos="fade-up" data-aos-delay="300">
-                <div
-                    class="w-14 h-14 flex items-center justify-center rounded-full bg-azul-claro text-white text-xl font-bold shadow-lg"
-                >
-                    4
-                </div>
-                <h3 class="mt-4 text-lg font-semibold">Entrega y soporte</h3>
+            <div class="process-card col-start-4 row-start-2">
+                <div class="process-icon">4</div>
+                <h3 class="title-card">Entrega y soporte</h3>
                 <p class="text-gray-300 text-sm mt-2">
                     Publicamos tu web y te brindamos soporte continuo.
                 </p>
             </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="mt-16">
-            <a
-                href="#contacto"
-                class="px-8 py-4 bg-azul-claro text-white font-semibold rounded-xl shadow-lg hover:bg-azul transition"
-            >
-                Comencemos tu proyecto
-            </a>
         </div>
     </div>
 </section>
