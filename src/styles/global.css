@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+    --color-cetzz: #49537e;
+    --color-labs: #18183a;
+
+    --color-primary-50: #edfcfe;
+    --color-primary-100: #d0f6fd;
+    --color-primary-200: #a8ecf9;
+    --color-primary-300: #6bdcf5;
+    --color-primary-400: #20c0e7;
+    --color-primary-500: #0ca6ce;
+    --color-primary-600: #0d84ad;
+    --color-primary-700: #126a8c;
+    --color-primary-800: #185672;
+    --color-primary-900: #184861;
+    --color-primary-950: #0a2e42;
+
+
+    --color-accent-50: #fff1f0;
+    --color-accent-100: #ffe0dd;
+    --color-accent-200: #ffc5c0;
+    --color-accent-300: #ff9d94;
+    --color-accent-400: #ff6557;
+    --color-accent-500: #ff3623;
+    --color-accent-600: #ff1903;
+    --color-accent-700: #d71200;
+    --color-accent-800: #b21203;
+    --color-accent-900: #92160a;
+    --color-accent-950: #500700;
+
+    --color-black-50: #f6f6f6;
+    --color-black-100: #e7e7e7;
+    --color-black-200: #d1d1d1;
+    --color-black-300: #b0b0b0;
+    --color-black-400: #888888;
+    --color-black-500: #6d6d6d;
+    --color-black-600: #5d5d5d;
+    --color-black-700: #4f4f4f;
+    --color-black-800: #454545;
+    --color-black-900: #3d3d3d;
+    --color-black-950: #000000;
+
+    --transition-duration-pro: .25s;
+}
+
+.link-btn {
+    @apply hover:text-accent-400 transition-colors duration-pro;
+}
+
+.btn-primary {
+    @apply px-6 py-2 bg-primary-600 rounded-md hover:bg-transparent hover:outline hover:outline-primary-600 transition-colors duration-pro;
+}
+
+.btn-primary-big {
+    @apply px-8 py-4 bg-primary-600 rounded-lg hover:bg-transparent hover:outline hover:outline-primary-600 transition-colors duration-pro shadow-lg shadow-primary-600/40;
+}
+
+.btn-secundary {
+    @apply outline outline-primary-600 px-6 py-2 rounded-md hover:bg-primary-600 hover:text-white transition-colors duration-pro shadow-lg shadow-primary-600/40;
+}
+
+.container-labs {
+    @apply container lg:max-w-6xl mx-auto px-6;
+}
+
+.card {
+    @apply py-12 px-6 rounded-2xl bg-black-900/10 backdrop-blur-lg shadow-lg hover:scale-105 transition-transform;
+}
+
+.icon-size {
+    @apply size-10;
+}
+
+.card-icon {
+    @apply size-12 mx-auto rounded-full flex items-center justify-center p-3 mb-6;
+}
+
+.service-card-icon {
+    @apply bg-gradient-to-br from-accent-400 to-accent-700;
+}
+
+.card:hover .service-card-icon{
+    animation: icon-animation 1s alternate infinite;
+}
+
+.title-style {
+    @apply bg-gradient-to-br from-primary-600 to-primary-200 bg-clip-text text-transparent text-shadow-md text-shadow-primary-300/40;
+}
+
+.title-secundary {
+    @apply text-3xl font-bold mb-4;
+}
+
+@keyframes icon-animation {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}

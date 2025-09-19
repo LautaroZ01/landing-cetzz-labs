@@ -1,0 +1,27 @@
+---
+import { Menu, Play } from "@lucide/astro";
+---
+
+<header class="container-labs flex items-center justify-between gap-2 sticky top-2 z-20 px-4 py-2 bg-black/50 rounded-lg backdrop-blur-lg shadow-md shadow-gray-800/40">
+    <a href="#" class="flex items-center hover:scale-120 hover:rotate-45 transition-transform duration-pro">
+        <img src="/logo-cetzz-labs.webp" alt="CetZz Labs" class="w-20">
+    </a>
+
+    <button class="lg:hidden text-primary-500" id="menu-toggle">
+        <Menu />
+    </button>
+    <nav class="grow hidden lg:flex px-2" id="mobile-menu" aria-hidden="true">
+        <div class="grow flex items-center justify-center gap-4 text-gray-300 font-semibold">
+            <a href="#" class="link-btn">Nosotros</a>
+            <a href="#" class="link-btn">Servicios</a>
+            <a href="#" class="link-btn">Portafolio</a>
+            <a href="#" class="link-btn">Precios</a>
+            <a href="#" class="link-btn">Contacto</a>
+        </div>
+        <div>
+            <a href="#" class="p-2 bg-gradient-to-bl from-primary-500 to-primary-600 rounded-full flex items-center justify-center hover:from-black-950 hover:to-transparent hover:outline hover:outline-primary-500 transition-colors duration-pro">
+                <Play class="size-4" />
+            </a>
+        </div>
+    </nav>
+</header>

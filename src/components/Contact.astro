@@ -1,0 +1,105 @@
+<section
+    id="contacto"
+    class="py-20 bg-gradient-to-br from-[#18183a] to-[#49537e] text-white"
+>
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Contáctanos</h2>
+            <p class="text-lg text-gray-300">
+                ¿Tienes un proyecto en mente o alguna duda? Escríbenos y te
+                responderemos lo antes posible.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Información de contacto -->
+            <div class="space-y-6" data-aos="fade-right">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Información</h3>
+                    <p class="text-gray-300">
+                        Estamos aquí para ayudarte en cada paso. Puedes
+                        escribirnos directamente o completar el formulario.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10">
+                            📍
+                        </span>
+                        <p class="text-gray-300">Buenos Aires, Argentina</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10">
+                            ✉️
+                        </span>
+                        <p class="text-gray-300">contacto@empresa.com</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10">
+                            📞
+                        </span>
+                        <p class="text-gray-300">+54 9 11 1234 5678</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <form
+                action="#"
+                method="POST"
+                class="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg space-y-6"
+                data-aos="fade-left"
+            >
+                <div>
+                    <label for="name" class="block text-sm font-medium mb-2"
+                        >Nombre</label
+                    >
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-azul-claro"
+                        placeholder="Tu nombre"
+                    />
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-2"
+                        >Correo electrónico</label
+                    >
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-azul-claro"
+                        placeholder="tucorreo@email.com"
+                    />
+                </div>
+
+                <div>
+                    <label for="message" class="block text-sm font-medium mb-2"
+                        >Mensaje</label
+                    >
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        required
+                        class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-azul-claro"
+                        placeholder="Escribe tu mensaje aquí..."
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full py-3 bg-azul-claro text-white rounded-lg font-semibold hover:bg-azul transition"
+                >
+                    Enviar mensaje
+                </button>
+            </form>
+        </div>
+    </div>
+</section>

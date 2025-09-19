@@ -1,0 +1,23 @@
+---
+import Header from "./ui/Header.astro";
+
+
+---
+
+<main>
+    <div class="absolute top-0 left-0 w-screen h-screen -z-10 flex items-center justify-center lg:justify-end bg-gradient-to-tr from-black-950 to-labs from-10%">
+        <video src="/hero-video.mp4" autoplay loop muted class="size-2xl object-cover mask-radial-at-center mask-radial-from-20% mask-radial-to-70% mb-96 lg:mb-0"></video>
+    </div>
+    <section class="h-[calc(100vh-70px)] pb-60 flex flex-col items-center lg:items-start justify-end lg:justify-center gap-8 container-labs lg:pb-14">
+        <div class="text-center lg:text-left">
+            <h1 class="lg:text-7xl text-5xl font-extrabold title-style">CetZz Labs</h1>
+            <h2 class="lg:text-4xl text-2xl font-bold mb-4 mt-2">Diseño Web & Tecnología</h2>
+            <p>Desarrollamos soluciones web innovadoras y tecnológicas para impulsar tu negocio.</p>
+        </div>
+        <div class="space-x-4">
+            <a href="" class="btn-secundary">Conocer más</a>
+            <a href="" class="btn-primary">Solicitar Web</a>
+        </div>
+    </section>
+</main>
+
