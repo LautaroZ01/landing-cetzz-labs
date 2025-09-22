@@ -46,8 +46,20 @@
     --transition-duration-pro: .25s;
 }
 
+*{
+    scroll-behavior: smooth;
+}
+
 .link-btn {
     @apply hover:text-accent-400 transition-colors duration-pro;
+}
+
+.btn-link {
+    @apply p-2 bg-gradient-to-bl from-primary-500 to-primary-700 rounded-full flex items-center justify-center hover:from-black-950 hover:to-transparent hover:outline hover:outline-primary-500 transition-colors duration-pro;
+}
+
+.btn-link-secundary {
+    @apply p-2 rounded-full flex items-center justify-center bg-black/40 outline outline-accent-500 hover:outline-accent-400 hover:scale-110 transition-all duration-pro;
 }
 
 .btn-primary {
@@ -56,6 +68,10 @@
 
 .btn-primary-big {
     @apply px-8 py-4 bg-primary-600 rounded-lg hover:bg-transparent hover:outline hover:outline-primary-600 transition-colors duration-pro shadow-lg shadow-primary-600/40;
+}
+
+.btn-secundary-big {
+    @apply px-8 py-4 bg-accent-500 rounded-lg hover:bg-transparent hover:outline hover:outline-accent-500 transition-colors duration-pro shadow-lg shadow-accent-500/40;
 }
 
 .btn-secundary {
@@ -71,7 +87,7 @@
 }
 
 .process-card {
-    @apply flex flex-col items-center bg-gradient-to-br from-primary-400/10 rounded-lg p-12 px-6 backdrop-blur-lg hover:shadow-labs outline outline-primary-400/50 hover:outline-primary-400 hover:scale-105 transition-all duration-pro ;
+    @apply flex flex-col items-center bg-gradient-to-br from-primary-400/10 rounded-lg p-12 px-6 backdrop-blur-lg hover:shadow-labs outline outline-primary-400/50 hover:outline-primary-400 hover:scale-105 transition-all duration-pro;
 }
 
 .process-arrow {
@@ -98,7 +114,7 @@
     @apply bg-gradient-to-br from-accent-400 to-accent-700;
 }
 
-.card:hover .service-card-icon{
+.card:hover .service-card-icon {
     animation: icon-animation 1s alternate infinite;
 }
 
@@ -114,10 +130,15 @@
     @apply text-xl font-semibold mb-4;
 }
 
+.rocket-bg{
+    @apply absolute size-90 bg-radial from-labs blur-2xl rounded-full ;
+}
+
 @keyframes icon-animation {
     0% {
         transform: translateY(0px);
     }
+
     100% {
         transform: translateY(-10px);
     }
@@ -127,9 +148,11 @@
     0% {
         transform: rotate(-6deg);
     }
+
     50% {
         transform: rotate(6deg);
     }
+
     100% {
         transform: rotate(0deg);
     }

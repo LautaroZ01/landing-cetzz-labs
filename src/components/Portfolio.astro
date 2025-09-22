@@ -1,0 +1,124 @@
+---
+import { ChevronLeft, ChevronRight } from "@lucide/astro";
+
+type Project = {
+    title: string;
+    description: string;
+    image: string;
+    link: string;
+};
+
+const projects: Project[] = [
+    {
+        title: "E-commerce Moderno",
+        description:
+            "Plataforma de ventas online con diseño responsivo y pasarela de pagos integrada.",
+        image: "/projects/e-commerce.webp",
+        link: "#",
+    },
+    {
+        title: "Blog Profesional",
+        description:
+            "Un blog optimizado para SEO y fácil de administrar con un panel moderno.",
+        image: "/projects/blog.webp",
+        link: "#",
+    },
+    {
+        title: "Landing Page Creativa",
+        description:
+            "Página de presentación con animaciones y enfoque en conversión de leads.",
+        image: "/projects/landing-page.webp",
+        link: "#",
+    },
+];
+---
+
+<section
+    id="portafolio"
+    class="py-20 bg-gradient-to-b from-black-950 to-labs from-10% relative"
+>
+    <div class="rocket-bg -top-20 right-20"></div>
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="title-secundary title-style">Nuestro Portafolio</h2>
+        <p class="text-lg text-gray-300 mb-12">
+            Algunos de los proyectos que hemos desarrollado para clientes de
+            distintos sectores.
+        </p>
+
+        <div class="relative overflow-hidden shadow-labs rounded-2xl">
+            <div
+                id="carousel"
+                class="flex transition-transform duration-700 ease-in-out"
+            >
+                {
+                    projects.map((project) => (
+                        <div class="min-w-full">
+                            <div class="relative bg-black/80 backdrop-blur-md">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    class="size-full rounded-2xl max-h-[720px] min-h-[720px] object-cover hover:scale-110 hover:rotate-2 transition-transform duration-pro mask-radial-[100%_95%] mask-radial-from-70% mask-radial-at-top"
+                                />
+                                <div class="absolute bottom-0 py-4 px-8 w-full text-left">
+                                    <h3 class="text-xl font-semibold mb-2">
+                                        {project.title}
+                                    </h3>
+                                    <p class="text-gray-300 mb-4">
+                                        {project.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <button
+                id="prev"
+                class="absolute top-1/2 left-8 -translate-y-1/2 btn-link-secundary cursor-pointer"
+            >
+                <ChevronLeft />
+            </button>
+            <button
+                id="next"
+                class="absolute top-1/2 right-8 -translate-y-1/2 btn-link-secundary cursor-pointer"
+            >
+                <ChevronRight />
+            </button>
+        </div>
+
+        <div class="mt-12">
+            <a
+                href="#contacto"
+                class="btn-secundary-big"
+            >
+                Quiero un proyecto así
+            </a>
+        </div>
+    </div>
+</section>
+
+<script lang="ts">
+    const carousel = document.getElementById("carousel");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let index = 0;
+    const totalSlides = carousel ? carousel.children.length : 0;
+
+    function updateCarousel() {
+        if (carousel) {
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+        }
+    }
+
+    next?.addEventListener("click", () => {
+        index = (index + 1) % totalSlides;
+        updateCarousel();
+    });
+
+    prev?.addEventListener("click", () => {
+        index = (index - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    });
+</script>
