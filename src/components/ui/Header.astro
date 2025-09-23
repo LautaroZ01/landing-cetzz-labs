@@ -1,10 +1,11 @@
 ---
 import { Menu, Phone } from "@lucide/astro";
+import Image from "astro/components/Image.astro";
 ---
 
 <header class="container-labs flex items-center justify-between gap-2 sticky top-2 z-20 px-4 py-2 bg-black/50 rounded-lg backdrop-blur-lg shadow-md shadow-gray-800/40">
-    <a href="#" class="flex items-center hover:scale-120 hover:rotate-45 transition-transform duration-pro">
-        <img src="/logo-cetzz-labs.webp" alt="CetZz Labs" class="w-20">
+    <a href="#inicio" class="flex items-center hover:scale-120 hover:rotate-45 transition-transform duration-pro">
+        <Image src="/logo-cetzz-labs.webp" alt="CetZz Labs" width={1280} height={720} class="w-20">
     </a>
 
     <button class="lg:hidden text-primary-500" id="menu-toggle">
@@ -19,7 +20,7 @@ import { Menu, Phone } from "@lucide/astro";
             <a href="#contacto" class="link-btn">Contacto</a>
         </div>
         <div>
-            <a href="#contacto" class="btn-link">
+            <a href="#contacto" class="btn-link" title="Contactar">
                 <Phone class="size-4" />
             </a>
         </div>

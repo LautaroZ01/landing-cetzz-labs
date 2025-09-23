@@ -1,5 +1,6 @@
 ---
 import { ChevronLeft, ChevronRight } from "@lucide/astro";
+import Image from "astro/components/Image.astro";
 
 type Project = {
     title: string;
@@ -54,9 +55,11 @@ const projects: Project[] = [
                     projects.map((project) => (
                         <div class="min-w-full">
                             <div class="relative bg-black/80 backdrop-blur-md">
-                                <img
+                                <Image
                                     src={project.image}
                                     alt={project.title}
+                                    width={1280}
+                                    height={720}
                                     class="size-full rounded-2xl max-h-[500px] min-h-[500px] lg:max-h-[720px] lg:min-h-[720px] object-contain lg:object-cover hover:scale-110 hover:rotate-2 transition-transform duration-pro mask-radial-[100%_95%] mask-radial-from-70% mask-radial-at-top"
                                 />
                                 <div class="absolute bottom-0 py-4 px-8 w-full text-left">
