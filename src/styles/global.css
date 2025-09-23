@@ -71,7 +71,7 @@
 }
 
 .btn-secundary-big {
-    @apply px-8 py-4 bg-accent-500 rounded-lg hover:bg-transparent hover:outline hover:outline-accent-500 transition-colors duration-pro shadow-lg shadow-accent-500/40;
+    @apply px-8 py-4 bg-gradient-to-br from-accent-400 to-accent-700 rounded-lg hover:bg-transparent hover:outline hover:outline-accent-400 transition-colors duration-pro shadow-lg shadow-accent-500/40;
 }
 
 .btn-secundary {
@@ -91,7 +91,7 @@
 }
 
 .process-arrow {
-    @apply text-primary-400/70 drop-shadow-md drop-shadow-primary-400 hover:scale-105 transition-transform duration-pro;
+    @apply text-accent-400/60 drop-shadow-md drop-shadow-accent-400 hover:scale-105 transition-transform duration-pro;
 }
 
 .process-card:hover {
@@ -131,7 +131,15 @@
 }
 
 .rocket-bg{
-    @apply absolute size-90 bg-radial from-labs blur-2xl rounded-full ;
+    @apply absolute size-90 bg-radial from-labs blur-2xl rounded-full lg:block hidden;
+}
+
+.contact-icon {
+    @apply shadow-cetzz flex items-center p-2 rounded-full gap-4 outline outline-accent-400;
+}
+
+.contact-input{
+    @apply w-full p-4 rounded-lg bg-black-900/20 placeholder-gray-300 focus:outline-none focus:ring-0 active:outline-none;
 }
 
 @keyframes icon-animation {
