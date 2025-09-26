@@ -1,20 +1,13 @@
 ---
-import {
-    Facebook,
-    Instagram,
-    Mail,
-    MapPin,
-    MessageCircleMore,
-    Phone,
-} from "@lucide/astro";
-import X from "./svg/X.astro";
+import { MessageCircleMore } from "@lucide/astro";
+import { contacts, socials, whatsApp } from "../data/data";
+import Icons from "./ui/Icons.astro";
 ---
 
 <section
     id="contacto"
     class="py-20 bg-gradient-to-b from-labs to-black-950 from-10% relative"
 >
-<div class="rocket-bg -bottom-20 left-2/8"></div>
     <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-12 flex flex-col items-center">
             <MessageCircleMore class="size-20 mb-4 text-gray-400" />
@@ -25,99 +18,60 @@ import X from "./svg/X.astro";
             </p>
         </div>
 
-        <div class="flex flex-col lg:flex-row items-center justify-center gap-8">
-            <a
-                href="mailto:cetzzlabs@gmail.com"
-                target="_blank"
-                class="flex items-center gap-4"
-            >
-                <div class="contact-icon">
-                    <Mail />
-                </div>
-                <p>cetzzlabs@gmail.com</p>
-            </a>
-            <a href="tel:+5493515555555" class="flex items-center gap-4">
-                <div class="contact-icon">
-                    <Phone />
-                </div>
-                <p>+54 9 351 5555555</p>
-            </a>
-            <a
-                href="https://www.google.com/maps/place/Salta+Capital,+Salta,+Argentina"
-                target="_blank"
-                class="flex items-center gap-4"
-            >
-                <div class="contact-icon">
-                    <MapPin />
-                </div>
-                <p>Salta Capital, Salta, Argentina</p>
-            </a>
+        <div
+            class="flex flex-col lg:flex-row items-center justify-center gap-8"
+        >
+            {
+                contacts.map((contact) => (
+                    <a
+                        href={contact.url}
+                        class="flex items-center gap-4 link-btn"
+                        target="_blank"
+                        title={contact.name}
+                        aria-label={contact.name}
+                    >
+                        <div class="contact-icon">
+                            <Icons name={contact.name} />
+                        </div>
+                        <p>{contact.info}</p>
+                    </a>
+                ))
+            }
         </div>
 
         <div class="flex items-center gap-8 justify-center mt-8 pb-4">
-            <a href="" class="contact-icon">
-                <Instagram />
-            </a>
-            <a href="" class="contact-icon">
-                <Facebook />
-            </a>
-            <a href="" class="contact-icon">
-                <X />
-            </a>
+            {
+                socials.map((social) => (
+                    <a
+                        href={social.url}
+                        class="btn-link-secundary"
+                        target="_blank"
+                        title={social.name}
+                        aria-label={social.name}
+                    >
+                        <Icons name={social.name} />
+                    </a>
+                ))
+            }
         </div>
 
-        <form
-            action="#"
-            method="POST"
-            class="rounded-2xl bg-black-900/10 backdrop-blur-lg p-8 space-y-6 max-w-xl mx-auto mt-8"
-        >
-            <div>
-                <label for="name" class="block text-sm font-medium mb-2"
-                    >Nombre</label
-                >
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    class="contact-input"
-                    placeholder="Tu nombre"
-                />
-            </div>
-
-            <div>
-                <label for="email" class="block text-sm font-medium mb-2"
-                    >Correo electrónico</label
-                >
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="contact-input"
-                    placeholder="tucorreo@gmail.com"
-                />
-            </div>
-
-            <div>
-                <label for="message" class="block text-sm font-medium mb-2"
-                    >Mensaje</label
-                >
-                <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                    class="contact-input"
-                    placeholder="Escribe tu mensaje aquí..."></textarea>
-            </div>
-
-            <button
-                type="submit"
-                class="btn-primary-big w-full mt-2 cursor-pointer"
-            >
-                Enviar mensaje
-            </button>
-        </form>
+        <div class="flex items-center justify-center mt-8">
+            {
+                whatsApp && (
+                    <a
+                        href={whatsApp.url}
+                        target="_blank"
+                        title={whatsApp.name}
+                        aria-label={whatsApp.name}
+                        class="flex items-center justify-center gap-4 text-lg font-semibold bg-green-400 text-green-800 p-6 rounded-lg hover:bg-green-200 hover:shadow-lg hover:shadow-green-400/40 transition-all duration-pro"
+                    >
+                        <div>
+                            <Icons name="whatsapp" />
+                        </div>
+                        <p>Escribir por WhatsApp</p>
+                    </a>
+                )
+            }
+        </div>
     </div>
 </section>

@@ -1,0 +1,21 @@
+---
+import { Facebook, Instagram, type AstroComponent, Mail, Phone, MapPin } from "@lucide/astro";
+import TikTok from "../svg/TikTok.astro";
+import WhatsApp from "../svg/WhatsApp.astro";
+
+const { name } = Astro.props;
+
+const icons: Record<string, AstroComponent> = {
+    facebook: Facebook,
+    instagram: Instagram,
+    tiktok: TikTok,
+    email: Mail,
+    phone: Phone,
+    address: MapPin,
+    whatsapp: WhatsApp
+};
+
+const Icon = icons[name.toLowerCase()] || null;
+---
+
+{Icon ? <Icon /> : null}
