@@ -141,7 +141,7 @@
 }
 
 .contact-card {
-    @apply flex items-center gap-4 p-6 max-w-[500px] w-full lg:w-auto lg:min-w-[300px] bg-neutral-900 border border-neutral-800 rounded-lg transition-all duration-300 hover:bg-neutral-800/80 hover:border-primary-400/30 hover:shadow-lg hover:shadow-primary-700/50;
+    @apply flex items-center gap-4 p-6 max-w-[500px] w-full lg:w-auto lg:min-w-[300px] bg-black-900/10 backdrop-blur-lg border border-black-900 rounded-lg transition-all duration-300 hover:bg-black-900/20 hover:border-primary-400/30 hover:shadow-lg hover:shadow-primary-700/50;
 }
 
 .contact-card:hover .contact-icon {
@@ -154,7 +154,7 @@
 }
 
 .contact-whatsapp {
-    @apply flex items-center justify-center gap-3 font-semibold bg-green-500 text-white py-4 px-8 rounded-lg shadow-lg shadow-green-500/20 transform transition-all duration-300 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/30 hover:scale-105;
+    @apply flex items-center justify-center gap-3 font-semibold bg-green-500 text-white py-4 px-8 rounded-lg shadow-lg shadow-green-500/20 transform transition-all duration-300 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/30 hover:scale-110 active:scale-100;
 }
 
 @keyframes icon-animation {
