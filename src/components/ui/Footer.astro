@@ -1,44 +1,59 @@
 ---
 import { socials } from "../../data/data";
 import Icons from "./Icons.astro";
+
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-labs py-10">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div>
-            <h3 class="text-2xl font-bold text-white mb-4">CetZz Labs</h3>
-            <p class="text-gray-400">Una empresa de tecnología diferente.</p>
+<footer class="bg-labs/80 text-neutral-400 border-t border-neutral-800">
+    <div class="max-w-6xl mx-auto px-6 pt-16 pb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+            <div class="md:col-span-2">
+                <h3 class="text-2xl font-bold text-neutral-100 mb-4">
+                    CetZz Labs
+                </h3>
+                <p class="text-neutral-400 max-w-xs">
+                    Una empresa de tecnología diferente.
+                </p>
+            </div>
+
+            <div class="md:col-span-1">
+                <h4 class="text-lg font-semibold text-neutral-200 mb-4">
+                    Enlaces rápidos
+                </h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#quienes-somos" class="link-btn">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="#servicios" class="link-btn">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#proceso" class="link-btn">Proceso</a>
+                    </li>
+                    <li>
+                        <a href="#portafolio" class="link-btn">Portafolio</a>
+                    </li>
+                    <li>
+                        <a href="#contacto" class="link-btn">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div>
-            <h4 class="text-lg font-semibold text-white mb-4">
-                Enlaces rápidos
-            </h4>
-            <ul class="space-y-2">
-                <li>
-                    <a href="#quienes-somos" class="link-btn">Nosotros</a>
-                </li>
-                <li>
-                    <a href="#servicios" class="link-btn">Servicios</a>
-                </li>
-                <li>
-                    <a href="#proceso" class="link-btn">Proceso de desarrollo</a
-                    >
-                </li>
-                <li>
-                    <a href="#contacto" class="link-btn">Contacto</a>
-                </li>
-            </ul>
-        </div>
+        <div
+            class="mt-16 pt-8 border-t border-neutral-800 flex flex-col-reverse md:flex-row justify-between items-center gap-6"
+        >
+            <p class="text-neutral-500 text-sm">
+                &copy; {currentYear} CetZz Labs. Todos los derechos reservados.
+            </p>
 
-        <div>
-            <h4 class="text-lg font-semibold text-white mb-4">Síguenos</h4>
-            <div class="flex space-x-4">
+            <div class="flex items-center space-x-5">
                 {
                     socials.map((social) => (
                         <a
                             href={social.url}
-                            class="btn-link-secundary"
+                            class="social-media"
                             target="_blank"
                             title={social.name}
                             aria-label={social.name}
@@ -49,11 +64,5 @@ import Icons from "./Icons.astro";
                 }
             </div>
         </div>
-    </div>
-
-    <div
-        class="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm"
-    >
-        &copy; {new Date().getFullYear()} CetZz Labs. Todos los derechos reservados.
     </div>
 </footer>
