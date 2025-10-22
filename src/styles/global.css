@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -46,8 +47,9 @@
     --transition-duration-pro: .25s;
 }
 
-*{
+* {
     scroll-behavior: smooth;
+    font-family: "Lato", sans-serif;
 }
 
 .link-btn {
@@ -130,7 +132,7 @@
     @apply text-xl font-semibold mb-4;
 }
 
-.rocket-bg{
+.rocket-bg {
     @apply absolute size-90 bg-radial from-labs blur-2xl rounded-full lg:block hidden;
 }
 
@@ -138,7 +140,7 @@
     @apply shadow-cetzz flex items-center p-2 rounded-full gap-4 outline outline-accent-400;
 }
 
-.contact-input{
+.contact-input {
     @apply w-full p-4 rounded-lg bg-black-900/20 placeholder-gray-300 focus:outline-none focus:ring-0 active:outline-none;
 }
 
