@@ -4,47 +4,54 @@ import { contacts, socials, whatsApp } from "../data/data";
 import Icons from "./ui/Icons.astro";
 ---
 
+
 <section
     id="contacto"
-    class="py-20 bg-gradient-to-b from-labs to-black-950 from-10% relative"
+    class="py-24 sm:py-32 bg-gradient-to-b from-labs to-black-950 from-10% text-neutral-300 relative"
 >
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center mb-12 flex flex-col items-center">
-            <MessageCircleMore class="size-20 mb-4 text-gray-400" />
-            <h2 class="title-secundary title-style">Contáctanos</h2>
-            <p class="text-lg text-gray-300">
+
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16 flex flex-col items-center">
+            <MessageCircleMore class="size-16 mb-6 text-cyan-400" />
+            <h2 class="title-secundary title-style text-neutral-100">
+                Contáctanos
+            </h2>
+            <p class="text-lg text-neutral-400 max-w-2xl mx-auto mt-4">
                 ¿Tienes un proyecto en mente o alguna duda? Escríbenos y te
                 responderemos lo antes posible.
             </p>
         </div>
 
         <div
-            class="flex flex-col lg:flex-row items-center justify-center gap-8"
+            class="flex flex-col lg:flex-row items-center justify-center gap-6"
         >
             {
                 contacts.map((contact) => (
                     <a
                         href={contact.url}
-                        class="flex items-center gap-4 link-btn"
+                        class="contact-card"
                         target="_blank"
                         title={contact.name}
                         aria-label={contact.name}
                     >
+
                         <div class="contact-icon">
                             <Icons name={contact.name} />
                         </div>
-                        <p>{contact.info}</p>
+                        <p class="text-neutral-200 font-medium">{contact.info}</p>
                     </a>
                 ))
             }
         </div>
 
-        <div class="flex items-center gap-8 justify-center mt-8 pb-4">
+        <div
+            class="flex items-center gap-6 justify-center mt-12 border-b border-neutral-800 pb-12"
+        >
             {
                 socials.map((social) => (
                     <a
                         href={social.url}
-                        class="btn-link-secundary"
+                        class="social-media"
                         target="_blank"
                         title={social.name}
                         aria-label={social.name}
@@ -55,15 +62,15 @@ import Icons from "./ui/Icons.astro";
             }
         </div>
 
-        <div class="flex items-center justify-center mt-8">
+        <div class="flex items-center justify-center mt-12">
             {
                 whatsApp && (
-                    <a
+                    <a 
                         href={whatsApp.url}
                         target="_blank"
                         title={whatsApp.name}
                         aria-label={whatsApp.name}
-                        class="flex items-center justify-center gap-4 text-lg font-semibold bg-green-400 text-green-800 p-6 rounded-lg hover:bg-green-200 hover:shadow-lg hover:shadow-green-400/40 transition-all duration-pro"
+                        class="contact-whatsapp"
                     >
                         <div>
                             <Icons name="whatsapp" />

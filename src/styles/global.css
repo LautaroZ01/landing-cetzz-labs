@@ -137,11 +137,24 @@
 }
 
 .contact-icon {
-    @apply shadow-cetzz flex items-center p-2 rounded-full gap-4 outline outline-accent-400;
+    @apply text-neutral-400 transition-colors duration-300;
 }
 
-.contact-input {
-    @apply w-full p-4 rounded-lg bg-black-900/20 placeholder-gray-300 focus:outline-none focus:ring-0 active:outline-none;
+.contact-card {
+    @apply flex items-center gap-4 p-6 max-w-[500px] w-full lg:w-auto lg:min-w-[300px] bg-neutral-900 border border-neutral-800 rounded-lg transition-all duration-300 hover:bg-neutral-800/80 hover:border-primary-400/30 hover:shadow-lg hover:shadow-primary-700/50;
+}
+
+.contact-card:hover .contact-icon {
+    @apply text-primary-400;
+    animation: contact-icon-animation 1s alternate infinite;
+}
+
+.social-media {
+    @apply text-neutral-500 transition-all duration-300 hover:text-accent-400 hover:scale-115;
+}
+
+.contact-whatsapp {
+    @apply flex items-center justify-center gap-3 font-semibold bg-green-500 text-white py-4 px-8 rounded-lg shadow-lg shadow-green-500/20 transform transition-all duration-300 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/30 hover:scale-105;
 }
 
 @keyframes icon-animation {
@@ -151,6 +164,16 @@
 
     100% {
         transform: translateY(-10px);
+    }
+}
+
+@keyframes contact-icon-animation {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(-3px);
     }
 }
 

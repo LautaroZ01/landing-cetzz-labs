@@ -14,7 +14,7 @@ export const socials: ISocial[] = [
     },
     {
         name: "Facebook",
-        url: "https://www.facebook.com/@cetzzlabs"
+        url: "https://www.facebook.com/profile.php?id=61579657569697"
     },
     {
         name: "Tiktok",
