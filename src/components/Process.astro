@@ -1,41 +1,45 @@
 ---
 import { Flag, BarChartBig, PencilLine, CheckCircle2 } from "@lucide/astro";
 import TimeLineSteps from "./svg/TimeLineSteps.astro"; // Asumo que esta es la ruta correcta
+import TimeLineStepsShadow from "./svg/TimeLineStepsShadow.astro";
 
 // --- CAMBIO 1: Nuevos valores de posClass ---
 // Estos valores están calculados para tu nuevo SVG
 const steps = [
     {
         number: 1,
-        title: "General concept",
+        title: "Reunión inicial",
         description:
-            "Far far away, behind mountains, far from the countries Vokalia.",
+            "Conversamos sobre tus ideas y lo que necesitas para tu negocio.",
         icon: Flag,
-        posClass: "lg:top-[84px]", // Estaba lg:top-0
+        posClass: "lg:-bottom-[52px] lg:right-[10px]",
+        posCard: "lg:top-[-20px] lg:left-[50px]",
     },
     {
         number: 2,
-        title: "Post product",
+        title: "Diseño",
         description:
-            "Far far away, behind mountains, far from the countries Vokalia.",
+            "Creamos un diseño único adaptado a tu marca y te mostramos un prototipo",
         icon: BarChartBig,
-        posClass: "lg:top-[-10px]", // Estaba lg:top-[-60px]
+        posClass: "lg:-top-[70px] lg:right-[30px]",
+        posCard: "lg:bottom-[-120px] lg:left-[100px]",
     },
     {
         number: 3,
-        title: "Design process",
+        title: "Desarrollo",
         description:
-            "Far far away, behind mountains, far from the countries Vokalia.",
+            "Construimos tu web optimizada, responsive y lista para Google.",
         icon: PencilLine,
-        posClass: "lg:top-[19px]", // Estaba lg:top-[-20px]
+        posClass: "lg:-bottom-[25px] lg:-right-[0px]",
+        posCard: "lg:top-[-60px] lg:left-[100px]",
     },
     {
         number: 4,
-        title: "Final delivery",
-        description:
-            "Far far away, behind mountains, far from the countries Vokalia.",
+        title: "Entrega y soporte",
+        description: "Publicamos tu web y te brindamos soporte continuo.",
         icon: CheckCircle2,
-        posClass: "lg:top-[34px]", // Estaba lg:top-0
+        posClass: "lg:-top-[34px] lg:right-[10px]",
+        posCard: "lg:bottom-[-134px] lg:left-[100px]",
     },
 ];
 ---
@@ -43,9 +47,14 @@ const steps = [
 <section class="py-16 lg:py-24 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div
-            class="hidden lg:block absolute top-1/2 left-0 w-full h-full -translate-y-1/2 z-10 "
+            class="hidden lg:block absolute top-1/2 left-0 w-full h-full -translate-y-1/2 z-10"
         >
             <TimeLineSteps />
+        </div>
+                <div
+            class="hidden lg:block absolute top-[160px] inset-x-0 w-full h-full -translate-y-1/2 translate-x-[80px] -z-30"
+        >
+            <TimeLineStepsShadow />
         </div>
 
         <div
@@ -53,20 +62,20 @@ const steps = [
         >
             {
                 steps.map((step) => (
-                    <div class="flex flex-col items-center text-center relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none">
+                    <div class="flex flex-col items-center relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
                         <div
                             class:list={[
-                                "bg-primary-500 rounded-full p-5 shadow-xl w-[70px] h-[70px] flex justify-center items-center text-blue-100 transition-transform duration-300 ease-in-out relative z-30",
+                                "bg-primary-500 rounded-full p-5 w-[70px] h-[70px] flex justify-center items-center text-blue-100 transition-transform duration-300 ease-in-out absolute z-30 shadow-xl shadow-primary-600/40",
                                 step.posClass,
                             ]}
                         >
                             <step.icon class="w-full h-full" stroke-width={2} />
                         </div>
-                        <div class="relative mt-6 lg:pt-8 w-full">
-                            <span class="absolute top-[-30px] lg:top-0 left-1/2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold text-slate-200 -z-10 leading-none select-none opacity-60">
+                        <div class:list={["relative w-full", step.posCard]}>
+                            <span class="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
                                 {step.number}
                             </span>
-                            <h3 class="text-xl lg:text-2xl font-semibold text-slate-900 mb-2">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-2">
                                 {step.title}
                             </h3>
                             <p class="text-base text-slate-500 leading-relaxed">
