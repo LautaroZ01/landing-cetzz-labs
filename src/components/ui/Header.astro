@@ -1,28 +1,98 @@
 ---
-import { Menu, Phone } from "@lucide/astro";
-import Image from "astro/components/Image.astro";
+import { Menu, X, Phone } from "@lucide/astro";
 ---
 
-<header class="container-labs flex items-center justify-between gap-2 sticky top-2 z-20 px-4 py-2 bg-black/50 rounded-lg backdrop-blur-lg shadow-md shadow-gray-800/40">
-    <a href="#inicio" class="flex items-center hover:scale-120 hover:rotate-45 transition-transform duration-pro">
-        <Image src="/logo-cetzz-labs.webp" alt="CetZz Labs" width={1280} height={720} class="w-20">
-    </a>
+<header
+  class="container-labs relative flex items-center justify-between flex-wrap gap-2 sticky top-0 md:top-2 z-50 px-4 py-2 bg-black/50 md:rounded-lg backdrop-blur-lg lg:shadow-md lg:shadow-gray-800/40"
+>
+  <a
+    href="#inicio"
+    class="flex items-center hover:scale-110 hover:rotate-3 transition-transform duration-300 active:scale-95"
+  >
+    <img
+      src="/logo-cetzz-labs.webp"
+      alt="CetZz Labs"
+      width={150}
+      height={50}
+      class="w-20 h-auto"
+    />
+  </a>
 
-    <button class="lg:hidden text-primary-500" id="menu-toggle">
-        <Menu />
-    </button>
-    <nav class="grow hidden lg:flex px-2" id="mobile-menu" aria-hidden="true">
-        <div class="grow flex items-center justify-center gap-4 text-gray-300 font-semibold">
-            <a href="#quienes-somos" class="link-btn">Nosotros</a>
-            <a href="#servicios" class="link-btn">Servicios</a>
-            <a href="#proceso" class="link-btn">Proceso</a>
-            <a href="#portafolio" class="link-btn">Portafolio</a>
-            <a href="#contacto" class="link-btn">Contacto</a>
-        </div>
-        <div>
-            <a href="#contacto" class="btn-link" title="Contactar" aria-label="Contactar">
-                <Phone class="size-4" />
-            </a>
-        </div>
-    </nav>
+  <button
+    id="menu-toggle"
+    class="lg:hidden text-primary-500 p-2 active:scale-95 z-50"
+    aria-label="Abrir menú de navegación"
+  >
+    <Menu id="icon-menu" />
+    <X id="icon-close" class="hidden" />
+  </button>
+
+  <nav
+    id="nav-menu"
+    class="absolute top-full left-0 w-full hidden flex-col items-center text-gray-300 font-medium
+           transition-all duration-300 ease-in-out
+           lg:static lg:flex lg:flex-row lg:items-center lg:justify-center lg:w-auto lg:bg-transparent lg:backdrop-blur-0 lg:gap-4 lg:py-0"
+  >
+    <div class="flex flex-col items-center space-y-5 py-8 lg:flex-row lg:space-y-0 lg:gap-4 lg:py-0">
+      <a href="#quienes-somos" class="link-btn block w-full text-center lg:w-auto">Nosotros</a>
+      <a href="#servicios" class="link-btn block w-full text-center lg:w-auto">Servicios</a>
+      <a href="#proceso" class="link-btn block w-full text-center lg:w-auto">Proceso</a>
+      <a href="#portafolio" class="link-btn block w-full text-center lg:w-auto">Portafolio</a>
+      <a href="#contacto" class="link-btn block w-full text-center lg:w-auto">Contacto</a>
+
+      <div class="lg:hidden w-4/6">
+        <a
+          href="#contacto"
+          class="btn-link"
+          title="Contactar"
+          aria-label="Contactar"
+        >
+          <Phone class="size-4" />
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mt-2 lg:mt-0 hidden md:block">
+    <a
+      href="#contacto"
+      class="btn-link"
+      title="Contactar"
+      aria-label="Contactar"
+    >
+      <Phone class="size-4" />
+    </a>
+  </div>
 </header>
+
+<script>
+  const btn = document.querySelector("#menu-toggle");
+  const nav = document.querySelector("#nav-menu");
+  const iconMenu = document.querySelector("#icon-menu");
+  const iconClose = document.querySelector("#icon-close");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !nav?.classList.contains("hidden");
+
+    nav?.classList.toggle("hidden");
+
+    iconMenu?.classList.toggle("hidden");
+    iconClose?.classList.toggle("hidden");
+
+    if (!isOpen) {
+      nav?.classList.add(
+        "bg-black/50",
+        "backdrop-blur-lg",
+        "shadow-md",
+        "shadow-gray-800/40"
+      );
+    } else {
+      nav?.classList.remove(
+        "bg-black/50",
+        "backdrop-blur-lg",
+        "shadow-md",
+        "shadow-gray-800/40"
+      );
+    }
+  });
+</script>

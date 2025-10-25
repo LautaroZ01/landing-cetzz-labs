@@ -53,11 +53,11 @@
 }
 
 .link-btn {
-    @apply hover:text-accent-400 transition-colors duration-pro;
+    @apply hover:text-accent-400 transition-colors duration-pro active:text-accent-400 active:scale-95;
 }
 
 .btn-link {
-    @apply p-2 bg-gradient-to-bl from-primary-500 to-primary-700 rounded-full flex items-center justify-center hover:from-black-950 hover:to-transparent hover:outline hover:outline-primary-500 hover:shadow-lg hover:shadow-primary-600/40 transition-colors duration-pro;
+    @apply p-2 bg-gradient-to-bl from-primary-500 to-primary-700 rounded-lg flex items-center justify-center hover:from-primary-400 hover:to-primary-600 hover:shadow-lg hover:shadow-primary-300/40 hover:scale-105 transition-all active:scale-95;
 }
 
 .btn-link-secundary {
