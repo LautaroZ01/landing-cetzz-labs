@@ -1,6 +1,6 @@
 ---
 import { Flag, BarChartBig, PencilLine, CheckCircle2 } from "@lucide/astro";
-import TimeLineSteps from "./svg/TimeLineSteps.astro"; // Asumo que esta es la ruta correcta
+import TimeLineSteps from "./svg/TimeLineSteps.astro";
 import TimeLineStepsShadow from "./svg/TimeLineStepsShadow.astro";
 
 // --- CAMBIO 1: Nuevos valores de posClass ---
@@ -47,7 +47,10 @@ const steps = [
 <section class="py-16 lg:py-24 lg:mb-20 overflow-hidden">
     <div class="text-center mb-12 lg:mb-30 flex flex-col items-center">
         <h2 class="title-secundary title-style">Así trabajamos</h2>
-        <p class="text-lg text-gray-300">Nuestro proceso es simple, claro y pensado para que tengas tu web lista sin complicaciones.</p>
+        <p class="text-lg text-gray-300">
+            Nuestro proceso es simple, claro y pensado para que tengas tu web
+            lista sin complicaciones.
+        </p>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div
@@ -55,7 +58,7 @@ const steps = [
         >
             <TimeLineSteps />
         </div>
-                <div
+        <div
             class="hidden lg:block absolute top-[160px] inset-x-0 w-full h-full -translate-y-1/2 translate-x-[80px] -z-30"
         >
             <TimeLineStepsShadow />
@@ -75,7 +78,9 @@ const steps = [
                         >
                             <step.icon class="w-full h-full" stroke-width={2} />
                         </div>
-                        <div class:list={["relative w-full px-6", step.posCard]}>
+                        <div
+                            class:list={["relative w-full px-6", step.posCard]}
+                        >
                             <span class="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute -top-10 lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
                                 {step.number}
                             </span>
@@ -92,3 +97,43 @@ const steps = [
         </div>
     </div>
 </section>
+
+<script>
+    // 1. Importar GSAP y el plugin ScrollTrigger
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Seleccionamos TODOS los contenedores de SVG
+    const svgContainers = document.querySelectorAll(".svg-container");
+
+    // 2. Recorremos CADA SVG que encontró
+    svgContainers.forEach((svgContainer) => {
+        // 3. Buscamos el path DENTRO del contenedor actual
+        const path = svgContainer.querySelector(".mi-camino") as SVGPathElement;
+
+        // Si no hay path, saltamos a la siguiente iteración
+        if (!path) return;
+
+        // 4. Medimos la longitud de ESE path específico
+        const length = path.getTotalLength();
+
+        // 5. Aplicamos la lógica de GSAP solo a ESE path
+        gsap.set(path, {
+            strokeDasharray: length,
+            strokeDashoffset: length,
+        });
+
+        gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 2,
+            ease: "power2.inOut",
+            scrollTrigger: {
+                trigger: svgContainer, // El trigger es el contenedor actual
+                start: "top 80%",
+                toggleActions: "play reset play reset"
+            },
+        });
+    });
+</script>
