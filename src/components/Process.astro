@@ -44,7 +44,11 @@ const steps = [
 ];
 ---
 
-<section class="py-16 lg:py-24 overflow-hidden">
+<section class="py-16 lg:py-24 lg:mb-20 overflow-hidden">
+    <div class="text-center mb-12 lg:mb-30 flex flex-col items-center">
+        <h2 class="title-secundary title-style">Así trabajamos</h2>
+        <p class="text-lg text-gray-300">Nuestro proceso es simple, claro y pensado para que tengas tu web lista sin complicaciones.</p>
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div
             class="hidden lg:block absolute top-1/2 left-0 w-full h-full -translate-y-1/2 z-10"
@@ -58,21 +62,21 @@ const steps = [
         </div>
 
         <div
-            class="relative z-20 flex flex-col lg:flex-row lg:justify-between items-start w-full gap-16 lg:gap-0 py-10"
+            class="lg:relative z-20 flex flex-col lg:flex-row lg:justify-between items-start w-full gap-16 lg:gap-0 py-10"
         >
             {
                 steps.map((step) => (
-                    <div class="flex flex-col items-center relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
+                    <div class="flex flex-col items-center gap-6 lg:gap-0 relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
                         <div
                             class:list={[
-                                "bg-primary-500 rounded-full p-5 w-[70px] h-[70px] flex justify-center items-center text-blue-100 transition-transform duration-300 ease-in-out absolute z-30 shadow-xl shadow-primary-600/40",
+                                "bg-primary-500 rounded-full p-5 w-[70px] h-[70px] flex justify-center items-center text-blue-100 transition-transform duration-300 ease-in-out lg:absolute z-30 shadow-xl shadow-primary-600/40",
                                 step.posClass,
                             ]}
                         >
                             <step.icon class="w-full h-full" stroke-width={2} />
                         </div>
-                        <div class:list={["relative w-full", step.posCard]}>
-                            <span class="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
+                        <div class:list={["relative w-full px-6", step.posCard]}>
+                            <span class="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute -top-10 lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
                                 {step.number}
                             </span>
                             <h3 class="text-xl lg:text-2xl font-semibold mb-2">
