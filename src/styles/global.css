@@ -157,6 +157,19 @@
     @apply flex items-center justify-center gap-3 font-semibold bg-green-500 text-white py-4 px-8 rounded-lg shadow-lg shadow-green-500/20 transform transition-all duration-300 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/30 hover:scale-110 active:scale-100;
 }
 
+.sticky-contact {
+    @apply fixed bottom-4 right-4 md:right-6 md:bottom-6 z-50;
+    animation: pulse-glow 1s alternate infinite;
+}
+
+.animation-menu {
+    animation: menu-animation 0.3s forwards;
+}
+
+.animation-menu-close {
+    animation: menu-animation-close 0.3s forwards;
+}
+
 @keyframes icon-animation {
     0% {
         transform: translateY(0px);
@@ -188,5 +201,47 @@
 
     100% {
         transform: rotate(0deg);
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes menu-animation {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes menu-animation-close {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(-40px);
+        opacity: 0;
     }
 }
