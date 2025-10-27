@@ -2,10 +2,18 @@
 import { Flag, BarChartBig, PencilLine, CheckCircle2 } from "@lucide/astro";
 import TimeLineSteps from "./svg/TimeLineSteps.astro";
 import TimeLineStepsShadow from "./svg/TimeLineStepsShadow.astro";
+import ProcessItem from "./ui/ProcessItem";
 
-// --- CAMBIO 1: Nuevos valores de posClass ---
-// Estos valores están calculados para tu nuevo SVG
-const steps = [
+export interface IStep {
+    number: number;
+    title: string;
+    description: string;
+    icon: any;
+    posClass: string;
+    posCard: string;
+}
+
+const steps: IStep[] = [
     {
         number: 1,
         title: "Reunión inicial",
@@ -70,27 +78,9 @@ const steps = [
             {
                 steps.map((step) => (
                     <div class="flex flex-col items-center gap-6 lg:gap-0 relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
-                        <div
-                            class:list={[
-                                "bg-primary-500 rounded-full p-5 w-[70px] h-[70px] flex justify-center items-center text-blue-100 transition-transform duration-300 ease-in-out lg:absolute z-30 shadow-xl shadow-primary-600/40",
-                                step.posClass,
-                            ]}
-                        >
-                            <step.icon class="w-full h-full" stroke-width={2} />
-                        </div>
-                        <div
-                            class:list={["relative w-full px-6", step.posCard]}
-                        >
-                            <span class="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute -top-10 lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
-                                {step.number}
-                            </span>
-                            <h3 class="text-xl lg:text-2xl font-semibold mb-2">
-                                {step.title}
-                            </h3>
-                            <p class="text-base text-slate-500 leading-relaxed">
-                                {step.description}
-                            </p>
-                        </div>
+                        <ProcessItem client:load step={step}>
+                            <step.icon className="w-full h-full" stroke-width={2} />
+                        </ProcessItem>
                     </div>
                 ))
             }
@@ -99,27 +89,20 @@ const steps = [
 </section>
 
 <script>
-    // 1. Importar GSAP y el plugin ScrollTrigger
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Seleccionamos TODOS los contenedores de SVG
     const svgContainers = document.querySelectorAll(".svg-container");
 
-    // 2. Recorremos CADA SVG que encontró
     svgContainers.forEach((svgContainer) => {
-        // 3. Buscamos el path DENTRO del contenedor actual
         const path = svgContainer.querySelector(".mi-camino") as SVGPathElement;
 
-        // Si no hay path, saltamos a la siguiente iteración
         if (!path) return;
 
-        // 4. Medimos la longitud de ESE path específico
         const length = path.getTotalLength();
 
-        // 5. Aplicamos la lógica de GSAP solo a ESE path
         gsap.set(path, {
             strokeDasharray: length,
             strokeDashoffset: length,
@@ -130,7 +113,7 @@ const steps = [
             duration: 2,
             ease: "power2.inOut",
             scrollTrigger: {
-                trigger: svgContainer, // El trigger es el contenedor actual
+                trigger: svgContainer,
                 start: "top 80%",
                 toggleActions: "play reset play reset"
             },

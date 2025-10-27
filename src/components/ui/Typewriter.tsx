@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 
-
-
 export default function Typewriter() {
     const messages = [
         "Diseño web & tecnología.",
