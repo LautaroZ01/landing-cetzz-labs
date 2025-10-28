@@ -1,117 +1,122 @@
 ---
-import { NotebookPen } from "@lucide/astro";
-import Arrow1 from "./svg/Arrow1.astro";
-import Arrow2 from "./svg/Arrow2.astro";
-import Arrow3 from "./svg/Arrow3.astro";
+import { Flag, BarChartBig, PencilLine, CheckCircle2 } from "@lucide/astro";
+import TimeLineSteps from "./svg/TimeLineSteps.astro";
+import TimeLineStepsShadow from "./svg/TimeLineStepsShadow.astro";
+import ProcessItem from "./ui/ProcessItem";
+
+export interface IStep {
+    number: number;
+    title: string;
+    description: string;
+    icon: any;
+    posClass: string;
+    posCard: string;
+}
+
+const steps: IStep[] = [
+    {
+        number: 1,
+        title: "Reunión inicial",
+        description:
+            "Conversamos sobre tus ideas y lo que necesitas para tu negocio.",
+        icon: Flag,
+        posClass: "lg:-bottom-[52px] lg:right-[10px]",
+        posCard: "lg:top-[-20px] lg:left-[50px]",
+    },
+    {
+        number: 2,
+        title: "Diseño",
+        description:
+            "Creamos un diseño único adaptado a tu marca y te mostramos un prototipo",
+        icon: BarChartBig,
+        posClass: "lg:-top-[70px] lg:right-[30px]",
+        posCard: "lg:bottom-[-120px] lg:left-[100px]",
+    },
+    {
+        number: 3,
+        title: "Desarrollo",
+        description:
+            "Construimos tu web optimizada, responsive y lista para Google.",
+        icon: PencilLine,
+        posClass: "lg:-bottom-[25px] lg:-right-[0px]",
+        posCard: "lg:top-[-60px] lg:left-[100px]",
+    },
+    {
+        number: 4,
+        title: "Entrega y soporte",
+        description: "Publicamos tu web y te brindamos soporte continuo.",
+        icon: CheckCircle2,
+        posClass: "lg:-top-[34px] lg:right-[10px]",
+        posCard: "lg:bottom-[-134px] lg:left-[100px]",
+    },
+];
 ---
 
-<section
-    id="proceso"
-    class="py-20 bg-radial from-labs to-black-950 to-60% relative"
->
-    <div class="container-labs text-center">
+<section class="py-16 lg:py-24 lg:mb-20 overflow-hidden">
+    <div class="text-center mb-12 lg:mb-30 flex flex-col items-center">
         <h2 class="title-secundary title-style">Así trabajamos</h2>
-        <p class="text-lg mb-16 text-gray-300">
+        <p class="text-lg text-gray-300">
             Nuestro proceso es simple, claro y pensado para que tengas tu web
             lista sin complicaciones.
         </p>
-
-        <!-- Versión Mobile -->
-        <div class="flex flex-col gap-8 md:hidden">
-            <div class="process-card">
-                <div class="process-icon">1</div>
-                <h3 class="title-card">Reunión inicial</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Conversamos sobre tus ideas y lo que necesitas para tu
-                    negocio.
-                </p>
-            </div>
-            <div class="process-card">
-                <div class="process-icon">2</div>
-                <h3 class="title-card">Diseño</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Creamos un diseño único adaptado a tu marca y te mostramos
-                    un prototipo.
-                </p>
-            </div>
-            <div class="process-card">
-                <div class="process-icon">3</div>
-                <h3 class="title-card">Desarrollo</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Construimos tu web optimizada, responsive y lista para
-                    Google.
-                </p>
-            </div>
-            <div class="process-card">
-                <div class="process-icon">4</div>
-                <h3 class="title-card">Entrega y soporte</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Publicamos tu web y te brindamos soporte continuo.
-                </p>
-            </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div
+            class="hidden lg:block absolute top-1/2 left-0 w-full h-full -translate-y-1/2 z-10"
+        >
+            <TimeLineSteps />
+        </div>
+        <div
+            class="hidden lg:block absolute top-[160px] inset-x-0 w-full h-full -translate-y-1/2 translate-x-[80px] -z-30"
+        >
+            <TimeLineStepsShadow />
         </div>
 
-        <!-- Versión Desktop -->
         <div
-            class="hidden md:grid relative grid-cols-4 grid-rows-2 gap-6 md:gap-10"
+            class="lg:relative z-20 flex flex-col lg:flex-row lg:justify-between items-start w-full gap-16 lg:gap-0 py-10"
         >
-            <div
-                class="col-start-1 row-start-2 flex items-center justify-center rotate-12 text-accent-400/60 hover:text-accent-300 hover:scale-105 transition-transform duration-pro"
-            >
-                <NotebookPen class="size-30" />
-            </div>
-            <div class="process-card">
-                <div class="process-icon">1</div>
-                <h3 class="title-card">Reunión inicial</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Conversamos sobre tus ideas y lo que necesitas para tu
-                    negocio.
-                </p>
-            </div>
-
-            <div
-                class="col-start-2 row-start-1 rotate-45 flex items-end justify-end pb-10 process-arrow"
-            >
-                <Arrow2 />
-            </div>
-
-            <div class="process-card col-start-2 row-start-2">
-                <div class="process-icon">2</div>
-                <h3 class="title-card">Diseño</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Creamos un diseño único adaptado a tu marca y te mostramos
-                    un prototipo.
-                </p>
-            </div>
-
-            <div
-                class="col-start-3 row-start-2 rotate-[220deg] flex items-end justify-end pr-8 pb-8 process-arrow"
-            >
-                <Arrow1 />
-            </div>
-
-            <div class="process-card col-start-3 row-start-1">
-                <div class="process-icon">3</div>
-                <h3 class="title-card">Desarrollo</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Construimos tu web optimizada, responsive y lista para
-                    Google.
-                </p>
-            </div>
-
-            <div
-                class="col-start-4 row-start-1 rotate-[75deg] flex items-end justify-end pb-8 process-arrow"
-            >
-                <Arrow3 />
-            </div>
-
-            <div class="process-card col-start-4 row-start-2">
-                <div class="process-icon">4</div>
-                <h3 class="title-card">Entrega y soporte</h3>
-                <p class="text-gray-300 text-sm mt-2">
-                    Publicamos tu web y te brindamos soporte continuo.
-                </p>
-            </div>
+            {
+                steps.map((step) => (
+                    <div class="flex flex-col items-center gap-6 lg:gap-0 relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
+                        <ProcessItem client:load step={step}>
+                            <step.icon className="w-full h-full" stroke-width={2} />
+                        </ProcessItem>
+                    </div>
+                ))
+            }
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const svgContainers = document.querySelectorAll(".svg-container");
+
+    svgContainers.forEach((svgContainer) => {
+        const path = svgContainer.querySelector(".mi-camino") as SVGPathElement;
+
+        if (!path) return;
+
+        const length = path.getTotalLength();
+
+        gsap.set(path, {
+            strokeDasharray: length,
+            strokeDashoffset: length,
+        });
+
+        gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 2,
+            ease: "power2.inOut",
+            scrollTrigger: {
+                trigger: svgContainer,
+                start: "top 80%",
+                toggleActions: "play reset play reset"
+            },
+        });
+    });
+</script>

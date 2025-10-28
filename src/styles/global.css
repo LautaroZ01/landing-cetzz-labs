@@ -43,6 +43,7 @@
     --color-black-950: #000000;
     --shadow-cetzz: 0 0 30px -5px #ff655788;
     --shadow-labs: 0 0 30px -5px #20c0e788;
+    --shadow-primary: 0 0 30px -5px #20c0e788;
 
     --transition-duration-pro: .25s;
 }
@@ -57,7 +58,7 @@
 }
 
 .btn-link {
-    @apply p-2 bg-gradient-to-bl from-primary-500 to-primary-700 rounded-lg flex items-center justify-center hover:from-primary-400 hover:to-primary-600 hover:shadow-lg hover:shadow-primary-300/40 hover:scale-105 transition-all active:scale-95;
+    @apply p-2 bg-gradient-to-bl from-primary-500 to-primary-600 rounded-full flex items-center justify-center hover:from-black-950 hover:to-transparent hover:outline hover:outline-primary-500 hover:shadow-lg hover:shadow-primary-600/40 transition-colors duration-pro;
 }
 
 .btn-link-secundary {
@@ -66,7 +67,11 @@
 
 
 .btn-primary {
-    @apply px-6 py-2 bg-primary-600 rounded-md hover:bg-transparent hover:outline hover:outline-primary-600 hover:shadow-lg hover:shadow-primary-600/40 transition-colors duration-pro;
+    @apply px-8 py-2 rounded-lg bg-gradient-to-br from-primary-400 to-primary-700 hover:shadow-primary transition-colors duration-pro;
+}
+
+.btn-secundary {
+    @apply px-8 py-2 rounded-lg bg-gray-900/60 border border-gray-800 hover:bg-gray-800/60 transition-colors duration-pro;
 }
 
 .btn-primary-big {
@@ -77,12 +82,8 @@
     @apply px-8 py-4 bg-gradient-to-br from-accent-400 to-accent-700 rounded-lg hover:bg-transparent hover:outline hover:outline-accent-400 transition-colors duration-pro shadow-lg shadow-accent-500/40;
 }
 
-.btn-secundary {
-    @apply outline outline-primary-600 px-6 py-2 rounded-md hover:bg-primary-600 hover:text-white transition-colors duration-pro shadow-lg shadow-primary-600/40;
-}
-
 .container-labs {
-    @apply container lg:max-w-6xl mx-auto px-6;
+    @apply container lg:max-w-6xl mx-auto px-8 lg:px-0;
 }
 
 .card {
@@ -122,7 +123,7 @@
 }
 
 .title-style {
-    @apply bg-gradient-to-br from-primary-600 to-primary-200 bg-clip-text text-transparent text-shadow-md text-shadow-primary-300/40;
+    @apply bg-gradient-to-br from-primary-400 to-primary-900 bg-clip-text text-transparent text-shadow-md text-shadow-primary-300;
 }
 
 .title-secundary {
