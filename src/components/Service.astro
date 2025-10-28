@@ -1,63 +1,284 @@
 ---
-import { Building, LayoutDashboard, PencilLine, Search, Shield, ShoppingCart } from "@lucide/astro";
+import {
+    Building,
+    LayoutPanelTop,
+    PencilLine,
+    Search,
+    Shield,
+    ShoppingCart,
+} from '@lucide/astro'
+
+const highlightClass = "font-bold text-cyan-400";
 ---
 
-<section id="servicios" class="py-20 bg-gradient-to-tr from-black-950 to-labs from-10% relative">
-<div class="rocket-bg top-1/3 left-1/3"></div>
+<section
+    id="servicios"
+    class="py-20 bg-gradient-to-tr from-black-950 to-labs from-10% relative"
+>
+    <div class="rocket-bg top-1/3 left-1/3"></div>
+
     <div class="container-labs text-center">
-      <h2 class="title-secundary title-style">Nuestros Servicios</h2>
-      <p class="text-lg mb-12 text-gray-400">
-        Creamos páginas web modernas y funcionales adaptadas a las necesidades de tu negocio.
-      </p>
-  
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <LayoutDashboard class="icon-size"/>
-          </div>
-          <h3 class="title-card">Landing Pages</h3>
-          <p class="text-gray-400">Diseñadas para captar clientes y aumentar tus conversiones.</p>
-        </div>
-  
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <Building class="icon-size"/>
-          </div>
-          <h3 class="title-card">Páginas Corporativas</h3>
-          <p class="text-gray-400">Transmití la esencia de tu empresa con un sitio profesional.</p>
-        </div>
-  
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <ShoppingCart class="icon-size"/>
-          </div>
-          <h3 class="title-card">E-commerce</h3>
-          <p class="text-gray-400">Tiendas online con pasarelas de pago seguras y gestión sencilla.</p>
-        </div>
-  
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <PencilLine class="icon-size"/>
-          </div>
-          <h3 class="title-card">Blogs Personalizados</h3>
-          <p class="text-gray-400">Espacios ideales para compartir contenido y atraer lectores.</p>
-        </div>
+        <h2 class="title-secundary title-style">Nuestros Servicios</h2>
+        <p class="text-lg mb-12 text-gray-400">
+            Creamos páginas web modernas y funcionales adaptadas a las
+            necesidades de tu negocio.
+        </p>
 
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <Shield class="icon-size"/>
-          </div>
-          <h3 class="title-card">Mantenimiento</h3>
-          <p class="text-gray-400">Actualizaciones, seguridad y soporte técnico continuo.</p>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <LayoutPanelTop class="icon-size text-cyan-200" />
+                    </div>
+                    <h3 class="title-card">Landing Pages</h3>
+                    <p class="text-gray-400">
+                        Diseñadas para <span class:list={highlightClass}>captar clientes</span> y aumentar tus <span class:list={highlightClass}>conversiones</span>
+                    </p>
+                </div>
+            </div>
 
-        <div class="card">
-          <div class="card-icon service-card-icon">
-            <Search class="icon-size"/>
-          </div>
-          <h3 class="title-card">SEO & Velocidad</h3>
-          <p class="text-gray-400">Optimización para Google y carga ultrarrápida.</p>
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <Building class="icon-size text-cyan-200" />
+                    </div>
+                    <h3 class="title-card">Páginas Corporativas</h3>
+                    <p class="text-gray-400">
+                        Transmití la <span class:list={highlightClass}>esencia</span> de tu empresa con un sitio <span class:list={highlightClass}>profesional</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <ShoppingCart class="icon-size text-cyan-200" />
+                    </div>
+                    <h3 class="title-card">E-commerce</h3>
+                    <p class="text-gray-400">
+                        Tiendas online con <span class:list={highlightClass}>pasarelas de pago seguras</span> y <span class:list={highlightClass}>gestión sencilla</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <PencilLine class="icon-size" />    
+                    </div>
+                    <h3 class="title-card">Diseños Interactivos</h3>
+                    <div class="relative min-h-[50px]">
+                        <p class="card-morph-before absolute w-full top-0 left-0 text-gray-400">
+                            Creamos con transiciones y efectos.
+                        </p>
+                        <p class="card-morph-after absolute w-full top-0 left-0 text-gray-400 opacity-0">
+                            Creamos <span class:list={highlightClass}>experiencias visuales únicas</span> con transiciones <span class:list={highlightClass}>fluidas</span> y efectos <span class:list={highlightClass}>dinámicos</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <Shield class="icon-size" />
+                    </div>
+                    <h3 class="title-card">Mantenimiento</h3>
+                    <div class="relative min-h-[50px]">
+                        <p class="card-morph-before absolute w-full top-0 left-0 text-gray-400">
+                            y soporte técnico.
+                        </p>
+                        <p class="card-morph-after absolute w-full top-0 left-0 text-gray-400 opacity-0">
+                            <span class:list={highlightClass}>Actualizaciones</span>, <span class:list={highlightClass}>seguridad</span> y soporte técnico <span class:list={highlightClass}>continuo</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-border-wrapper rounded-2xl p-[1px] bg-gray-900/50 transition-all duration-300">
+                <div class="card bg-gray-900/30 backdrop-blur-lg rounded-xl h-full w-full">
+                    <div class="card-icon service-card-icon">
+                        <Search class="icon-size" />
+                    </div>
+                    <h3 class="title-card">SEO & Velocidad</h3>
+                    <div class="relative min-h-[50px]">
+                        <p class="card-morph-before absolute w-full top-0 left-0 text-gray-400">
+                            para y carga.
+                        </p>
+                        <p class="card-morph-after absolute w-full top-0 left-0 text-gray-400 opacity-0">
+                            <span class:list={highlightClass}>Optimización</span> para <span class:list={highlightClass}>Google</span> y carga <span class:list={highlightClass}>ultrarrápida</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { SplitText } from "gsap/SplitText";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    // --- FUNCIONES HELPER ---
+    
+    // --- Hacemos que la función devuelva los splits ---
+    function transition(element1: any, element2: any, vars: any) {
+        var split1 = new SplitText(element1, {type:"words", position:"absolute"}),
+            split2 = new SplitText(element2, {type:"words", position:"absolute"}),
+            data = compareSplits(split1, split2),
+            l = data.matches1.length,
+            tl = gsap.timeline(vars), 
+            i, bounds1, bounds2;
+        
+        tl.set(element2, {autoAlpha:1}); 
+        tl.set(split2.words, {autoAlpha:0}); 
+
+        for (i = 0; i < l; i++) {
+            bounds1 = data.matches1[i].getBoundingClientRect();
+            bounds2 = data.matches2[i].getBoundingClientRect();
+            tl.to(data.matches1[i], {duration: 1,x:bounds2.left - bounds1.left, y:bounds2.top - bounds1.top, ease: "power1.inOut"}, i * 0.03);
+        }
+        
+        tl.to(data.unmatched1,{duration: 0.3,autoAlpha:0}, 0);
+        tl.to(data.unmatched2, {duration: 0.5, autoAlpha:1}); 
+        
+        // --- Devolvemos el timeline Y los splits ---
+        return { tl, split1, split2 };
+    }
+
+    function compareSplits(s1: any, s2: any) {
+        var matches1 = [],
+            matches2 = [],
+            unmatched1 = s1.words.slice(0),
+            unmatched2 = s2.words.slice(0),
+            l = unmatched2.length,
+            index, i;
+        for (i = 0; i < l; i++) {
+            index = findFirstMatch(unmatched2[i].textContent, unmatched1);
+            if (index !== -1) {
+                matches1.push(unmatched1[index]);
+                matches2.push(unmatched2[i]);
+                unmatched1.splice(index, 1);
+                unmatched2.splice(i--, 1);
+                l--;
+            }
+        }
+        return {
+            matches1:matches1,
+            matches2:matches2,
+            unmatched1:unmatched1,
+            unmatched2:unmatched2
+        };
+    }
+
+    function findFirstMatch(word: any, collection: any) {
+        var l = collection.length,
+            i;
+        word = word.replace(/\s/g, "");
+        for (i = 0; i < l; i++) {
+            if (collection[i].textContent.replace(/\s/g, "") === word) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+
+    document.fonts.ready.then(() => {
+        
+        // --- Animación para las 3 PRIMERAS cards ---
+        const allSubtitles = document.querySelectorAll("#servicios .card p");
+        const firstThreeSubtitles = Array.from(allSubtitles).slice(0, 3);
+
+        firstThreeSubtitles.forEach((subtitle) => {
+            let split = SplitText.create(subtitle, { type: "words,chars" });
+            
+            gsap.from(split.words, {
+                y: -50,
+                opacity: 0,
+                rotation: "random(-60, 60)",
+                duration: 0.9,
+                ease: "back.out(1.7)",
+                stagger: 0.05,
+                scrollTrigger: {
+                    trigger: subtitle.closest(".card"),
+                    start: "top 85%",
+                    toggleActions: "play reset play reset", // onEnter, onLeave, onEnterBack, onLeaveBack
+                },
+            });
+        });
+
+        // --- Animación para las ÚLTIMAS 3 cards (Morphing) ---
+        
+        const allCards = document.querySelectorAll("#servicios .card");
+        const lastThreeCards = Array.from(allCards).slice(3);
+
+        lastThreeCards.forEach((card) => {
+            const beforeText = card.querySelector(".card-morph-before");
+            const afterText = card.querySelector(".card-morph-after");
+
+            if (beforeText && afterText) {
+                
+                // --- Lógica de ScrollTrigger ---
+                
+                // Variables para guardar los splits y el timeline
+                let morphAnimation;
+                let splits: { split1: SplitText; split2: SplitText } | null = null;
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 80%",
+                    // Definimos un final para los eventos onLeave
+                    end: "bottom 20%", 
+                    
+                    onEnter: () => {
+                        // Creamos la animación (paused)
+                        const animData = transition(beforeText, afterText, { 
+                            duration: 1, 
+                            paused: true 
+                        });
+                        morphAnimation = animData.tl;
+                        splits = { split1: animData.split1, split2: animData.split2 };
+                        
+                        // La reproducimos
+                        morphAnimation.play();
+                    },
+                    onEnterBack: () => {
+                        // Lo mismo si entramos subiendo
+                        const animData = transition(beforeText, afterText, { 
+                            duration: 1, 
+                            paused: true 
+                        });
+                        morphAnimation = animData.tl;
+                        splits = { split1: animData.split1, split2: animData.split2 };
+
+                        morphAnimation.play();
+                    },
+                    onLeave: () => {
+                        // Al salir, revertimos los splits para limpiar el DOM
+                        if (splits) {
+                            splits.split1.revert();
+                            splits.split2.revert();
+                            splits = null; // Limpiamos la referencia
+                        }
+                        gsap.set(afterText, { autoAlpha: 0 });
+                        gsap.set(beforeText, { autoAlpha: 1 });
+                    },
+                    onLeaveBack: () => {
+                        // Lo mismo al salir por arriba
+                        if (splits) {
+                            splits.split1.revert();
+                            splits.split2.revert();
+                            splits = null;
+                        }
+                        gsap.set(afterText, { autoAlpha: 0 });
+                        gsap.set(beforeText, { autoAlpha: 1 });
+                    }
+                });
+            }
+        });
+    });
+</script>
