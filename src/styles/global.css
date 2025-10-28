@@ -61,8 +61,9 @@
 }
 
 .btn-link-secundary {
-    @apply p-2 rounded-full flex items-center justify-center bg-black/40 outline outline-accent-500 hover:outline-accent-400 hover:scale-110 transition-all duration-pro;
+    @apply p-2 font-bold rounded-lg flex items-center justify-center bg-black/70 outline outline-cyan-500 hover:outline-cyan-400 hover:scale-103 transition-all duration-pro;
 }
+
 
 .btn-primary {
     @apply px-6 py-2 bg-primary-600 rounded-md hover:bg-transparent hover:outline hover:outline-primary-600 hover:shadow-lg hover:shadow-primary-600/40 transition-colors duration-pro;

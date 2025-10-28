@@ -1,7 +1,4 @@
 ---
-import { ChevronLeft, ChevronRight } from "@lucide/astro";
-import Image from "astro/components/Image.astro";
-
 type Project = {
     title: string;
     description: string;
@@ -11,25 +8,40 @@ type Project = {
 
 const projects: Project[] = [
     {
-        title: "E-commerce Moderno",
-        description:
-            "Plataforma de ventas online con diseño responsivo y pasarela de pagos integrada.",
+        title: "El Sabor Auténtico",
+        description: "Landing page donde cada plato cuenta una historia y cada momento es único",
+        image: "/projects/sabor-autentico.webp",
+        link: "https://resto-react-landing-page.vercel.app/"
+    },
+    {
+        title: "Soluciones de Transporte",
+        description: "Landing page para cotizar servicios de transporte para persionas, materiales y carga.",
+        image: "/projects/transporte.webp",
+        link: "https://lta-landing-page-transporte-salta.netlify.app/",
+    },
+    {
+        title: "RestoBar",
+        description: "Landing page para un restobar con un diseño moderno y responsive.",
+        image: "/projects/RestoBar.webp",
+        link: "https://resto-astro-landing-page.vercel.app/",
+    },
+    {
+        title: "Inmobiliaria",
+        description: "Landing Page para una inmobiliaria con un diseño moderno y responsive.",
+        image: "/projects/landing-inmo.webp",
+        link: "https://landing-inmobiliaria-three.vercel.app/",
+    },
+    {
+        title: "Buscador de Recetas con IA",
+        description: "Landing page para una startup de biotecnología, enfocada en la captación de leads.",
+        image: "/projects/recetas-ia.webp",
+        link: "https://another-plant.vercel.app/",
+    },
+    {
+        title: "Ecommerce",
+        description: "Landing page para una startup de biotecnología, enfocada en la captación de leads.",
         image: "/projects/e-commerce.webp",
-        link: "#",
-    },
-    {
-        title: "Blog Profesional",
-        description:
-            "Un blog optimizado para SEO y fácil de administrar con un panel moderno.",
-        image: "/projects/blog.webp",
-        link: "#",
-    },
-    {
-        title: "Landing Page Creativa",
-        description:
-            "Página de presentación con animaciones y enfoque en conversión de leads.",
-        image: "/projects/landing-page.webp",
-        link: "#",
+        link: "",
     },
 ];
 ---
@@ -39,89 +51,230 @@ const projects: Project[] = [
     class="py-20 bg-gradient-to-b from-black-950 to-labs from-10% relative"
 >
     <div class="rocket-bg -top-20 right-20"></div>
-    <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="max-w-6xl mx-auto px-6 text-center w-full">
         <h2 class="title-secundary title-style">Nuestro Portafolio</h2>
         <p class="text-lg text-gray-300 mb-12">
-            Algunos de los proyectos que hemos desarrollado para clientes de
-            distintos sectores.
+            Haz clic en un proyecto para ver más detalles.
         </p>
 
-        <div class="relative overflow-hidden shadow-labs rounded-2xl">
-            <div
-                id="carousel"
-                class="flex transition-transform duration-700 ease-in-out"
-            >
-                {
-                    projects.map((project) => (
-                        <div class="min-w-full">
-                            <div class="relative bg-black/80 backdrop-blur-md">
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    width={1280}
-                                    height={720}
-                                    class="size-full rounded-2xl max-h-[500px] min-h-[500px] lg:max-h-[720px] lg:min-h-[720px] object-contain lg:object-cover hover:scale-110 hover:rotate-2 transition-transform duration-pro mask-radial-[100%_95%] mask-radial-from-70% mask-radial-at-top"
-                                />
-                                <div class="absolute bottom-0 py-4 px-8 w-full text-left">
-                                    <h3 class="text-xl font-semibold mb-2">
-                                        {project.title}
-                                    </h3>
-                                    <p class="text-gray-300 mb-4">
-                                        {project.description}
-                                    </p>
-                                </div>
+        <div class="grid-flip-container">
+            {
+                projects.map((project) => (
+                    <article class="article">
+                        <a href={project.link} class="image-wrapper">
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                width={600}
+                                height={400}
+                            />
+                        </a>
+                        <section class="description">
+                            {/* <h2>{project.title}</h2> */}
+                            <div class="details-view">
+                                {/* <p class="font-bold">{project.description}</p> */}
+                                <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn-link-secundary">Ver proyecto</a>
                             </div>
-                        </div>
-                    ))
-                }
-            </div>
-
-            <button
-                id="prev"
-                class="absolute top-1/2 left-8 -translate-y-1/2 btn-link-secundary cursor-pointer"
-            >
-                <ChevronLeft />
-            </button>
-            <button
-                id="next"
-                class="absolute top-1/2 right-8 -translate-y-1/2 btn-link-secundary cursor-pointer"
-            >
-                <ChevronRight />
-            </button>
-        </div>
-
-        <div class="mt-12">
-            <a
-                href="#contacto"
-                class="btn-secundary-big"
-            >
-                Quiero un proyecto así
-            </a>
+                        </section>
+                    </article>
+                ))
+            }
         </div>
     </div>
 </section>
 
-<script lang="ts">
-    const carousel = document.getElementById("carousel");
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
+<script>
+    import { gsap } from "gsap";
+    import { Flip } from "gsap/Flip";
 
-    let index = 0;
-    const totalSlides = carousel ? carousel.children.length : 0;
+    gsap.registerPlugin(Flip);
 
-    function updateCarousel() {
-        if (carousel) {
-            carousel.style.transform = `translateX(-${index * 100}%)`;
+    window.addEventListener("load", () => {
+        
+        const articles = document.querySelectorAll("#portafolio .article");
+        const container = document.querySelector("#portafolio .grid-flip-container");
+
+        articles.forEach((article) => {
+            article.addEventListener("click", (e) => {
+                const target = e.target as HTMLElement;
+                // Usamos .closest() por si el usuario hace clic en un ícono DENTRO del botón
+                if (target.closest(".btn-link-secundary")) {
+                    // Si fue en el botón, no hacemos nada y dejamos que el link funcione
+                    return;
+                }
+                // Si el clic NO fue en el botón, prevenimos el default y animamos
+                e.preventDefault();
+                if (article.classList.contains("details")) {
+                    return;
+                }
+                const state = Flip.getState("#portafolio .article");
+
+                // Hacemos los cambios en el DOM
+                const currentDetails = container!.querySelector(".details");
+                
+                // Ocultamos el texto de la card que se encoge
+                if (currentDetails) {
+                    currentDetails.classList.remove("details");
+                    // Ocultamos sus detalles explícitamente
+                    gsap.to(currentDetails.querySelector(".details-view"), { 
+                        opacity: 0, 
+                        y: "30px", 
+                        duration: 0.3 
+                    });
+                }
+                article.classList.add("details");
+
+                // Invert Play: Animamos...
+                const tl = Flip.from(state, {
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    stagger: 0.05,
+                    onStart: () => {
+                        // Animación de los overlays
+                        gsap.to("#portafolio .article", {
+                            "--max": 0,
+                            duration: 0.8
+                        });
+                        gsap.to("#portafolio .article.details", {
+                            "--max": 1,
+                            duration: 0.9,
+                            delay: 0.1
+                        });
+                    }
+                });
+
+                tl.to(
+                    article.querySelector(".details-view"), 
+                    { opacity: 1, y: 0, duration: 0.7, delay: 0.2 },
+                    "-=0.5"
+                );
+            });
+        });
+
+        // Animación de entrada 
+        gsap.from("#portafolio .article", {
+            autoAlpha: 0,
+            yPercent: 30,
+            stagger: 0.05
+        });
+
+    });
+</script>
+
+<style>
+    /* Variables de la demo para el overlay */
+    :root {
+        --base-color: #3f3352;
+        --overlayH: 263;
+        --overlayS: 23%;
+        --overlayL: 26%;
+    }
+
+    /* El contenedor del grid */
+    .grid-flip-container {
+        display: grid;
+        grid-gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: minmax(18rem, max-content);
+        position: relative;
+    }
+    .details-view {
+        color: white;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    
+    /* En pantallas grandes, 3 columnas  */
+    @media (min-width: 1024px) {
+        .grid-flip-container {
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
 
-    next?.addEventListener("click", () => {
-        index = (index + 1) % totalSlides;
-        updateCarousel();
-    });
+    /* Estilos de cada artículo */
+    .article {
+        --max: 0; /* Variable para el overlay  */
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 1rem; 
+        background: #111; 
+    }
 
-    prev?.addEventListener("click", () => {
-        index = (index - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-    });
-</script>
+    /* La imagen y su contenedor */
+    .article a.image-wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
+        height: 100%;
+    }
+
+    .article img {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        transition: transform 0.4s ease;
+    }
+
+    .article:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* La clase .details que aplica GSAP */
+    .article.details {
+        grid-row: span 2;
+        grid-column: span 2;
+        cursor: default;
+    }
+
+    /* La descripción */
+    .description {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; 
+        padding: clamp(1rem, 2.5vmin, 2.25rem);
+        color: white;
+        text-align: center;
+        
+        /* El overlay degradado de la demo */
+        background: linear-gradient(
+            0deg,
+            hsl(var(--overlayH), var(--overlayS), var(--overlayL), calc(1 * var(--max))) 0%,
+            hsla(var(--overlayH), var(--overlayS), var(--overlayL), calc(0.738 * var(--max))) 19%,
+            hsla(var(--overlayH), var(--overlayS), var(--overlayL), calc(0.382 * var(--max))) 47%,
+            hsla(var(--overlayH), var(--overlayS), var(--overlayL), 0) 100%
+        );
+    }
+    
+    .description h2 {
+        font-family: 'Sora', sans-serif; 
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: white;
+        margin: 0;
+    }
+
+    /* Los detalles (párrafo) están ocultos por defecto */
+    .details-view {
+        color: white;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .details-view p {
+        color: #ddd;
+        font-family: 'Sora', sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+    }
+</style>
