@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { socials } from "../../data/data";
 import Icons from "./Icons.astro";
 
@@ -9,6 +10,15 @@ const currentYear = new Date().getFullYear();
     <div class="max-w-6xl mx-auto px-6 pt-16 pb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             <div class="md:col-span-2">
+                <a href="#inicio" class="flex w-30 p-2 mb-4 items-center hover:scale-110 hover:rotate-3 transition-transform duration-300 active:scale-95">
+                    <Image
+                        src="/logo.webp"
+                        alt="CetZz Labs"
+                        width={100}
+                        height={100}
+                        class="w-full object-contain rounded-full"
+                    />
+                </a>
                 <h3 class="text-2xl font-bold text-neutral-100 mb-4">
                     CetZz Labs
                 </h3>

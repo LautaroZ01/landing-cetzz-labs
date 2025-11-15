@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 type Project = {
     title: string;
     description: string;
@@ -32,16 +34,16 @@ const projects: Project[] = [
         link: "https://landing-inmobiliaria-three.vercel.app/",
     },
     {
-        title: "Buscador de Recetas con IA",
-        description: "Landing page para una startup de biotecnología, enfocada en la captación de leads.",
-        image: "/projects/recetas-ia.webp",
-        link: "https://another-plant.vercel.app/",
+        title: "Estudio contable",
+        description: "Landing page para un estudio contable con un diseño moderno y responsive.",
+        image: "/projects/estudio-contable.webp",
+        link: "https://estudio-contable-cetzz.vercel.app/",
     },
     {
-        title: "Ecommerce",
-        description: "Landing page para una startup de biotecnología, enfocada en la captación de leads.",
-        image: "/projects/e-commerce.webp",
-        link: "",
+        title: "Todo Tela",
+        description: "Landing page para una tienda de telas con un diseño moderno y responsive.",
+        image: "/projects/todo-tela.webp",
+        link: "https://www.tododetsalta.com.ar/",
     },
 ];
 ---
@@ -62,7 +64,7 @@ const projects: Project[] = [
                 projects.map((project) => (
                     <article class="article">
                         <a href={project.link} class="image-wrapper">
-                            <img
+                            <Image
                                 src={project.image}
                                 alt={project.title}
                                 width={600}
@@ -70,9 +72,7 @@ const projects: Project[] = [
                             />
                         </a>
                         <section class="description">
-                            {/* <h2>{project.title}</h2> */}
                             <div class="details-view">
-                                {/* <p class="font-bold">{project.description}</p> */}
                                 <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn-link-secundary">Ver proyecto</a>
                             </div>
                         </section>

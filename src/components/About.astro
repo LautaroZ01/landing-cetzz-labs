@@ -7,19 +7,18 @@ import Image from "astro/components/Image.astro";
     class="pb-20 pt-2 bg-gradient-to-br from-black-950 to-labs from-10%"
 >
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        <!-- Imagen / Ilustración -->
-        <div data-aos="fade-right">
+        <div>
             <Image
                 src="/team.webp"
                 alt="Nuestro equipo"
+                loading="eager"
                 width={1280}
                 height={720}
                 class="shadow-xl object-cover w-full h-[400px] md:h-[500px] mask-radial-[100%_100%] mask-radial-from-10% mask-radial-at-left"
             />
         </div>
 
-        <!-- Texto -->
-        <div class="space-y-6" data-aos="fade-left">
+        <div class="flex flex-col gap-6 items-start">
             <h2 class="title-secundary title-style">Quiénes somos</h2>
             <p class="text-lg text-gray-400 leading-relaxed">
                 Somos un equipo apasionado por la tecnología y el diseño,
@@ -32,6 +31,7 @@ import Image from "astro/components/Image.astro";
                 reflejen la identidad de cada cliente, con un enfoque en
                 innovación, creatividad y resultados medibles.
             </p>
+            <a href="#contacto" class="btn-primary-big">Contáctanos</a>
         </div>
     </div>
 </section>
