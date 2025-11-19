@@ -89,6 +89,10 @@
     @apply py-12 px-6 rounded-2xl bg-black-900/10 backdrop-blur-lg shadow-lg hover:scale-105 hover:outline hover:outline-accent-400 hover:shadow-cetzz transition-all duration-pro;
 }
 
+.cardInnerClass {
+    @apply py-6 rounded-2xl bg-black-900/5 backdrop-blur-lg shadow-lg hover:scale-101 hover:outline hover:outline-accent-400 hover:shadow-cetzz transition-all duration-pro h-full w-full flex flex-col justify-between relative overflow-hidden z-10;
+}
+
 .process-card {
     @apply flex flex-col items-center bg-gradient-to-br from-primary-400/10 rounded-lg p-12 px-6 backdrop-blur-lg hover:shadow-labs outline outline-primary-400/50 hover:outline-primary-400 hover:scale-105 transition-all duration-pro;
 }
