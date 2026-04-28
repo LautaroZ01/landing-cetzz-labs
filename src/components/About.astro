@@ -10,7 +10,7 @@
         class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10"
     >
         <div
-            class="relative w-full md:aspect-[6/5] flex justify-center items-center"
+            class="about-video relative w-full md:aspect-[6/5] flex justify-center items-center opacity-0"
         >
             <video
                 src="/hero-video.mp4"
@@ -24,13 +24,13 @@
 
         <div class="flex flex-col gap-8 items-start">
             <h2
-                class="text-4xl md:text-5xl lg:text-6xl font-extrabold title-style leading-tight"
+                class="about-text text-4xl md:text-5xl lg:text-6xl font-extrabold title-style leading-tight opacity-0"
             >
                 Quiénes somos
             </h2>
 
             <div
-                class="flex flex-col gap-4 text-lg text-gray-300 leading-relaxed font-light"
+                class="about-text flex flex-col gap-4 text-lg text-gray-300 leading-relaxed font-light opacity-0"
             >
                 <p>
                     Somos un equipo apasionado por la <strong
@@ -48,7 +48,7 @@
             </div>
 
             <div
-                class="grid grid-cols-2 gap-8 w-full py-6 mt-2 border-y border-white/10 relative"
+                class="about-text grid grid-cols-2 gap-8 w-full py-6 mt-2 border-y border-white/10 relative opacity-0"
             >
                 <div
                     class="absolute inset-0 bg-gradient-to-r from-labs/5 to-transparent -z-10"
@@ -56,8 +56,8 @@
                 </div>
                 <div class="flex flex-col gap-1 pl-4 border-labs">
                     <span
-                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter"
-                        ><span class="text-labs">+</span>10</span
+                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter flex items-center"
+                        ><span class="text-labs">+</span><span class="counter-1">0</span></span
                     >
                     <span class="text-gray-400 text-sm md:text-base font-medium"
                         >Proyectos Exitosos</span
@@ -65,8 +65,8 @@
                 </div>
                 <div class="flex flex-col gap-1 pl-4 border-labs/50">
                     <span
-                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter"
-                        >100<span class="text-labs">%</span></span
+                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter flex items-center"
+                        ><span class="counter-2">0</span><span class="text-labs">%</span></span
                     >
                     <span class="text-gray-400 text-sm md:text-base font-medium"
                         >Enfoque a Medida</span
@@ -76,3 +76,72 @@
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.getElementById("quienes-somos");
+
+        if (section) {
+            // Animar el contenedor del video (Fade in, Slide from left y Blur dissolve)
+            gsap.fromTo(
+                ".about-video",
+                { opacity: 0, x: -60, filter: "blur(15px)" },
+                {
+                    opacity: 1,
+                    x: 0,
+                    filter: "blur(0px)",
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 75%",
+                    },
+                }
+            );
+
+            // Animar los textos de forma escalonada (Slide up)
+            gsap.fromTo(
+                ".about-text",
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 75%",
+                    },
+                }
+            );
+
+            // Animación de contadores numéricos (solo números)
+            const countElements = [
+                { selector: ".counter-1", endValue: 10 },
+                { selector: ".counter-2", endValue: 100 }
+            ];
+
+            countElements.forEach((item) => {
+                const el = document.querySelector(item.selector);
+                if (el) {
+                    gsap.to(el, {
+                        innerHTML: item.endValue,
+                        duration: 2.5,
+                        snap: { innerHTML: 1 }, // Esto fuerza a que sean números enteros
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 60%",
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>

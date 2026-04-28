@@ -52,8 +52,15 @@ const steps: IStep[] = [
 ];
 ---
 
-<section class="py-16 lg:py-24 lg:mb-20 overflow-hidden">
-    <div class="text-center mb-12 lg:mb-30 flex flex-col items-center">
+<section class="pt-24 lg:pt-48 pb-32 lg:pb-64 bg-black-950 relative">
+    <div
+        class="absolute top-[-250px] right-[-10%] w-[600px] h-[600px] bg-labs rounded-full blur-[100px] z-0 pointer-events-none"
+    >
+    </div>
+
+    <div
+        class="text-center mb-20 lg:mb-40 flex flex-col items-center relative z-10"
+    >
         <h2 class="title-secundary title-style">Así trabajamos</h2>
         <p class="text-lg text-gray-300">
             Nuestro proceso es simple, claro y pensado para que tengas tu web
@@ -73,13 +80,17 @@ const steps: IStep[] = [
         </div>
 
         <div
+            id="process-container"
             class="lg:relative z-20 flex flex-col lg:flex-row lg:justify-between items-start w-full gap-16 lg:gap-0 py-10"
         >
             {
                 steps.map((step) => (
-                    <div class="flex flex-col items-center gap-6 lg:gap-0 relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
+                    <div class="process-step opacity-0 flex flex-col items-center gap-6 lg:gap-0 relative w-full max-w-sm mx-auto lg:basis-[23%] lg:max-w-none min-h-[150px]">
                         <ProcessItem client:load step={step}>
-                            <step.icon className="w-full h-full" stroke-width={2} />
+                            <step.icon
+                                className="w-full h-full"
+                                stroke-width={2}
+                            />
                         </ProcessItem>
                     </div>
                 ))
@@ -94,29 +105,54 @@ const steps: IStep[] = [
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const svgContainers = document.querySelectorAll(".svg-container");
+    document.addEventListener("DOMContentLoaded", () => {
+        // Animación de la línea SVG continua
+        const svgContainers = document.querySelectorAll(".svg-container");
 
-    svgContainers.forEach((svgContainer) => {
-        const path = svgContainer.querySelector(".mi-camino") as SVGPathElement;
+        svgContainers.forEach((svgContainer) => {
+            const path = svgContainer.querySelector(
+                ".mi-camino",
+            ) as SVGPathElement;
 
-        if (!path) return;
+            if (!path) return;
 
-        const length = path.getTotalLength();
+            const length = path.getTotalLength();
 
-        gsap.set(path, {
-            strokeDasharray: length,
-            strokeDashoffset: length,
+            gsap.set(path, {
+                strokeDasharray: length,
+                strokeDashoffset: length,
+            });
+
+            gsap.to(path, {
+                strokeDashoffset: 0,
+                duration: 2.5,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: svgContainer,
+                    start: "top 80%",
+                },
+            });
         });
 
-        gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 2,
-            ease: "power2.inOut",
-            scrollTrigger: {
-                trigger: svgContainer,
-                start: "top 80%",
-                toggleActions: "play reset play reset"
-            },
-        });
+        // Animación escalonada (stagger) para cada paso del proceso
+        const processContainer = document.getElementById("process-container");
+        if (processContainer) {
+            gsap.fromTo(
+                ".process-step",
+                { opacity: 0, y: 50, scale: 0.9 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    stagger: 0.6, // Retraso mayor (0.6s) entre cada paso
+                    ease: "back.out(1.5)",
+                    scrollTrigger: {
+                        trigger: processContainer,
+                        start: "top 75%",
+                    },
+                },
+            );
+        }
     });
 </script>
