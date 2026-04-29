@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { ChevronLeft, ChevronRight, ArrowRight } from "@lucide/astro";
 
 type Project = {
     title: string;
@@ -10,271 +10,311 @@ type Project = {
 
 const projects: Project[] = [
     {
-        title: "El Sabor Auténtico",
-        description: "Landing page donde cada plato cuenta una historia y cada momento es único",
-        image: "/projects/sabor-autentico.webp",
-        link: "https://resto-react-landing-page.vercel.app/"
+        title: "Todo Tela",
+        description:
+            "Landing page para una tienda de telas con un diseño moderno y responsive.",
+        image: "/projects/todo-tela.webp",
+        link: "https://www.tododetsalta.com.ar/",
     },
     {
-        title: "Soluciones de Transporte",
-        description: "Landing page para cotizar servicios de transporte para persionas, materiales y carga.",
-        image: "/projects/transporte.webp",
-        link: "https://lta-landing-page-transporte-salta.netlify.app/",
+        title: "AniTrendy",
+        description:
+            "Tienda online de moda con catálogo dinámico y diseño orientado a conversión.",
+        image: "/projects/anitrendy.png",
+        link: "https://anitrendy.com.ar/",
+    },
+    {
+        title: "SkyCargo",
+        description:
+            "Sitio web corporativo de logística y transporte de carga con interfaz profesional.",
+        image: "/projects/skycargo.png",
+        link: "https://skycargo.com.ar/",
+    },
+    {
+        title: "Impacto Creativo",
+        description:
+            "Landing page moderna y vibrante para una agencia de marketing digital.",
+        image: "/projects/impactocreativo.png",
+        link: "https://impacto-creativo.vercel.app/",
+    },
+    {
+        title: "El Sabor Auténtico",
+        description:
+            "Landing page donde cada plato cuenta una historia y cada momento es único.",
+        image: "/projects/sabor-autentico.webp",
+        link: "https://resto-react-landing-page.vercel.app/",
     },
     {
         title: "RestoBar",
-        description: "Landing page para un restobar con un diseño moderno y responsive.",
+        description:
+            "Landing page para un restobar con un diseño moderno y responsive.",
         image: "/projects/RestoBar.webp",
         link: "https://resto-astro-landing-page.vercel.app/",
     },
     {
-        title: "Inmobiliaria",
-        description: "Landing Page para una inmobiliaria con un diseño moderno y responsive.",
-        image: "/projects/landing-inmo.webp",
-        link: "https://landing-inmobiliaria-three.vercel.app/",
-    },
-    {
-        title: "Estudio contable",
-        description: "Landing page para un estudio contable con un diseño moderno y responsive.",
-        image: "/projects/estudio-contable.webp",
-        link: "https://estudio-contable-cetzz.vercel.app/",
-    },
-    {
-        title: "Todo Tela",
-        description: "Landing page para una tienda de telas con un diseño moderno y responsive.",
-        image: "/projects/todo-tela.webp",
-        link: "https://www.tododetsalta.com.ar/",
+        title: "Soluciones de Transporte",
+        description:
+            "Landing page para cotizar servicios de transporte para personas, materiales y carga.",
+        image: "/projects/transporte.webp",
+        link: "https://lta-landing-page-transporte-salta.netlify.app/",
     },
 ];
 ---
 
 <section
     id="portafolio"
-    class="py-20 bg-gradient-to-b from-black-950 to-labs from-10% relative"
+    class="py-24 lg:py-32 bg-labs relative overflow-hidden"
 >
-    <div class="rocket-bg -top-20 right-20"></div>
-    <div class="max-w-6xl mx-auto px-6 text-center w-full">
-        <h2 class="title-secundary title-style">Nuestro Portafolio</h2>
-        <p class="text-lg text-gray-300 mb-12">
-            Haz clic en un proyecto para ver más detalles.
-        </p>
+    <div class="rocket-bg top-[-5%] right-[-5%] opacity-50 mix-blend-screen">
+    </div>
+    <div
+        class="absolute top-[30%] left-[-10%] w-[800px] h-[800px] bg-purple-900/10 rounded-full blur-[150px] pointer-events-none z-0"
+    >
+    </div>
 
-        <div class="grid-flip-container">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 w-full relative z-10">
+        <div class="mb-8 md:mb-12">
+            <div class="w-full portfolio-info-container">
+                <span
+                    class="text-cyan-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                    >Nuestros proyectos</span
+                >
+                <h3
+                    id="portfolio-title"
+                    class="text-3xl md:text-5xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md"
+                >
+                    {projects[0].title}
+                </h3>
+                <p
+                    id="portfolio-desc"
+                    class="text-lg md:text-xl text-gray-400 leading-relaxed font-light max-w-4xl min-h-[60px] md:min-h-[84px]"
+                >
+                    {projects[0].description}
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="relative w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] flex items-center justify-center perspective-[1500px]"
+        >
+            <div
+                class="absolute -top-5 right-0 md:right-4 z-40 flex items-center gap-3"
+            >
+                <button
+                    id="btn-prev"
+                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-[#080d17]/80 border border-white/10 hover:bg-white/20 hover:border-cyan-500/50 text-white transition-all active:scale-95 shadow-lg backdrop-blur-md cursor-pointer"
+                    aria-label="Proyecto anterior"
+                >
+                    <ChevronLeft
+                        class="w-5 h-5 md:w-6 md:h-6 pointer-events-none"
+                    />
+                </button>
+                <button
+                    id="btn-next"
+                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-[#080d17]/80 border border-white/10 hover:bg-white/20 hover:border-cyan-500/50 text-white transition-all active:scale-95 shadow-lg backdrop-blur-md cursor-pointer"
+                    aria-label="Siguiente proyecto"
+                >
+                    <ChevronRight
+                        class="w-5 h-5 md:w-6 md:h-6 pointer-events-none"
+                    />
+                </button>
+            </div>500px]">
             {
-                projects.map((project) => (
-                    <article class="article">
-                        <a href={project.link} class="image-wrapper">
-                            <Image
-                                src={project.image}
-                                alt={project.title}
-                                width={600}
-                                height={400}
-                            />
+                projects.map((project, index) => (
+                    <div
+                        class="carousel-item absolute top-0 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] h-full rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer"
+                        data-index={index}
+                    >
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            class="w-full h-full object-cover object-top"
+                        />
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 pointer-events-none transition-opacity duration-500" />
+
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="carousel-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 inline-flex items-center justify-center gap-2 px-4 md:px-6 py-1 md:py-2 hover:bg-cyan-500 text-white font-bold text-sm md:text-base rounded-full transition-all active:scale-95 backdrop-blur-xl opacity-0 pointer-events-none translate-y-4"
+                        >
+                            Ver página
+                            <ArrowRight class="w-4 h-4 md:w-5 md:h-5 pointer-events-none" />
                         </a>
-                        <section class="description">
-                            <div class="details-view">
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn-link-secundary">Ver proyecto</a>
-                            </div>
-                        </section>
-                    </article>
+                    </div>
                 ))
             }
         </div>
     </div>
 </section>
 
+<script is:inline define:vars={{ projects }}>
+    window.portfolioProjects = projects;
+</script>
+
 <script>
     import { gsap } from "gsap";
-    import { Flip } from "gsap/Flip";
 
-    gsap.registerPlugin(Flip);
+    document.addEventListener("DOMContentLoaded", () => {
+        const projects = (window as any).portfolioProjects;
+        if (!projects || !projects.length) return;
 
-    window.addEventListener("load", () => {
-        
-        const articles = document.querySelectorAll("#portafolio .article");
-        const container = document.querySelector("#portafolio .grid-flip-container");
+        let currentIndex = 0;
+        const total = projects.length;
 
-        articles.forEach((article) => {
-            article.addEventListener("click", (e) => {
-                const target = e.target as HTMLElement;
-                // Usamos .closest() por si el usuario hace clic en un ícono DENTRO del botón
-                if (target.closest(".btn-link-secundary")) {
-                    // Si fue en el botón, no hacemos nada y dejamos que el link funcione
-                    return;
-                }
-                // Si el clic NO fue en el botón, prevenimos el default y animamos
-                e.preventDefault();
-                if (article.classList.contains("details")) {
-                    return;
-                }
-                const state = Flip.getState("#portafolio .article");
+        const items = document.querySelectorAll(".carousel-item");
 
-                // Hacemos los cambios en el DOM
-                const currentDetails = container!.querySelector(".details");
-                
-                // Ocultamos el texto de la card que se encoge
-                if (currentDetails) {
-                    currentDetails.classList.remove("details");
-                    // Ocultamos sus detalles explícitamente
-                    gsap.to(currentDetails.querySelector(".details-view"), { 
-                        opacity: 0, 
-                        y: "30px", 
-                        duration: 0.3 
-                    });
-                }
-                article.classList.add("details");
+        const titleEl = document.getElementById("portfolio-title");
+        const descEl = document.getElementById("portfolio-desc");
 
-                // Invert Play: Animamos...
-                const tl = Flip.from(state, {
-                    duration: 0.8,
-                    ease: "power2.inOut",
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+
+        let isAnimating = false;
+
+        const updateCarousel = () => {
+            if (titleEl && descEl) {
+                gsap.to([titleEl, descEl], {
+                    opacity: 0,
+                    y: 10,
+                    duration: 0.2,
                     stagger: 0.05,
-                    onStart: () => {
-                        // Animación de los overlays
-                        gsap.to("#portafolio .article", {
-                            "--max": 0,
-                            duration: 0.8
-                        });
-                        gsap.to("#portafolio .article.details", {
-                            "--max": 1,
-                            duration: 0.9,
-                            delay: 0.1
-                        });
-                    }
-                });
+                    ease: "power1.in",
+                    onComplete: () => {
+                        titleEl.textContent = projects[currentIndex].title;
+                        descEl.textContent = projects[currentIndex].description;
 
-                tl.to(
-                    article.querySelector(".details-view"), 
-                    { opacity: 1, y: 0, duration: 0.7, delay: 0.2 },
-                    "-=0.5"
-                );
+                        gsap.to([titleEl, descEl], {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            stagger: 0.05,
+                            ease: "power2.out",
+                        });
+                    },
+                });
+            }
+
+            const isMobile = window.innerWidth < 768;
+            const shiftAmount = isMobile ? "15%" : "25%";
+            const scaleAmount = isMobile ? 0.9 : 0.85;
+
+            items.forEach((item, index) => {
+                const el = item as HTMLElement;
+                const btn = el.querySelector(".carousel-btn") as HTMLElement;
+
+                if (index === currentIndex) {
+                    el.style.transform = `translateX(0) scale(1) translateZ(0)`;
+                    el.style.opacity = `1`;
+                    el.style.zIndex = `30`;
+                    el.style.filter = `blur(0px) brightness(1)`;
+                    el.style.pointerEvents = "auto";
+
+                    if (btn) {
+                        btn.style.opacity = "1";
+                        btn.style.pointerEvents = "auto";
+                        btn.style.transform = "translateY(0)";
+                    }
+                } else if (index === getPrevIndex()) {
+                    el.style.transform = `translateX(-${shiftAmount}) scale(${scaleAmount}) translateZ(-50px)`;
+                    el.style.opacity = `0.6`;
+                    el.style.zIndex = `20`;
+                    el.style.filter = `blur(2px) brightness(0.6)`;
+                    el.style.pointerEvents = "auto";
+
+                    if (btn) {
+                        btn.style.opacity = "0";
+                        btn.style.pointerEvents = "none";
+                        btn.style.transform = "translateY(1rem)";
+                    }
+                } else if (index === getNextIndex()) {
+                    el.style.transform = `translateX(${shiftAmount}) scale(${scaleAmount}) translateZ(-50px)`;
+                    el.style.opacity = `0.6`;
+                    el.style.zIndex = `20`;
+                    el.style.filter = `blur(2px) brightness(0.6)`;
+                    el.style.pointerEvents = "auto";
+
+                    if (btn) {
+                        btn.style.opacity = "0";
+                        btn.style.pointerEvents = "none";
+                        btn.style.transform = "translateY(1rem)";
+                    }
+                } else {
+                    el.style.transform = `translateX(0) scale(0.6) translateZ(-100px)`;
+                    el.style.opacity = `0`;
+                    el.style.zIndex = `10`;
+                    el.style.filter = `blur(10px) brightness(0)`;
+                    el.style.pointerEvents = "none";
+
+                    if (btn) {
+                        btn.style.opacity = "0";
+                        btn.style.pointerEvents = "none";
+                    }
+                }
+            });
+        };
+
+        const getPrevIndex = () => (currentIndex - 1 + total) % total;
+        const getNextIndex = () => (currentIndex + 1) % total;
+
+        let autoplayTimer: ReturnType<typeof setInterval>;
+
+        const resetAutoplay = () => {
+            clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(() => {
+                if (!isAnimating) {
+                    isAnimating = true;
+                    currentIndex = getNextIndex();
+                    updateCarousel();
+                    setTimeout(() => (isAnimating = false), 700);
+                }
+            }, 5000);
+        };
+
+        const goToPrev = () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            currentIndex = getPrevIndex();
+            updateCarousel();
+            resetAutoplay();
+            setTimeout(() => (isAnimating = false), 700);
+        };
+
+        const goToNext = () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            currentIndex = getNextIndex();
+            updateCarousel();
+            resetAutoplay();
+            setTimeout(() => (isAnimating = false), 700);
+        };
+
+        btnPrev?.addEventListener("click", goToPrev);
+        btnNext?.addEventListener("click", goToNext);
+
+        items.forEach((item, index) => {
+            item.addEventListener("click", (e) => {
+                const target = e.target as HTMLElement;
+                const isBtn = target.closest(".carousel-btn");
+
+                if (index !== currentIndex && !isBtn) {
+                    e.preventDefault();
+                    if (isAnimating) return;
+                    isAnimating = true;
+                    currentIndex = index;
+                    updateCarousel();
+                    resetAutoplay();
+                    setTimeout(() => (isAnimating = false), 700);
+                }
             });
         });
 
-        // Animación de entrada 
-        gsap.from("#portafolio .article", {
-            autoAlpha: 0,
-            yPercent: 30,
-            stagger: 0.05
+        window.addEventListener("resize", () => {
+            updateCarousel();
         });
 
+        updateCarousel();
+        resetAutoplay();
     });
 </script>
-
-<style>
-    /* Variables de la demo para el overlay */
-    :root {
-        --base-color: #3f3352;
-        --overlayH: 263;
-        --overlayS: 23%;
-        --overlayL: 26%;
-    }
-
-    /* El contenedor del grid */
-    .grid-flip-container {
-        display: grid;
-        grid-gap: 1.5rem;
-        margin: 0;
-        padding: 0;
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: minmax(18rem, max-content);
-        position: relative;
-    }
-    .details-view {
-        color: white;
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    
-    /* En pantallas grandes, 3 columnas  */
-    @media (min-width: 1024px) {
-        .grid-flip-container {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-    }
-
-    /* Estilos de cada artículo */
-    .article {
-        --max: 0; /* Variable para el overlay  */
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        border-radius: 1rem; 
-        background: #111; 
-    }
-
-    /* La imagen y su contenedor */
-    .article a.image-wrapper {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        display: block;
-        height: 100%;
-    }
-
-    .article img {
-        max-width: 100%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-        transition: transform 0.4s ease;
-    }
-
-    .article:hover img {
-        transform: scale(1.05);
-    }
-    
-    /* La clase .details que aplica GSAP */
-    .article.details {
-        grid-row: span 2;
-        grid-column: span 2;
-        cursor: default;
-    }
-
-    /* La descripción */
-    .description {
-        position: relative;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end; 
-        padding: clamp(1rem, 2.5vmin, 2.25rem);
-        color: white;
-        text-align: center;
-        
-        /* El overlay degradado de la demo */
-        background: linear-gradient(
-            0deg,
-            hsl(var(--overlayH), var(--overlayS), var(--overlayL), calc(1 * var(--max))) 0%,
-            hsla(var(--overlayH), var(--overlayS), var(--overlayL), calc(0.738 * var(--max))) 19%,
-            hsla(var(--overlayH), var(--overlayS), var(--overlayL), calc(0.382 * var(--max))) 47%,
-            hsla(var(--overlayH), var(--overlayS), var(--overlayL), 0) 100%
-        );
-    }
-    
-    .description h2 {
-        font-family: 'Sora', sans-serif; 
-        font-weight: 600;
-        font-size: 1.5rem;
-        color: white;
-        margin: 0;
-    }
-
-    /* Los detalles (párrafo) están ocultos por defecto */
-    .details-view {
-        color: white;
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    .details-view p {
-        color: #ddd;
-        font-family: 'Sora', sans-serif;
-        font-weight: 300;
-        font-style: normal;
-        margin-top: 0.5rem;
-        margin-bottom: 0;
-    }
-</style>
