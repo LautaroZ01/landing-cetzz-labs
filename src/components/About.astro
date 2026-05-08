@@ -4,37 +4,41 @@
 
 <section
     id="quienes-somos"
-    class="pb-20 pt-10 lg:pt-20 bg-gradient-to-br from-black-950 to-labs from-10% relative overflow-hidden"
+    class="py-20 lg:py-32 bg-white relative overflow-hidden"
 >
     <div
-        class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10"
+        class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center relative z-10"
     >
         <div
-            class="about-video relative w-full md:aspect-[6/5] flex justify-center items-center opacity-0"
+            class="about-video relative w-full aspect-square md:aspect-[4/3] flex justify-center items-center opacity-0 lg:-ml-6"
         >
-            <video
-                src="/hero-video.mp4"
-                autoplay
-                loop
-                muted
-                playsinline
-                class="w-full h-full object-cover mask-radial-at-center mask-radial-from-5% mask-radial-to-70% scale-[1.3] lg:scale-[1.5]"
-            ></video>
+            <div class="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden bg-primary-950 shadow-2xl shadow-primary-900/10 ring-1 ring-black-100 flex items-center justify-center p-1 lg:p-2">
+                <video
+                    src="/hero-video.mp4"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="w-full h-full object-cover rounded-[1.8rem] lg:rounded-[2.8rem] scale-[1.01]"
+                ></video>
+                <div class="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-950/40 via-transparent to-transparent pointer-events-none rounded-[2rem] lg:rounded-[3rem]"></div>
+            </div>
         </div>
 
         <div class="flex flex-col gap-8 items-start">
             <h2
-                class="about-text text-4xl md:text-5xl lg:text-6xl font-extrabold title-style leading-tight opacity-0"
+                class="about-text text-4xl md:text-5xl lg:text-6xl font-extrabold text-black-900 tracking-tight leading-tight opacity-0"
             >
                 Quiénes somos
             </h2>
 
             <div
-                class="about-text flex flex-col gap-4 text-lg text-gray-300 leading-relaxed font-light opacity-0"
+                class="about-text flex flex-col gap-4 text-lg text-black-600 leading-relaxed font-normal opacity-0"
             >
                 <p>
                     Somos un equipo apasionado por la <strong
-                        class="text-white font-semibold"
+                        class="text-black-900 font-bold"
                         >tecnología y el diseño</strong
                     >, especializados en crear páginas web modernas, rápidas y
                     funcionales que impulsan el crecimiento de empresas y
@@ -48,27 +52,27 @@
             </div>
 
             <div
-                class="about-text grid grid-cols-2 gap-8 w-full py-6 mt-2 border-y border-white/10 relative opacity-0"
+                class="about-text grid grid-cols-2 gap-8 w-full py-6 mt-2 border-y border-black-100 relative opacity-0"
             >
                 <div
-                    class="absolute inset-0 bg-gradient-to-r from-labs/5 to-transparent -z-10"
+                    class="absolute inset-0 bg-gradient-to-r from-primary-50 to-transparent -z-10"
                 >
                 </div>
-                <div class="flex flex-col gap-1 pl-4 border-labs">
+                <div class="flex flex-col gap-1 pl-4 border-l-2 border-primary-400">
                     <span
-                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter flex items-center"
-                        ><span class="text-labs">+</span><span class="counter-1">0</span></span
+                        class="text-4xl lg:text-5xl font-black text-black-900 tracking-tighter flex items-center"
+                        ><span class="text-primary-500">+</span><span class="counter-1">0</span></span
                     >
-                    <span class="text-gray-400 text-sm md:text-base font-medium"
+                    <span class="text-black-500 text-sm md:text-base font-semibold"
                         >Proyectos Exitosos</span
                     >
                 </div>
-                <div class="flex flex-col gap-1 pl-4 border-labs/50">
+                <div class="flex flex-col gap-1 pl-4 border-l-2 border-primary-200">
                     <span
-                        class="text-4xl lg:text-5xl font-black text-white tracking-tighter flex items-center"
-                        ><span class="counter-2">0</span><span class="text-labs">%</span></span
+                        class="text-4xl lg:text-5xl font-black text-black-900 tracking-tighter flex items-center"
+                        ><span class="counter-2">0</span><span class="text-primary-500">%</span></span
                     >
-                    <span class="text-gray-400 text-sm md:text-base font-medium"
+                    <span class="text-black-500 text-sm md:text-base font-semibold"
                         >Enfoque a Medida</span
                     >
                 </div>

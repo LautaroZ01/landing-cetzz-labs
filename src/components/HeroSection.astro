@@ -1,5 +1,175 @@
 ---
-import Typewriter from "./ui/Typewriter";
+import { ArrowRight } from "@lucide/astro";
+import HeroIllustration from "./svg/HeroIllustration.astro";
 ---
 
-<section class="bg-white w-full h-[98vh] text-black rounded-b-[20%]"></section>
+<section
+    class="relative bg-primary-50 w-full min-h-[95vh] text-black-900 rounded-b-[2rem] lg:rounded-b-[4rem] overflow-hidden flex items-center justify-center pt-20 pb-16 lg:pb-0 border-b border-primary-100 shadow-sm"
+>
+    <!-- Background Glow -->
+    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary-200/50 to-transparent pointer-events-none z-0"></div>
+    <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[80%] max-w-[1000px] h-[400px] bg-primary-400/40 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <div
+        class="container-labs relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 max-w-7xl w-full"
+    >
+        <!-- Text Content -->
+        <div
+            class="w-full lg:w-[50%] flex flex-col items-center lg:items-start text-center lg:text-left"
+        >
+            <h1
+                class="hero-title translate-y-12 opacity-0 text-5xl md:text-4xl lg:text-[2.5rem] xl:text-[3.5rem] font-black leading-[1.1] tracking-tight text-black-900 mb-6"
+            >
+                Creamos páginas web y <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-[#49537e]"
+                    >sistemas que generan clientes</span
+                > todos los días
+            </h1>
+
+            <!-- Subtítulo -->
+            <p
+                class="hero-subtitle translate-y-8 opacity-0 text-lg md:text-xl text-black-600 max-w-2xl mx-auto lg:mx-0 mb-10 font-medium leading-relaxed"
+            >
+                Creamos experiencias web ultrarrápidas, modernas y centradas en
+                el usuario que elevan tu marca y multiplican tus conversiones.
+            </p>
+
+            <!-- Botones -->
+            <div
+                class="hero-buttons translate-y-8 opacity-0 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+            >
+                <a
+                    href="#contacto"
+                    class="btn-primary-big w-full sm:w-auto flex items-center justify-center gap-2 group"
+                >
+                    Empezar Proyecto
+                    <ArrowRight
+                        class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                    />
+                </a>
+                <a
+                    href="#portafolio"
+                    class="btn-secundary-big w-full sm:w-auto"
+                >
+                    Ver Portafolio
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Illustration -->
+        <div
+            class="hero-image translate-y-12 opacity-0 hidden lg:flex w-full lg:w-[50%] justify-center lg:justify-end mt-12 lg:mt-0"
+        >
+            <HeroIllustration />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const tl = gsap.timeline({ delay: 0.2 });
+
+        // 1. Animación del Badge
+        tl.to(".hero-badge", {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "back.out(1.5)",
+        });
+
+        // 2. Animación del Título Principal
+        tl.to(
+            ".hero-title",
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power4.out",
+            },
+            "-=0.5",
+        );
+
+        // 3. Subtítulo
+        tl.to(
+            ".hero-subtitle",
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+            },
+            "-=0.8",
+        );
+
+        // 4. Botones
+        tl.to(
+            ".hero-buttons",
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "back.out(1.5)",
+            },
+            "-=0.6",
+        );
+
+        // 5. Hero Image Fade-In
+        tl.to(
+            ".hero-image",
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power3.out",
+            },
+            "-=0.8",
+        );
+
+        // 6. Animación de dibujo de la ilustración (SVG Paths)
+        const drawPaths = document.querySelectorAll(".hero-draw-path");
+        drawPaths.forEach((path) => {
+            if (path instanceof SVGPathElement || path instanceof SVGRectElement || path instanceof SVGLineElement) {
+                // Approximate length for non-paths or get actual length for paths
+                let length = 1000;
+                if (path instanceof SVGPathElement) {
+                    length = path.getTotalLength();
+                }
+                gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+                tl.to(path, { strokeDashoffset: 0, duration: 1.2, ease: "expo.out" }, "-=1.0");
+            }
+        });
+
+        // 7. Aparición de elementos de color de la ilustración
+        tl.fromTo(".hero-color-block", 
+            { opacity: 0, scale: 0.8, transformOrigin: "center center" },
+            { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.5)" },
+            "-=1.5"
+        );
+
+        tl.fromTo(".hero-fade-item",
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: "power2.out" },
+            "-=1.2"
+        );
+
+        // Animaciones continuas (Loop) para las formas geométricas flotantes
+        gsap.to(".hero-shape", {
+            y: "random(-30, 30)",
+            x: "random(-30, 30)",
+            duration: 6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: 0.5,
+        });
+
+        gsap.to(".hero-shape-rotate", {
+            rotation: 360,
+            duration: 25,
+            repeat: -1,
+            ease: "linear",
+        });
+    });
+</script>

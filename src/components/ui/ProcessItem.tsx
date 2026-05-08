@@ -23,13 +23,13 @@ export default function ProcessItem({ step, children }: ProcessItemProps) {
                 transition={{ duration: 0.7, delay: 0.5 }}
                 className={`relative w-full px-6 ${step.posCard}`}
             >
-                <span className="bg-gradient-to-b from-white/50 to-transparent bg-clip-text text-transparent absolute -top-10 lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-bold -z-10 leading-none select-none opacity-60">
+                <span className="bg-gradient-to-b from-primary-200/80 to-transparent bg-clip-text text-transparent absolute -top-10 lg:-top-4 right-2 -translate-x-1/2 lg:-translate-y-1/2 text-[6rem] lg:text-[8rem] font-black -z-10 leading-none select-none">
                     {step.number}
                 </span>
-                <h3 className="text-xl lg:text-2xl font-semibold mb-2">
+                <h3 className="text-xl lg:text-2xl font-semibold mb-2 text-black-900">
                     {step.title}
                 </h3>
-                <p className="text-base text-slate-500 leading-relaxed">
+                <p className="text-base text-black-600 leading-relaxed">
                     {step.description}
                 </p>
             </motion.div>

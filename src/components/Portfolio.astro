@@ -63,12 +63,12 @@ const projects: Project[] = [
 
 <section
     id="portafolio"
-    class="py-24 lg:py-32 bg-labs relative overflow-hidden"
+    class="py-24 lg:py-32 bg-black-50 relative overflow-hidden"
 >
-    <div class="rocket-bg top-[-5%] right-[-5%] opacity-50 mix-blend-screen">
+    <div class="rocket-bg top-[-5%] right-[-5%] opacity-30 mix-blend-multiply">
     </div>
     <div
-        class="absolute top-[30%] left-[-10%] w-[800px] h-[800px] bg-purple-900/10 rounded-full blur-[150px] pointer-events-none z-0"
+        class="absolute top-[30%] left-[-10%] w-[800px] h-[800px] bg-primary-100/40 rounded-full blur-[150px] pointer-events-none z-0"
     >
     </div>
 
@@ -76,18 +76,18 @@ const projects: Project[] = [
         <div class="mb-8 md:mb-12">
             <div class="w-full portfolio-info-container">
                 <span
-                    class="text-cyan-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                    class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
                     >Nuestros proyectos</span
                 >
                 <h3
                     id="portfolio-title"
-                    class="text-3xl md:text-5xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md"
+                    class="text-3xl md:text-5xl lg:text-5xl font-extrabold text-black-900 mb-4 tracking-tight drop-shadow-sm"
                 >
                     {projects[0].title}
                 </h3>
                 <p
                     id="portfolio-desc"
-                    class="text-lg md:text-xl text-gray-400 leading-relaxed font-light max-w-4xl min-h-[60px] md:min-h-[84px]"
+                    class="text-lg md:text-xl text-black-600 leading-relaxed font-normal max-w-4xl min-h-[60px] md:min-h-[84px]"
                 >
                     {projects[0].description}
                 </p>
@@ -102,7 +102,7 @@ const projects: Project[] = [
             >
                 <button
                     id="btn-prev"
-                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-[#080d17]/80 border border-white/10 hover:bg-white/20 hover:border-cyan-500/50 text-white transition-all active:scale-95 shadow-lg backdrop-blur-md cursor-pointer"
+                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white border border-black-100 hover:bg-primary-50 hover:border-primary-300 text-black-600 hover:text-primary-600 transition-all active:scale-95 shadow-soft cursor-pointer"
                     aria-label="Proyecto anterior"
                 >
                     <ChevronLeft
@@ -111,18 +111,18 @@ const projects: Project[] = [
                 </button>
                 <button
                     id="btn-next"
-                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-[#080d17]/80 border border-white/10 hover:bg-white/20 hover:border-cyan-500/50 text-white transition-all active:scale-95 shadow-lg backdrop-blur-md cursor-pointer"
+                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white border border-black-100 hover:bg-primary-50 hover:border-primary-300 text-black-600 hover:text-primary-600 transition-all active:scale-95 shadow-soft cursor-pointer"
                     aria-label="Siguiente proyecto"
                 >
                     <ChevronRight
                         class="w-5 h-5 md:w-6 md:h-6 pointer-events-none"
                     />
                 </button>
-            </div>500px]">
+            </div>
             {
                 projects.map((project, index) => (
                     <div
-                        class="carousel-item absolute top-0 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] h-full rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer"
+                        class="carousel-item absolute top-0 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] h-full rounded-[2rem] overflow-hidden border border-black-100 shadow-soft-hover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer bg-white"
                         data-index={index}
                     >
                         <img
@@ -131,13 +131,13 @@ const projects: Project[] = [
                             class="w-full h-full object-cover object-top"
                         />
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 pointer-events-none transition-opacity duration-500" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 pointer-events-none transition-opacity duration-500" />
 
                         <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="carousel-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 inline-flex items-center justify-center gap-2 px-4 md:px-6 py-1 md:py-2 hover:bg-cyan-500 text-white font-bold text-sm md:text-base rounded-full transition-all active:scale-95 backdrop-blur-xl opacity-0 pointer-events-none translate-y-4"
+                            class="carousel-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2 hover:bg-primary-600 bg-white/20 border border-white/30 text-white font-bold text-sm md:text-base rounded-full transition-all active:scale-95 backdrop-blur-md opacity-0 pointer-events-none translate-y-4"
                         >
                             Ver página
                             <ArrowRight class="w-4 h-4 md:w-5 md:h-5 pointer-events-none" />

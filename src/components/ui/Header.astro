@@ -3,36 +3,41 @@ import { Image } from "astro:assets";
 import Facebook from "../svg/social/Facebook.astro";
 import Instagram from "../svg/social/Instagram.astro";
 import WhatsApp from "../svg/social/WhatsApp.astro";
+import { socials, whatsApp } from "../../data/data";
+
+const facebookUrl = socials.find(s => s.name === "Facebook")?.url || "#";
+const instagramUrl = socials.find(s => s.name === "Instagram")?.url || "#";
+const whatsappUrl = whatsApp?.url || "#";
 ---
 
 <header class="fixed w-full flex mt-4 z-50 justify-center items-center">
   <div
-    class="w-7xl bg-black-950 rounded-full px-4 py-2 md:px-8 md:py-4 flex items-center justify-between"
+    class="w-7xl bg-white/80 backdrop-blur-md border border-black-100 shadow-sm rounded-full px-4 py-2 md:px-8 md:py-4 flex items-center justify-between"
   >
     <nav
-      class="flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-gray-300"
+      class="hidden md:flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-black-600 font-medium"
     >
-      <a href="#">Nosotros</a>
-      <a href="#">Servicios</a>
-      <a href="#">Portafolio</a>
+      <a href="#quienes-somos" class="hover:text-primary-600 transition-colors">Nosotros</a>
+      <a href="#servicios" class="hover:text-primary-600 transition-colors">Servicios</a>
+      <a href="#portafolio" class="hover:text-primary-600 transition-colors">Portafolio</a>
     </nav>
-    <div class="flex items-center gap-2">
-      <Image src="/logo.webp" alt="" width={24} height={24} />
-      <span class="text-lg font-bold">CetZz Labs</span>
-    </div>
+    <a href="#" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300">
+      <Image src="/logo.webp" alt="" width={24} height={24} class="rounded-full" />
+      <span class="text-lg font-bold text-black-900">CetZz Labs</span>
+    </a>
     <nav
-      class="flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-gray-300"
+      class="hidden md:flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-black-600 font-medium"
     >
-      <a href="">Procesos</a>
-      <a href="">Contacto</a>
+      <a href="#procesos" class="hover:text-primary-600 transition-colors">Procesos</a>
+      <a href="#contacto" class="hover:text-primary-600 transition-colors">Contacto</a>
       <div class="flex items-center gap-2">
-        <a href="">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
           <WhatsApp class="size-1" size={12} />
         </a>
-        <a href="">
+        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
           <Facebook class="size-1" />
         </a>
-        <a href="">
+        <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
           <Instagram class="size-1" />
         </a>
       </div>

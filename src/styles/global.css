@@ -2,22 +2,24 @@
 @import "tailwindcss";
 
 @theme {
+    /* Brand Colors - Mantenidos */
     --color-cetzz: #49537e;
     --color-labs: #18183a;
 
-    --color-primary-50: #edfcfe;
-    --color-primary-100: #d0f6fd;
-    --color-primary-200: #a8ecf9;
-    --color-primary-300: #6bdcf5;
-    --color-primary-400: #20c0e7;
-    --color-primary-500: #0ca6ce;
-    --color-primary-600: #0d84ad;
-    --color-primary-700: #126a8c;
-    --color-primary-800: #185672;
-    --color-primary-900: #184861;
-    --color-primary-950: #0a2e42;
+    /* Primary Colors (True Blue) */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+    --color-primary-950: #172554;
 
-
+    /* Accent Colors (Rojos/Naranjas) */
     --color-accent-50: #fff1f0;
     --color-accent-100: #ffe0dd;
     --color-accent-200: #ffc5c0;
@@ -30,25 +32,196 @@
     --color-accent-900: #92160a;
     --color-accent-950: #500700;
 
-    --color-black-50: #f6f6f6;
-    --color-black-100: #e7e7e7;
-    --color-black-200: #d1d1d1;
-    --color-black-300: #b0b0b0;
-    --color-black-400: #888888;
-    --color-black-500: #6d6d6d;
-    --color-black-600: #5d5d5d;
-    --color-black-700: #4f4f4f;
-    --color-black-800: #454545;
-    --color-black-900: #3d3d3d;
-    --color-black-950: #000000;
-    --shadow-cetzz: 0 0 30px -5px #ff655788;
-    --shadow-labs: 0 0 30px -5px #20c0e788;
-    --shadow-primary: 0 0 30px -5px #20c0e788;
+    /* Grayscale para Light Mode */
+    --color-black-50: #f8fafc;
+    --color-black-100: #f1f5f9;
+    --color-black-200: #e2e8f0;
+    --color-black-300: #cbd5e1;
+    --color-black-400: #94a3b8;
+    --color-black-500: #64748b;
+    --color-black-600: #475569;
+    --color-black-700: #334155;
+    --color-black-800: #1e293b;
+    --color-black-900: #0f172a;
+    --color-black-950: #020617;
 
-    --transition-duration-pro: .25s;
+    /* Sombras Soft UI para Light Mode */
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    --shadow-soft-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+    --shadow-cetzz: 0 10px 30px -5px rgba(73, 83, 126, 0.3);
+    --shadow-primary: 0 10px 30px -5px rgba(32, 192, 231, 0.3);
+
+    --transition-duration-pro: .3s;
 }
 
-* {
+/* --- MODERN RESET --- */
+
+html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
     font-family: "Lato", sans-serif;
+    background-color: var(--color-black-50); /* Gris extra claro */
+    color: var(--color-black-800); /* Gris casi negro para excelente legibilidad */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-black-900);
+    line-height: 1.2;
+}
+
+.title-style {
+    @apply bg-gradient-to-br from-black-900 to-black-600 bg-clip-text text-transparent drop-shadow-sm;
+}
+
+.title-secundary {
+    @apply text-3xl md:text-4xl font-extrabold mb-4 tracking-tight;
+}
+
+.title-card {
+    @apply text-xl font-bold mb-3 text-black-900;
+}
+
+/* --- COMPONENTS & BUTTONS (Light Mode Redesign) --- */
+
+.link-btn {
+    @apply text-black-600 hover:text-primary-600 font-medium transition-colors duration-pro active:scale-95;
+}
+
+.btn-link {
+    @apply p-2 mr-4 bg-white text-black-800 rounded-xl flex items-center justify-center hover:text-primary-600 hover:shadow-soft-hover hover:-translate-y-1 transition-all duration-pro active:scale-95 border border-black-100;
+}
+
+/* Botón Secundario (Outline) */
+.btn-link-secundary {
+    @apply p-2 font-bold rounded-xl flex items-center justify-center bg-transparent text-primary-600 border-2 border-primary-100 hover:border-primary-400 hover:bg-primary-50 transition-all duration-pro active:scale-95;
+}
+
+/* Botón Primario Principal */
+.btn-primary {
+    @apply px-8 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold shadow-soft hover:shadow-primary hover:-translate-y-1 transition-all duration-pro active:scale-95;
+}
+
+/* Botón Secundario Principal */
+.btn-secundary {
+    @apply px-8 py-3 rounded-xl bg-white text-black-800 font-semibold border border-black-200 shadow-sm hover:shadow-soft-hover hover:border-black-300 hover:-translate-y-1 transition-all duration-pro active:scale-95;
+}
+
+.btn-primary-big {
+    @apply px-8 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-all duration-pro shadow-primary hover:-translate-y-1 active:scale-95 text-lg;
+}
+
+.btn-secundary-big {
+    @apply px-8 py-4 bg-white text-black-800 font-bold rounded-xl border border-black-200 hover:border-black-300 hover:bg-black-50 transition-all duration-pro shadow-soft hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 text-lg;
+}
+
+/* --- CARDS & CONTAINERS --- */
+.container-labs {
+    @apply container lg:max-w-7xl mx-auto px-6 lg:px-8;
+}
+
+/* Tarjeta General Light Mode */
+.card {
+    @apply p-8 rounded-3xl bg-white shadow-soft border border-black-100 hover:shadow-soft-hover hover:-translate-y-2 transition-all duration-pro relative overflow-hidden;
+}
+
+.cardInnerClass {
+    @apply p-8 rounded-3xl bg-white shadow-soft border border-black-100 hover:shadow-soft-hover hover:-translate-y-1 transition-all duration-pro h-full w-full flex flex-col justify-between relative overflow-hidden z-10;
+}
+
+/* Tarjeta de Procesos Light Mode */
+.process-card {
+    @apply flex flex-col items-center bg-white rounded-2xl p-8 shadow-soft border border-black-100 hover:shadow-soft-hover hover:border-primary-200 hover:-translate-y-2 transition-all duration-pro z-10 relative;
+}
+
+.process-arrow {
+    @apply text-primary-300 drop-shadow-sm hover:scale-110 transition-transform duration-pro;
+}
+
+.process-icon {
+    @apply size-16 flex items-center justify-center rounded-2xl bg-primary-50 text-primary-600 text-2xl font-bold mb-6 border border-primary-100;
+}
+
+.icon-size {
+    @apply size-10;
+}
+
+.card-icon {
+    @apply size-14 mx-auto rounded-2xl bg-primary-50 text-primary-600 flex items-center justify-center p-3 mb-6 border border-primary-100;
+}
+
+.service-card-icon {
+    @apply bg-primary-50 text-primary-600;
+}
+
+/* --- MISC --- */
+.rocket-bg {
+    @apply absolute size-[600px] bg-primary-100/50 blur-[120px] rounded-full lg:block hidden -z-10 pointer-events-none;
+}
+
+.contact-icon {
+    @apply text-black-400 transition-colors duration-300;
+}
+
+.contact-card {
+    @apply flex items-center gap-4 p-6 max-w-[500px] w-full lg:w-auto lg:min-w-[300px] bg-white border border-black-200 rounded-2xl transition-all duration-300 hover:bg-black-50 hover:border-primary-300 hover:shadow-soft hover:-translate-y-1;
+}
+
+.contact-card:hover .contact-icon {
+    @apply text-primary-600;
+    animation: contact-icon-animation 1s alternate infinite;
+}
+
+.social-media {
+    @apply text-black-500 bg-white border border-black-200 rounded-full flex items-center justify-center transition-all duration-300 hover:text-white hover:bg-primary-600 hover:border-primary-600 hover:-translate-y-1 shadow-sm hover:shadow-primary;
+}
+
+.contact-whatsapp {
+    @apply flex items-center justify-center gap-3 font-semibold bg-[#25D366] text-white py-4 px-8 rounded-xl shadow-soft transition-all duration-300 hover:bg-[#1ebd5a] hover:shadow-soft-hover hover:-translate-y-1 active:scale-95;
+}
+
+.sticky-contact {
+    @apply fixed bottom-6 right-6 md:right-8 md:bottom-8 z-50 shadow-soft-hover rounded-full;
+    animation: pulse-glow-light 2s infinite;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes icon-animation {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-8px); }
+}
+
+@keyframes contact-icon-animation {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-3px); }
+}
+
+@keyframes pulse-glow-light {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.animation-menu {
+    animation: menu-animation 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animation-menu-close {
+    animation: menu-animation-close 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes menu-animation {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0px); opacity: 1; }
+}
+
+@keyframes menu-animation-close {
+    0% { transform: translateY(0px); opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
 }
