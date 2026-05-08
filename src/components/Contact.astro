@@ -1,84 +1,236 @@
 ---
-import { MessageCircleMore } from "@lucide/astro";
-import { contacts, socials, whatsApp } from "../data/data";
 import Icons from "./ui/Icons.astro";
 ---
 
-
-<section
-    id="contacto"
-    class="py-24 sm:py-32 bg-white text-black-600 relative"
->
-
-    <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-16 flex flex-col items-center">
-            <MessageCircleMore class="size-16 mb-6 text-primary-500" />
-            <h2 class="title-secundary title-style text-black-900">
-                Contáctanos
-            </h2>
-            <p class="text-lg text-black-500 max-w-2xl mx-auto mt-4 font-medium">
-                ¿Tienes un proyecto en mente o alguna duda? Escríbenos y te
-                responderemos lo antes posible.
-            </p>
-        </div>
-
+<section id="contacto" class="py-24 sm:py-32 bg-white text-black-600 relative">
+    <div class="max-w-6xl mx-auto px-6">
         <div
-            class="flex flex-col lg:flex-row items-center justify-center gap-6"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-stretch"
         >
-            {
-                contacts.map((contact) => (
-                    <a
-                        href={contact.url}
-                        class="contact-card"
-                        target="_blank"
-                        title={contact.name}
-                        aria-label={contact.name}
+            {/* --- COLUMNA IZQUIERDA: Textos e Información --- */}
+            <div class="flex flex-col gap-8">
+                <div>
+                    <h2
+                        class="text-4xl sm:text-5xl font-extrabold text-white mb-4"
                     >
+                        Hablemos por <span class="title-style">WhatsApp</span>
+                    </h2>
+                    <p class="text-lg text-neutral-400 max-w-md">
+                        Completá el formulario y te llevamos directo a una
+                        conversación con nuestro equipo.
+                    </p>
+                </div>
 
-                        <div class="contact-icon">
-                            <Icons name={contact.name} />
+                <div class="flex flex-col gap-4 mt-2">
+                    {/* Tarjeta 1: Ubicación */}
+                    <div
+                        class="flex items-center gap-4 p-5 rounded-2xl bg-[#11131e]/50 border border-neutral-800/60"
+                    >
+                        <div
+                            class="bg-neutral-800/80 p-3 rounded-full text-green-400"
+                        >
+                            <Icons name="address" />
                         </div>
-                        <p class="text-black-800 font-semibold">{contact.info}</p>
-                    </a>
-                ))
-            }
-        </div>
-
-        <div
-            class="flex items-center gap-6 justify-center mt-12 border-b border-black-100 pb-12"
-        >
-            {
-                socials.map((social) => (
-                    <a
-                        href={social.url}
-                        class="social-media"
-                        target="_blank"
-                        title={social.name}
-                        aria-label={social.name}
-                    >
-                        <Icons name={social.name} />
-                    </a>
-                ))
-            }
-        </div>
-
-        <div class="flex items-center justify-center mt-12">
-            {
-                whatsApp && (
-                    <a 
-                        href={whatsApp.url}
-                        target="_blank"
-                        title={whatsApp.name}
-                        aria-label={whatsApp.name}
-                        class="contact-whatsapp"
-                    >
                         <div>
-                            <Icons name="whatsapp" />
+                            <h3 class="text-white font-semibold text-[17px]">
+                                Estamos en Salta capital
+                            </h3>
+                            <p class="text-neutral-400 text-sm mt-0.5">
+                                Trabajamos con clientes de toda Argentina de
+                                forma 100% online.
+                            </p>
                         </div>
-                        <p>Escribir por WhatsApp</p>
-                    </a>
-                )
-            }
+                    </div>
+
+                    {/* Tarjeta 2: Días */}
+                    <div
+                        class="flex items-center gap-4 p-5 rounded-2xl bg-[#11131e]/50 border border-neutral-800/60"
+                    >
+                        <div
+                            class="bg-neutral-800/80 p-3 rounded-full text-cyan-400"
+                        >
+                            <Icons name="calendar" />
+                            {/* Cambia el nombre según tu set de iconos */}
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold text-[17px]">
+                                Días de atención
+                            </h3>
+                            <p class="text-neutral-400 text-sm mt-0.5">
+                                Lunes a Viernes · Sábados con turno previo
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Tarjeta 3: Horarios */}
+                    <div
+                        class="flex items-center gap-4 p-5 rounded-2xl bg-[#11131e]/50 border border-neutral-800/60"
+                    >
+                        <div
+                            class="bg-neutral-800/80 p-3 rounded-full text-orange-400"
+                        >
+                            <Icons name="clock" />
+                            {/* Cambia el nombre según tu set de iconos */}
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold text-[17px]">
+                                Horarios
+                            </h3>
+                            <p class="text-neutral-400 text-sm mt-0.5">
+                                9:00 a 21:00 hs (ART)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- COLUMNA DERECHA: Formulario --- */}
+            <div class="relative w-full">
+                {/* Brillo de fondo sutil detrás del formulario */}
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 via-transparent to-cyan-500/10 rounded-3xl blur-2xl"
+                >
+                </div>
+
+                <div
+                    class="relative bg-[#1a1b26]/60 backdrop-blur-md border border-neutral-800/80 rounded-[2rem] p-8 sm:p-10 shadow-2xl"
+                >
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-2 h-2 rounded-full bg-[#39d353]"></div>
+                        <span
+                            class="text-[#39d353] text-xs font-bold uppercase tracking-wide"
+                        >
+                            Asesoramiento gratuito
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-8">
+                        Contanos sobre tu proyecto
+                    </h3>
+
+                    {/* Formulario */}
+                    <form id="whatsapp-form" class="flex flex-col gap-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            {/* Input Nombre */}
+                            <div class="flex flex-col gap-1.5">
+                                <label
+                                    for="nombre"
+                                    class="text-sm text-neutral-400 ml-1"
+                                    >Nombre</label
+                                >
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    placeholder="Tu nombre"
+                                    class="bg-[#12141c] border border-neutral-700/50 text-white text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 transition-colors w-full"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {/* Select Necesidad */}
+                        <div class="flex flex-col gap-1.5 relative">
+                            <label
+                                for="servicio"
+                                class="text-sm text-neutral-400 ml-1"
+                                >¿Qué necesitás?</label
+                            >
+                            <select
+                                id="servicio"
+                                class="bg-[#12141c] border border-neutral-700/50 text-white text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 transition-colors w-full appearance-none cursor-pointer"
+                            >
+                                <option value="Página web">Página web</option>
+                                <option value="E-commerce">E-commerce</option>
+                                <option value="Rediseño">Rediseño web</option>
+                                <option value="Marketing"
+                                    >Campañas/Marketing</option
+                                >
+                                <option value="Sistema a Medida"
+                                    >Sistema a Medida</option
+                                >
+                                <option value="Otro">Otro</option>
+                            </select>
+                            {/* Flecha personalizada para el select */}
+                            <div
+                                class="pointer-events-none absolute right-4 top-[38px] text-neutral-400"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><path d="m6 9 6 6 6-6"></path></svg
+                                >
+                            </div>
+                        </div>
+
+                        {/* Textarea Mensaje */}
+                        <div class="flex flex-col gap-1.5">
+                            <label
+                                for="mensaje"
+                                class="text-sm text-neutral-400 ml-1"
+                                >Mensaje (opcional)</label
+                            >
+                            <textarea
+                                id="mensaje"
+                                rows="3"
+                                placeholder="Contanos brevemente sobre tu negocio..."
+                                class="bg-[#12141c] border border-neutral-700/50 text-white text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:border-cyan-500 transition-colors w-full resize-none"
+                            ></textarea>
+                        </div>
+
+                        {/* Botón Enviar */}
+                        <button
+                            type="submit"
+                            class="mt-3 w-full bg-[#39d353] hover:bg-[#16a12d] text-black font-bold rounded-xl px-4 py-4 flex cursor-pointer items-center justify-center gap-2 transition-colors duration-300"
+                        >
+                            <Icons name="whatsapp" />
+                            Enviar por WhatsApp
+                        </button>
+
+                        <p
+                            class="text-center text-xs text-neutral-500 mt-2 font-bold"
+                        >
+                            Te respondemos en horario de atención. Sin spam.
+                            Cero costo.
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<script>
+    // Lógica opcional del lado del cliente para construir el mensaje de WhatsApp
+    const form = document.getElementById("whatsapp-form");
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const nombre = (
+                document.getElementById("nombre") as HTMLInputElement
+            ).value;
+            const servicio = (
+                document.getElementById("servicio") as HTMLSelectElement
+            ).value;
+            const mensaje = (
+                document.getElementById("mensaje") as HTMLTextAreaElement
+            ).value;
+
+            // Reemplaza esto con tu número de teléfono real con código de área (sin el +)
+            const numeroDestino = "5493875636478";
+
+            const textoWhatsApp = `Hola! Soy ${nombre}. Me interesa el servicio de *${servicio}*. ${mensaje ? `\n\nTe comento un poco: ${mensaje}` : ""}`;
+            const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
+
+            window.open(url, "_blank");
+        });
+    }
+</script>
