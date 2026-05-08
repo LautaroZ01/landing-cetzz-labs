@@ -1,0 +1,102 @@
+---
+import { ChevronDown } from "@lucide/astro";
+
+const faqs = [
+    {
+        question: "¿Cuánto cuesta una web?",
+        answer: "Depende del tipo de proyecto. Una página enfocada en consultas tiene un costo distinto a un sistema a medida. Te pasamos un presupuesto claro después de entender qué necesitás."
+    },
+    {
+        question: "¿Cuánto tarda?",
+        answer: "Una web simple entre 1 y 2 semanas. Sistemas más complejos pueden llevar entre 3 y 6 semanas según el alcance."
+    },
+    {
+        question: "¿Necesito redes sociales?",
+        answer: "No es obligatorio. Las redes potencian, pero podés empezar solo con la web y campañas dirigidas a WhatsApp."
+    },
+    {
+        question: "¿Puedo empezar solo con la web?",
+        answer: "Sí, totalmente. La web es la base. Después podés sumar tráfico y redes cuando quieras escalar."
+    },
+    {
+        question: "¿Las campañas son obligatorias?",
+        answer: "No. Las campañas son un complemento opcional. Si querés solo la web, te la hacemos enfocada en convertir y listo."
+    }
+];
+---
+
+<section id="faq" class="py-24 lg:py-32 bg-black-50 relative overflow-hidden">
+    <div class="max-w-3xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <span class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block">Dudas frecuentes</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-black-900 mb-6 tracking-tight">
+                Preguntas <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600">Frecuentes</span>
+            </h2>
+            <p class="text-lg text-black-600 max-w-2xl mx-auto font-medium">
+                Resolvemos tus principales dudas para que puedas dar el siguiente paso con total seguridad.
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+            {faqs.map((faq, index) => (
+                <div class="faq-item bg-white border border-black-100 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-md">
+                    <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer">
+                        <span class="text-black-900 font-bold text-lg pr-4">{faq.question}</span>
+                        <ChevronDown class="w-5 h-5 text-primary-500 transition-transform duration-300 faq-icon flex-shrink-0" />
+                    </button>
+                    <div class="faq-content overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                        <div class="px-6 pb-6 text-black-600 font-medium leading-relaxed">
+                            <p>{faq.answer}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const button = item.querySelector('.faq-button');
+            const content = item.querySelector('.faq-content') as HTMLElement;
+            const icon = item.querySelector('.faq-icon');
+            
+            if (button && content && icon) {
+                button.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('is-open');
+                    
+                    // Close all others
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('is-open')) {
+                            otherItem.classList.remove('is-open');
+                            const otherContent = otherItem.querySelector('.faq-content') as HTMLElement;
+                            const otherIcon = otherItem.querySelector('.faq-icon');
+                            if (otherContent) otherContent.style.maxHeight = '0px';
+                            if (otherIcon) otherIcon.classList.remove('rotate-180');
+                            otherItem.classList.remove('border-primary-200', 'shadow-lg');
+                            otherItem.classList.add('border-black-100');
+                        }
+                    });
+                    
+                    // Toggle current
+                    if (isOpen) {
+                        item.classList.remove('is-open');
+                        content.style.maxHeight = '0px';
+                        icon.classList.remove('rotate-180');
+                        item.classList.remove('border-primary-200', 'shadow-lg');
+                        item.classList.add('border-black-100');
+                    } else {
+                        item.classList.add('is-open');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.classList.add('rotate-180');
+                        item.classList.remove('border-black-100');
+                        item.classList.add('border-primary-200', 'shadow-lg');
+                    }
+                });
+            }
+        });
+    });
+</script>

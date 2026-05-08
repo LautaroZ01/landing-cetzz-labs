@@ -12,6 +12,7 @@ const servicesData = [
         description:
             "Ideal para publicidad y redes sociales. Está diseñada estratégicamente para atrapar la atención al instante y conseguirte clientes rápido con un solo vistazo.",
         glowColor: "bg-cyan-500",
+        formValue: "Página web",
     },
     {
         id: "service-1",
@@ -19,6 +20,7 @@ const servicesData = [
         description:
             "Tu negocio en internet abierto las 24 horas. Podrás exhibir todos tus productos y vender de forma completamente segura, integrando diversos métodos de pago para facilitar la compra.",
         glowColor: "bg-indigo-500",
+        formValue: "E-commerce",
     },
     {
         id: "service-2",
@@ -26,6 +28,7 @@ const servicesData = [
         description:
             "Estrategia integral, creación de contenido, optimización de alcance y campañas en Meta Ads para potenciar al máximo tus conversiones.",
         glowColor: "bg-blue-500",
+        formValue: "Marketing",
     },
     {
         id: "service-3",
@@ -33,6 +36,7 @@ const servicesData = [
         description:
             "Sistemas web construidos totalmente desde cero a tu gusto. Sorprendemos a tus visitantes con interacciones y flujos únicos pensados exclusivamente para destacar tu empresa sobre el resto.",
         glowColor: "bg-purple-500",
+        formValue: "Sistema a Medida",
     },
 ];
 ---
@@ -62,7 +66,7 @@ const servicesData = [
         class="container-labs flex flex-col gap-6 lg:gap-8 relative z-10 pb-12"
     >
         {
-            servicesData.map(({ id, title, description, glowColor }, index) => (
+            servicesData.map(({ id, title, description, glowColor, formValue }, index) => (
                 <div
                     id={id}
                     class="sticky flex flex-col md:flex-row w-full rounded-[2.5rem] overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.05)] transition-transform duration-500 ease-in-out border border-black-100 backdrop-blur-2xl bg-white/90"
@@ -89,7 +93,8 @@ const servicesData = [
 
                             <a
                                 href="#contacto"
-                                class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-50 text-primary-600 font-bold rounded-xl transition-all duration-300 hover:bg-primary-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm hover:shadow-soft border border-primary-100 hover:border-primary-500"
+                                data-service={formValue}
+                                class="service-btn inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-50 text-primary-600 font-bold rounded-xl transition-all duration-300 hover:bg-primary-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm hover:shadow-soft border border-primary-100 hover:border-primary-500"
                             >
                                 Me interesa
                                 <ArrowRight class="w-5 h-5" />
@@ -110,3 +115,18 @@ const servicesData = [
         }
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const serviceBtns = document.querySelectorAll('.service-btn');
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const serviceValue = btn.getAttribute('data-service');
+                const selectElement = document.getElementById('servicio') as HTMLSelectElement;
+                if (selectElement && serviceValue) {
+                    selectElement.value = serviceValue;
+                }
+            });
+        });
+    });
+</script>
