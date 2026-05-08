@@ -1,7 +1,14 @@
 ---
-import { Facebook, Instagram, type AstroComponent, Mail, Phone, MapPin, Clock, Calendar } from "@lucide/astro";
+import {
+    Facebook,
+    Instagram,
+    type AstroComponent,
+    Mail,
+    Phone,
+    MapPin, Clock, Calendar,
+} from "@lucide/astro";
 import TikTok from "../svg/TikTok.astro";
-import WhatsApp from "../svg/WhatsApp.astro";
+import WhatsApp from "../svg/social/WhatsApp.astro";
 
 const { name } = Astro.props;
 
@@ -12,7 +19,7 @@ const icons: Record<string, AstroComponent> = {
     email: Mail,
     phone: Phone,
     address: MapPin,
-    whatsapp: WhatsApp,
+    whatsapp: WhatsApp,,
     clock: Clock,
     calendar: Calendar
 };
