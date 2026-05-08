@@ -10,37 +10,37 @@ const instagramUrl = socials.find(s => s.name === "Instagram")?.url || "#";
 const whatsappUrl = whatsApp?.url || "#";
 ---
 
-<header class="fixed w-full flex mt-4 z-50 justify-center items-center">
+<header class="fixed w-full flex mt-4 z-50 justify-center items-center px-4">
   <div
-    class="w-7xl bg-white/80 backdrop-blur-md border border-black-100 shadow-sm rounded-full px-4 py-2 md:px-8 md:py-4 flex items-center justify-between"
+    class="w-full max-w-6xl bg-white/90 backdrop-blur-lg border border-black-100 shadow-sm rounded-full px-5 py-3 md:px-6 md:py-3.5 flex items-center justify-between"
   >
-    <nav
-      class="hidden md:flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-black-600 font-medium"
-    >
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 z-10">
+      <Image src="/logo.webp" alt="" width={26} height={26} class="rounded-full" />
+      <span class="text-lg font-bold text-black-900 hidden sm:block">CetZz Labs</span>
+    </a>
+
+    <!-- Desktop Navigation Center -->
+    <nav class="hidden lg:flex items-center gap-8 text-sm text-black-600 font-medium absolute left-1/2 -translate-x-1/2">
       <a href="#quienes-somos" class="hover:text-primary-600 transition-colors">Nosotros</a>
       <a href="#servicios" class="hover:text-primary-600 transition-colors">Servicios</a>
       <a href="#portafolio" class="hover:text-primary-600 transition-colors">Portafolio</a>
-    </nav>
-    <a href="#" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300">
-      <Image src="/logo.webp" alt="" width={24} height={24} class="rounded-full" />
-      <span class="text-lg font-bold text-black-900">CetZz Labs</span>
-    </a>
-    <nav
-      class="hidden md:flex items-center gap-4 justify-between grow px-6 md:px-20 text-sm text-black-600 font-medium"
-    >
       <a href="#procesos" class="hover:text-primary-600 transition-colors">Procesos</a>
       <a href="#contacto" class="hover:text-primary-600 transition-colors">Contacto</a>
-      <div class="flex items-center gap-2">
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
-          <WhatsApp class="size-1" size={12} />
-        </a>
-        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
-          <Facebook class="size-1" />
-        </a>
-        <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">
-          <Instagram class="size-1" />
-        </a>
-      </div>
     </nav>
+
+    <!-- Redes Sociales (Siempre visibles, en Mobile y Desktop) -->
+    <div class="flex items-center gap-4 z-10">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-black-500 hover:text-primary-500 transition-colors" aria-label="WhatsApp">
+          <WhatsApp class="w-5 h-5" />
+        </a>
+        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" class="text-black-500 hover:text-primary-500 transition-colors" aria-label="Facebook">
+          <Facebook class="w-5 h-5" />
+        </a>
+        <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="text-black-500 hover:text-primary-500 transition-colors" aria-label="Instagram">
+          <Instagram class="w-5 h-5" />
+        </a>
+    </div>
+
   </div>
 </header>

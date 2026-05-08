@@ -71,14 +71,6 @@ import HeroIllustration from "./svg/HeroIllustration.astro";
     document.addEventListener("DOMContentLoaded", () => {
         const tl = gsap.timeline({ delay: 0.2 });
 
-        // 1. Animación del Badge
-        tl.to(".hero-badge", {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "back.out(1.5)",
-        });
-
         // 2. Animación del Título Principal
         tl.to(
             ".hero-title",
