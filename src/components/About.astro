@@ -109,23 +109,6 @@
         const section = document.getElementById("quienes-somos");
 
         if (section) {
-            // Animar el contenedor del video (Fade in, Slide from left y Blur dissolve)
-            gsap.fromTo(
-                ".about-video",
-                { opacity: 0, x: -60, filter: "blur(15px)" },
-                {
-                    opacity: 1,
-                    x: 0,
-                    filter: "blur(0px)",
-                    duration: 1.5,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 75%",
-                    },
-                },
-            );
-
             // Animar los textos de forma escalonada (Slide up)
             gsap.fromTo(
                 ".about-text",
