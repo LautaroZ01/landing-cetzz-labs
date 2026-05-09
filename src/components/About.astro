@@ -12,17 +12,25 @@
         <div
             class="about-video relative w-full aspect-square md:aspect-[4/3] flex justify-center items-center opacity-0 lg:-ml-6"
         >
-            <div class="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden bg-primary-950 shadow-2xl shadow-primary-900/10 ring-1 ring-black-100 flex items-center justify-center p-1 lg:p-2">
+            <div
+                class="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden bg-primary-950 shadow-2xl shadow-primary-900/10 ring-1 ring-black-100 flex items-center justify-center p-1 lg:p-2"
+            >
                 <video
                     src="/hero-video.mp4"
                     autoplay
                     loop
                     muted
-                    playsinline
-                    class="w-full h-full object-cover rounded-[1.8rem] lg:rounded-[2.8rem] scale-[1.01]"
+                    class="size-2xl object-cover mask-radial-at-center mask-radial-from-20% mask-radial-to-70% mb-96 lg:mb-0 hidden lg:flex"
                 ></video>
-                <div class="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-primary-950/40 via-transparent to-transparent pointer-events-none rounded-[2rem] lg:rounded-[3rem]"></div>
+
+                <div
+                    class="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] ring-1 ring-inset ring-white/10 pointer-events-none"
+                >
+                </div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-primary-950/40 via-transparent to-transparent pointer-events-none rounded-[2rem] lg:rounded-[3rem]"
+                >
+                </div>
             </div>
         </div>
 
@@ -58,21 +66,31 @@
                     class="absolute inset-0 bg-gradient-to-r from-primary-50 to-transparent -z-10"
                 >
                 </div>
-                <div class="flex flex-col gap-1 pl-4 border-l-2 border-primary-400">
+                <div
+                    class="flex flex-col gap-1 pl-4 border-l-2 border-primary-400"
+                >
                     <span
                         class="text-4xl lg:text-5xl font-black text-black-900 tracking-tighter flex items-center"
-                        ><span class="text-primary-500">+</span><span class="counter-1">0</span></span
+                        ><span class="text-primary-500">+</span><span
+                            class="counter-1">0</span
+                        ></span
                     >
-                    <span class="text-black-500 text-sm md:text-base font-semibold"
+                    <span
+                        class="text-black-500 text-sm md:text-base font-semibold"
                         >Proyectos Exitosos</span
                     >
                 </div>
-                <div class="flex flex-col gap-1 pl-4 border-l-2 border-primary-200">
+                <div
+                    class="flex flex-col gap-1 pl-4 border-l-2 border-primary-200"
+                >
                     <span
                         class="text-4xl lg:text-5xl font-black text-black-900 tracking-tighter flex items-center"
-                        ><span class="counter-2">0</span><span class="text-primary-500">%</span></span
+                        ><span class="counter-2">0</span><span
+                            class="text-primary-500">%</span
+                        ></span
                     >
-                    <span class="text-black-500 text-sm md:text-base font-semibold"
+                    <span
+                        class="text-black-500 text-sm md:text-base font-semibold"
                         >Enfoque a Medida</span
                     >
                 </div>
@@ -105,7 +123,7 @@
                         trigger: section,
                         start: "top 75%",
                     },
-                }
+                },
             );
 
             // Animar los textos de forma escalonada (Slide up)
@@ -122,13 +140,13 @@
                         trigger: section,
                         start: "top 75%",
                     },
-                }
+                },
             );
 
             // Animación de contadores numéricos (solo números)
             const countElements = [
                 { selector: ".counter-1", endValue: 10 },
-                { selector: ".counter-2", endValue: 100 }
+                { selector: ".counter-2", endValue: 100 },
             ];
 
             countElements.forEach((item) => {
@@ -142,7 +160,7 @@
                         scrollTrigger: {
                             trigger: section,
                             start: "top 60%",
-                        }
+                        },
                     });
                 }
             });
