@@ -1,0 +1,90 @@
+---
+import { Star } from "@lucide/astro";
+
+const testimonials = [
+    {
+        name: "Martín R.",
+        company: "Estudio Jurídico R&Asoc",
+        content: "Desde que CetZz Labs nos rediseñó la web, las consultas por WhatsApp se triplicaron. Lo mejor fue la velocidad de entrega y cómo entendieron exactamente el perfil serio pero moderno que buscábamos. 100% recomendados.",
+        rating: 5
+    },
+    {
+        name: "Sofía T.",
+        company: "Tienda de Indumentaria",
+        content: "Teníamos un e-commerce muy lento y perdíamos ventas en el checkout. Nos hicieron un sistema nuevo, súper rápido y fácil de usar. En el primer mes recuperamos la inversión solo con la mejora en la tasa de conversión.",
+        rating: 5
+    },
+    {
+        name: "Alejandro M.",
+        company: "Agencia de Logística",
+        content: "Increíble el nivel de detalle y profesionalismo. Necesitábamos una plataforma a medida para que nuestros clientes rastreen envíos y lo resolvieron de una manera brillante. El soporte post-lanzamiento es excelente.",
+        rating: 5
+    }
+];
+---
+
+<section id="testimonios" class="py-20 lg:py-24 bg-black-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <span class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block">Prueba Social</span>
+            <h2 class="section-title text-center">
+                Empresas que ya <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600">escalaron</span> con nosotros
+            </h2>
+            <p class="section-subtitle mx-auto text-center">
+                No confíes solo en nuestra palabra, escuchá lo que dicen quienes ya trabajan con CetZz Labs.
+            </p>
+        </div>
+
+        <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {testimonials.map((testimonial, index) => (
+                <div class="testimonial-card opacity-0 translate-y-8 bg-white border border-black-100 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full relative group">
+                    <!-- Detalle decorativo -->
+                    <div class="absolute top-0 right-8 w-12 h-1 bg-gradient-to-r from-primary-400 to-blue-500 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Estrellas -->
+                    <div class="flex items-center gap-1 mb-6">
+                        {Array.from({ length: testimonial.rating }).map(() => (
+                            <Star class="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        ))}
+                    </div>
+
+                    <!-- Contenido -->
+                    <p class="text-black-600 italic mb-8 flex-grow text-lg leading-relaxed">
+                        "{testimonial.content}"
+                    </p>
+
+                    <!-- Autor -->
+                    <div class="mt-auto pt-6 border-t border-black-50 flex flex-col">
+                        <span class="font-bold text-black-900 text-lg">{testimonial.name}</span>
+                        <span class="text-sm text-black-500 font-medium">{testimonial.company}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.querySelector(".testimonials-grid");
+
+        if (grid) {
+            gsap.to(".testimonial-card", {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: grid,
+                    start: "top 95%",
+                }
+            });
+        }
+    });
+</script>

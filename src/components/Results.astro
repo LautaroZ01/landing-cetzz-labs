@@ -1,0 +1,155 @@
+---
+
+---
+
+<section
+    id="resultados"
+    class="py-20 lg:py-24 bg-black-50 relative overflow-hidden border-b border-black-100"
+>
+    <!-- Decorative background elements -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-gradient-to-b from-black-50 to-transparent rounded-b-full pointer-events-none z-0"
+    >
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <span
+                class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                >Resultados Reales</span
+            >
+            <h2 class="section-title text-center">
+                No hacemos webs, creamos <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
+                    >activos digitales</span
+                >
+            </h2>
+            <p class="section-subtitle mx-auto text-center">
+                El impacto que generamos en los negocios que deciden dar el
+                salto tecnológico con nosotros.
+            </p>
+        </div>
+
+        <div
+            class="results-container grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto"
+        >
+            {/* Metric 1 */}
+            <div
+                class="result-card opacity-0 translate-y-8 flex flex-col items-center justify-center p-8 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+            >
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                </div>
+                <div
+                    class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
+                >
+                    <span class="text-primary-500">+</span><span
+                        class="counter"
+                        data-target="300">0</span
+                    ><span class="text-primary-500">%</span>
+                </div>
+                <h3 class="text-lg font-bold text-black-900 mb-1">
+                    Más consultas
+                </h3>
+                <p class="text-center text-black-500 text-sm font-medium">
+                    Aumento promedio en la captación de leads mensuales.
+                </p>
+            </div>
+
+            {/* Metric 2 */}
+            <div
+                class="result-card opacity-0 translate-y-8 flex flex-col items-center justify-center p-8 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+            >
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                </div>
+                <div
+                    class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
+                >
+                    <span class="text-blue-500">+</span><span
+                        class="counter"
+                        data-target="150">0</span
+                    ><span class="text-blue-500">%</span>
+                </div>
+                <h3 class="text-lg font-bold text-black-900 mb-1">
+                    Tasa de conversión
+                </h3>
+                <p class="text-center text-black-500 text-sm font-medium">
+                    Incremento en ventas al optimizar la experiencia de usuario.
+                </p>
+            </div>
+
+            {/* Metric 3 */}
+            <div
+                class="result-card opacity-0 translate-y-8 flex flex-col items-center justify-center p-8 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+            >
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-cyan-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                </div>
+                <div
+                    class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
+                >
+                    <span class="text-cyan-500">-</span><span
+                        class="counter"
+                        data-target="50">0</span
+                    ><span class="text-cyan-500">%</span>
+                </div>
+                <h3 class="text-lg font-bold text-black-900 mb-1">
+                    Ahorro de tiempo
+                </h3>
+                <p class="text-center text-black-500 text-sm font-medium">
+                    Automatizando procesos y sistemas a medida.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector(".results-container");
+
+        if (container) {
+            // Animar la aparición de las tarjetas
+            gsap.to(".result-card", {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "back.out(1.2)",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 80%",
+                },
+            });
+
+            // Animar el conteo numérico
+            const counters = document.querySelectorAll(".counter");
+            counters.forEach((counter) => {
+                const target = parseInt(
+                    counter.getAttribute("data-target") || "0",
+                    10,
+                );
+
+                gsap.to(counter, {
+                    innerHTML: target,
+                    duration: 2.5,
+                    snap: { innerHTML: 1 },
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 75%",
+                    },
+                });
+            });
+        }
+    });
+</script>

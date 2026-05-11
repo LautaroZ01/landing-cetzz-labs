@@ -7,8 +7,14 @@ import HeroIllustration from "./svg/HeroIllustration.astro";
     class="relative bg-primary-50 w-full min-h-[95vh] text-black-900 rounded-b-[2rem] lg:rounded-b-[4rem] overflow-hidden flex items-center justify-center pt-20 pb-16 lg:pb-0 border-b border-primary-100 shadow-sm"
 >
     <!-- Background Glow -->
-    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary-200/50 to-transparent pointer-events-none z-0"></div>
-    <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[80%] max-w-[1000px] h-[400px] bg-primary-400/40 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div
+        class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary-200/50 to-transparent pointer-events-none z-0"
+    >
+    </div>
+    <div
+        class="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[80%] max-w-[1000px] h-[400px] bg-primary-400/40 rounded-full blur-[120px] pointer-events-none z-0"
+    >
+    </div>
 
     <div
         class="container-labs relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 max-w-7xl w-full"
@@ -33,6 +39,72 @@ import HeroIllustration from "./svg/HeroIllustration.astro";
                 Creamos experiencias web ultrarrápidas, modernas y centradas en
                 el usuario que elevan tu marca y multiplican tus conversiones.
             </p>
+
+            <!-- Oferta Irresistible VIP -->
+            <div
+                class="hero-offer translate-y-8 opacity-0 bg-primary-400/90 relative mb-10 w-full sm:w-auto p-[2px] rounded-[1.1rem] overflow-hidden group shadow-[0_10px_40px_-10px_rgba(37,99,235,0.4)]"
+            >
+                <!-- Borde rotativo con gradientes -->
+                <div
+                    class="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_300deg,theme(colors.cyan.500)_360deg)] animate-[spin_4s_linear_infinite] opacity-90"
+                >
+                </div>
+                <div
+                    class="absolute inset-[-100%] bg-[conic-gradient(from_180deg,transparent_0_300deg,theme(colors.cyan.400)_360deg)] animate-[spin_4s_linear_infinite] opacity-90"
+                >
+                </div>
+
+                <!-- Tarjeta interna (VIP Dark Mode) -->
+                <div
+                    class="relative flex items-center gap-4 backdrop-blur-xl p-4 sm:px-5 rounded-2xl w-full h-full z-10"
+                >
+                    <!-- Icono dinámico brillante -->
+                    <div
+                        class="flex-shrink-0 relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-primary-400 to-blue-600 rounded-xl shadow-[inset_0_0_12px_rgba(255,255,255,0.3)] border border-white/10"
+                    >
+                        <svg
+                            class="w-6 h-6 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-primary-400 rounded-xl animate-ping opacity-20"
+                        >
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col text-left">
+                        <span
+                            class="text-[11px] font-extrabold uppercase tracking-widest text-white mb-0.5 flex items-center gap-1.5"
+                        >
+                            <svg
+                                class="w-3.5 h-3.5 text-yellow-400 animate-pulse"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                ><path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                ></path></svg
+                            >
+                            Oferta Exclusiva
+                        </span>
+                        <span
+                            class="text-sm sm:text-[15px] font-bold text-white leading-snug"
+                        >
+                            Diagnóstico gratuito + propuesta<br
+                                class="hidden sm:block"
+                            /> personalizada en menos de 24 hs
+                        </span>
+                    </div>
+                </div>
+            </div>
 
             <!-- Botones -->
             <div
@@ -95,6 +167,18 @@ import HeroIllustration from "./svg/HeroIllustration.astro";
             "-=0.8",
         );
 
+        // 3.5 Oferta
+        tl.to(
+            ".hero-offer",
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "back.out(1.5)",
+            },
+            "-=0.6",
+        );
+
         // 4. Botones
         tl.to(
             ".hero-buttons",
@@ -122,28 +206,53 @@ import HeroIllustration from "./svg/HeroIllustration.astro";
         // 6. Animación de dibujo de la ilustración (SVG Paths)
         const drawPaths = document.querySelectorAll(".hero-draw-path");
         drawPaths.forEach((path) => {
-            if (path instanceof SVGPathElement || path instanceof SVGRectElement || path instanceof SVGLineElement) {
+            if (
+                path instanceof SVGPathElement ||
+                path instanceof SVGRectElement ||
+                path instanceof SVGLineElement
+            ) {
                 // Approximate length for non-paths or get actual length for paths
                 let length = 1000;
                 if (path instanceof SVGPathElement) {
                     length = path.getTotalLength();
                 }
-                gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-                tl.to(path, { strokeDashoffset: 0, duration: 1.2, ease: "expo.out" }, "-=1.0");
+                gsap.set(path, {
+                    strokeDasharray: length,
+                    strokeDashoffset: length,
+                });
+                tl.to(
+                    path,
+                    { strokeDashoffset: 0, duration: 1.2, ease: "expo.out" },
+                    "-=1.0",
+                );
             }
         });
 
         // 7. Aparición de elementos de color de la ilustración
-        tl.fromTo(".hero-color-block", 
+        tl.fromTo(
+            ".hero-color-block",
             { opacity: 0, scale: 0.8, transformOrigin: "center center" },
-            { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.5)" },
-            "-=1.5"
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: "back.out(1.5)",
+            },
+            "-=1.5",
         );
 
-        tl.fromTo(".hero-fade-item",
+        tl.fromTo(
+            ".hero-fade-item",
             { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: "power2.out" },
-            "-=1.2"
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.05,
+                ease: "power2.out",
+            },
+            "-=1.2",
         );
 
         // Animaciones continuas (Loop) para las formas geométricas flotantes

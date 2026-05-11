@@ -80,8 +80,12 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-gradient-to-br from-black-900 to-black-600 bg-clip-text text-transparent drop-shadow-sm;
 }
 
-.title-secundary {
-    @apply text-3xl md:text-4xl font-extrabold mb-4 tracking-tight;
+.section-title {
+    @apply text-3xl md:text-5xl font-extrabold text-black-900 mb-6 tracking-tight;
+}
+
+.section-subtitle {
+    @apply text-lg text-black-600 max-w-2xl font-medium;
 }
 
 .title-card {

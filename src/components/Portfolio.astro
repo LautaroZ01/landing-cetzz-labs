@@ -10,6 +10,20 @@ type Project = {
 
 const projects: Project[] = [
     {
+        title: "RestoBar",
+        description:
+            "Landing page para un restobar con un diseño moderno y responsive.",
+        image: "/projects/RestoBar.webp",
+        link: "https://resto-astro-landing-page.vercel.app/",
+    },
+    {
+        title: "Soluciones de Transporte",
+        description:
+            "Landing page para cotizar servicios de transporte para personas, materiales y carga.",
+        image: "/projects/transporte.webp",
+        link: "https://lta-landing-page-transporte-salta.netlify.app/",
+    },
+    {
         title: "Todo Tela",
         description:
             "Landing page para una tienda de telas con un diseño moderno y responsive.",
@@ -24,13 +38,6 @@ const projects: Project[] = [
         link: "https://anitrendy.com.ar/",
     },
     {
-        title: "SkyCargo",
-        description:
-            "Sitio web corporativo de logística y transporte de carga con interfaz profesional.",
-        image: "/projects/skycargo.png",
-        link: "https://skycargo.com.ar/",
-    },
-    {
         title: "Impacto Creativo",
         description:
             "Landing page moderna y vibrante para una agencia de marketing digital.",
@@ -43,20 +50,6 @@ const projects: Project[] = [
             "Landing page donde cada plato cuenta una historia y cada momento es único.",
         image: "/projects/sabor-autentico.webp",
         link: "https://resto-react-landing-page.vercel.app/",
-    },
-    {
-        title: "RestoBar",
-        description:
-            "Landing page para un restobar con un diseño moderno y responsive.",
-        image: "/projects/RestoBar.webp",
-        link: "https://resto-astro-landing-page.vercel.app/",
-    },
-    {
-        title: "Soluciones de Transporte",
-        description:
-            "Landing page para cotizar servicios de transporte para personas, materiales y carga.",
-        image: "/projects/transporte.webp",
-        link: "https://lta-landing-page-transporte-salta.netlify.app/",
     },
 ];
 ---
@@ -73,11 +66,11 @@ const projects: Project[] = [
     </div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 w-full relative z-10">
-        <div class="mb-8 md:mb-12">
-            <div class="w-full portfolio-info-container">
+        <div class="mb-4 md:mb-8">
+            <div class="text-center lg:text-left mb-10 lg:mb-0 w-full lg:w-1/2">
                 <span
                     class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
-                    >Nuestros proyectos</span
+                    >Nuestro Trabajo</span
                 >
                 <h3
                     id="portfolio-title"
@@ -95,7 +88,7 @@ const projects: Project[] = [
         </div>
 
         <div
-            class="relative w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] flex items-center justify-center perspective-[1500px]"
+            class="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[580px] flex items-center justify-center perspective-[1500px]"
         >
             <div
                 class="absolute -top-5 right-0 md:right-4 z-40 flex items-center gap-3"

@@ -61,13 +61,19 @@ const steps: IStep[] = [
     >
     </div>
 
-    <div
-        class="text-center mb-20 lg:mb-40 flex flex-col items-center relative z-10"
-    >
-        <h2 class="title-secundary title-style">Así trabajamos</h2>
-        <p class="text-lg text-black-600">
-            Nuestro proceso es simple, claro y pensado para que tengas tu web
-            lista sin complicaciones.
+    <div class="container-labs text-center mb-16 relative z-10">
+        <span
+            class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+            >Nuestro Método</span
+        >
+        <h2 class="section-title text-center">
+            Así <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
+                >trabajamos</span>
+        </h2>
+        <p class="section-subtitle mx-auto text-center">
+            Un proceso ágil, transparente y enfocado en resultados desde el
+            primer día.
         </p>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -148,11 +154,11 @@ const steps: IStep[] = [
                     y: 0,
                     scale: 1,
                     duration: 0.8,
-                    stagger: 0.6, // Retraso mayor (0.6s) entre cada paso
+                    stagger: 0.2, // Reducido para que aparezcan más rápido
                     ease: "back.out(1.5)",
                     scrollTrigger: {
                         trigger: processContainer,
-                        start: "top 75%",
+                        start: "top 90%",
                     },
                 },
             );
