@@ -4,7 +4,7 @@
 
 <section
     id="resultados"
-    class="py-20 lg:py-24 bg-black-50 relative overflow-hidden border-b border-black-100"
+    class="pt-28 lg:pt-48 pb-20 lg:pb-24 bg-black-50 relative isolate -mt-8 lg:-mt-24 overflow-hidden border-b border-black-100"
 >
     <!-- Decorative background elements -->
     <div
@@ -108,6 +108,27 @@
     </div>
 </section>
 
+<style>
+    /* Brillo que sigue al cursor sobre cada tarjeta (efecto 3D) */
+    .result-card {
+        transform-style: preserve-3d;
+    }
+    .card-glare {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0;
+        border-radius: inherit;
+        transition: opacity 0.35s ease;
+        background: radial-gradient(
+            circle at var(--gx, 50%) var(--gy, 50%),
+            rgba(59, 130, 246, 0.2),
+            rgba(59, 130, 246, 0) 55%
+        );
+    }
+</style>
+
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -148,6 +169,66 @@
                         trigger: container,
                         start: "top 75%",
                     },
+                });
+            });
+        }
+
+        /* ---- Hover 3D: la tarjeta se inclina siguiendo el mouse ---- */
+        const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+        ).matches;
+        const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (finePointer && !reduceMotion) {
+            const MAX_TILT = 9;
+            const cards =
+                document.querySelectorAll<HTMLElement>(".result-card");
+
+            cards.forEach((card) => {
+                const glare = document.createElement("div");
+                glare.className = "card-glare";
+                card.appendChild(glare);
+
+                let rect: DOMRect | null = null;
+                const tiltX = gsap.quickTo(card, "rotationX", {
+                    duration: 0.4,
+                    ease: "power2.out",
+                });
+                const tiltY = gsap.quickTo(card, "rotationY", {
+                    duration: 0.4,
+                    ease: "power2.out",
+                });
+
+                card.addEventListener("pointerenter", () => {
+                    rect = card.getBoundingClientRect();
+                    gsap.set(card, {
+                        transformPerspective: 900,
+                        transformOrigin: "center",
+                    });
+                    glare.style.opacity = "1";
+                });
+
+                card.addEventListener("pointermove", (e) => {
+                    if (!rect) rect = card.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width;
+                    const py = (e.clientY - rect.top) / rect.height;
+                    tiltY((px - 0.5) * 2 * MAX_TILT);
+                    tiltX((0.5 - py) * 2 * MAX_TILT);
+                    card.style.setProperty("--gx", `${px * 100}%`);
+                    card.style.setProperty("--gy", `${py * 100}%`);
+                });
+
+                card.addEventListener("pointerleave", () => {
+                    rect = null;
+                    glare.style.opacity = "0";
+                    gsap.to(card, {
+                        rotationX: 0,
+                        rotationY: 0,
+                        duration: 0.6,
+                        ease: "power3.out",
+                    });
                 });
             });
         }

@@ -3,10 +3,12 @@ import Icons from "./Icons.astro";
 import { whatsApp } from "../../data/data";
 ---
 
-<div class="sticky-contact">
+<div id="wa-float" class="sticky-contact">
     <a
+        id="wa-float-link"
         href={whatsApp.url}
         target="_blank"
+        rel="noopener noreferrer"
         title={whatsApp.name}
         aria-label={whatsApp.name}
         class="block bg-[#25D366] text-white rounded-full shadow-soft p-4 hover:bg-[#1ebd5a] hover:shadow-soft-hover transition-all duration-300 hover:-translate-y-1 active:scale-95"
@@ -14,3 +16,153 @@ import { whatsApp } from "../../data/data";
         <Icons name={whatsApp.name} />
     </a>
 </div>
+
+<style>
+    /* Easter egg: mantené pulsado para arrastrarlo por la página */
+    .sticky-contact {
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        cursor: grab;
+    }
+    .sticky-contact.is-dragging {
+        cursor: grabbing;
+        animation-play-state: paused;
+        z-index: 60;
+    }
+    .sticky-contact.is-dragging > a {
+        pointer-events: none;
+        box-shadow:
+            0 0 0 6px rgba(37, 211, 102, 0.25),
+            0 20px 40px -10px rgba(0, 0, 0, 0.28);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    const el = document.getElementById("wa-float");
+    const link = document.getElementById(
+        "wa-float-link",
+    ) as HTMLAnchorElement | null;
+
+    if (el && link) {
+        const HOLD_MS = 320; // tiempo de "mantener pulsado" para activar el arrastre
+        const MOVE_TOLERANCE = 14; // px de movimiento que cancelan el hold
+        const MARGIN = 8; // px mínimos respecto al borde del viewport
+
+        let holdTimer: number | undefined;
+        let dragging = false;
+        let suppressClick = false;
+        let activePointer: number | null = null;
+        let startX = 0;
+        let startY = 0;
+        let baseX = 0;
+        let baseY = 0;
+        let homeLeft = 0;
+        let homeTop = 0;
+
+        const clamp = (v: number, min: number, max: number) =>
+            Math.max(min, Math.min(max, v));
+
+        const boundsX = (v: number) =>
+            clamp(
+                v,
+                MARGIN - homeLeft,
+                window.innerWidth - el.offsetWidth - MARGIN - homeLeft,
+            );
+        const boundsY = (v: number) =>
+            clamp(
+                v,
+                MARGIN - homeTop,
+                window.innerHeight - el.offsetHeight - MARGIN - homeTop,
+            );
+
+        const refreshHome = () => {
+            const x = (gsap.getProperty(el, "x") as number) || 0;
+            const y = (gsap.getProperty(el, "y") as number) || 0;
+            const r = el.getBoundingClientRect();
+            homeLeft = r.left - x;
+            homeTop = r.top - y;
+        };
+        refreshHome();
+
+        const enterDrag = () => {
+            dragging = true;
+            el.classList.add("is-dragging");
+            try {
+                if (activePointer !== null) el.setPointerCapture(activePointer);
+            } catch {}
+            if (navigator.vibrate) navigator.vibrate(15);
+            gsap.to(el, { scale: 1.15, duration: 0.2, ease: "back.out(2)" });
+        };
+
+        const endDrag = () => {
+            if (!dragging) return;
+            dragging = false;
+            suppressClick = true;
+            el.classList.remove("is-dragging");
+            gsap.to(el, { scale: 1, duration: 0.3, ease: "power2.out" });
+            window.setTimeout(() => (suppressClick = false), 80);
+        };
+
+        el.addEventListener("pointerdown", (e) => {
+            if (e.button && e.button !== 0) return;
+            activePointer = e.pointerId;
+            suppressClick = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            baseX = (gsap.getProperty(el, "x") as number) || 0;
+            baseY = (gsap.getProperty(el, "y") as number) || 0;
+            refreshHome();
+            window.clearTimeout(holdTimer);
+            holdTimer = window.setTimeout(enterDrag, HOLD_MS);
+        });
+
+        el.addEventListener("pointermove", (e) => {
+            if (e.pointerId !== activePointer) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            if (!dragging) {
+                if (Math.hypot(dx, dy) > MOVE_TOLERANCE) {
+                    window.clearTimeout(holdTimer);
+                }
+                return;
+            }
+
+            e.preventDefault();
+            gsap.set(el, { x: boundsX(baseX + dx), y: boundsY(baseY + dy) });
+        });
+
+        const finish = (e: PointerEvent) => {
+            if (e.pointerId !== activePointer) return;
+            window.clearTimeout(holdTimer);
+            try {
+                el.releasePointerCapture(e.pointerId);
+            } catch {}
+            endDrag();
+            activePointer = null;
+        };
+        el.addEventListener("pointerup", finish);
+        el.addEventListener("pointercancel", finish);
+
+        // Un click "real" abre WhatsApp; el que sigue a un arrastre se ignora.
+        link.addEventListener("click", (e) => {
+            if (dragging || suppressClick) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            refreshHome();
+            gsap.set(el, {
+                x: boundsX((gsap.getProperty(el, "x") as number) || 0),
+                y: boundsY((gsap.getProperty(el, "y") as number) || 0),
+            });
+        });
+    }
+</script>

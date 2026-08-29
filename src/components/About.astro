@@ -4,10 +4,10 @@
 
 <section
     id="quienes-somos"
-    class="py-20 lg:py-32 bg-primary-100/90 relative overflow-hidden border-t border-primary-100"
+    class="relative z-[2] py-20 lg:py-60 bg-primary-100 overflow-hidden border-t border-primary-100 rounded-[2rem] lg:rounded-[6rem]"
 >
     <div
-        class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center relative z-10"
+        class="about-stage max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center relative z-10"
     >
         <div
             class="about-video relative w-full aspect-square md:aspect-[4/3] flex justify-center items-center opacity-0 lg:-ml-6"
@@ -103,46 +103,133 @@
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     document.addEventListener("DOMContentLoaded", () => {
         const section = document.getElementById("quienes-somos");
 
         if (section) {
-            // Animar el contenedor del video
-            gsap.fromTo(
-                ".about-video",
-                { opacity: 0, x: -60, filter: "blur(15px)" },
-                {
-                    opacity: 1,
-                    x: 0,
-                    filter: "blur(0px)",
-                    duration: 1.5,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 75%",
-                    },
-                },
-            );
+            const reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
 
-            // Animar los textos de forma escalonada
-            gsap.fromTo(
-                ".about-text",
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.2,
-                    stagger: 0.2,
-                    ease: "power3.out",
+            if (reduceMotion) {
+                gsap.set(".about-video, .about-text", { autoAlpha: 1 });
+            } else {
+                /* Enfoque distinto al del Hero (que es un "alejamiento" atado
+                   al scroll): acá es un despliegue 3D DISPARADO por umbral y
+                   REVERSIBLE, que se arma al entrar y se pliega al salir. */
+                const tl = gsap.timeline({
+                    defaults: { ease: "power3.out" },
                     scrollTrigger: {
                         trigger: section,
                         start: "top 75%",
+                        toggleActions: "play none none reverse",
                     },
-                },
-            );
+                });
+
+                tl.fromTo(
+                    ".about-video",
+                    {
+                        autoAlpha: 0,
+                        xPercent: -6,
+                        rotationY: 16,
+                        transformOrigin: "left center",
+                    },
+                    {
+                        autoAlpha: 1,
+                        xPercent: 0,
+                        rotationY: 0,
+                        transformPerspective: 900,
+                        duration: 1,
+                    },
+                ).fromTo(
+                    ".about-text",
+                    {
+                        autoAlpha: 0,
+                        y: 60,
+                        rotationX: -50,
+                        transformOrigin: "50% 0%",
+                    },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        rotationX: 0,
+                        transformPerspective: 900,
+                        duration: 0.8,
+                        stagger: 0.16,
+                        ease: "back.out(1.5)",
+                    },
+                    "-=0.55",
+                );
+            }
+
+            /* ---- Transición ENTRE secciones (overlap tipo "stack") ----
+               El solape lo hace el CSS: Testimonios y Nosotros son
+               `position: sticky; top: 0` dentro de .section-stack, así que
+               Nosotros se interpone sobre Testimonios y Servicios sube por
+               encima de Nosotros. GSAP acá sólo agrega la profundidad:
+               la sección que queda debajo retrocede (se achica y se atenúa)
+               mientras la de arriba la va tapando. */
+            if (!reduceMotion) {
+                const recede = {
+                    scale: 0.92,
+                    autoAlpha: 0.35,
+                    yPercent: -4,
+                    transformOrigin: "center top",
+                    ease: "none",
+                };
+
+                const prevStage = document.querySelector(".testi-stage");
+                if (prevStage) {
+                    gsap.to(prevStage, {
+                        ...recede,
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top bottom",
+                            end: "top top",
+                            scrub: 0.6,
+                        },
+                    });
+                }
+
+                /* Transición "catapulta": al pasar por la mitad de "Nosotros"
+                   scrolleando hacia abajo, te lleva rápido a "Servicios"
+                   (nada de solape lento). Enfoque totalmente distinto al de
+                   Testimonios → Nosotros. */
+                const nextSection = document.getElementById("servicios");
+                const isDesktop =
+                    window.matchMedia("(min-width: 1024px)").matches;
+                if (nextSection && isDesktop) {
+                    let jumpLock = false;
+
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: "center center",
+                        onEnter: () => {
+                            if (jumpLock) return;
+                            jumpLock = true;
+                            gsap.to(window, {
+                                scrollTo: { y: nextSection, autoKill: false },
+                                duration: 0.55,
+                                ease: "power2.inOut",
+                                onComplete: () => {
+                                    window.setTimeout(
+                                        () => (jumpLock = false),
+                                        500,
+                                    );
+                                },
+                            });
+                        },
+                        onLeaveBack: () => {
+                            jumpLock = true;
+                            window.setTimeout(() => (jumpLock = false), 800);
+                        },
+                    });
+                }
+            }
 
             // Animación de contadores de About
             const aboutCounters = [
