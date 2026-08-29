@@ -1,68 +1,184 @@
 ---
-import { Star } from "@lucide/astro";
+import { Quote, ChevronLeft, ChevronRight } from "@lucide/astro";
 
 const testimonials = [
     {
         name: "Martín R.",
         company: "Estudio Jurídico R&Asoc",
-        content: "Desde que CetZz Labs nos rediseñó la web, las consultas por WhatsApp se triplicaron. Lo mejor fue la velocidad de entrega y cómo entendieron exactamente el perfil serio pero moderno que buscábamos. 100% recomendados.",
-        rating: 5
+        content:
+            "Desde que CetZz Labs nos rediseñó la web, las consultas por WhatsApp se triplicaron. Lo mejor fue la velocidad de entrega y cómo entendieron el perfil serio pero moderno que buscábamos.",
     },
     {
         name: "Sofía T.",
         company: "Tienda de Indumentaria",
-        content: "Teníamos un e-commerce muy lento y perdíamos ventas en el checkout. Nos hicieron un sistema nuevo, súper rápido y fácil de usar. En el primer mes recuperamos la inversión solo con la mejora en la tasa de conversión.",
-        rating: 5
+        content:
+            "Teníamos un e-commerce muy lento y perdíamos ventas en el checkout. Nos hicieron un sistema nuevo, súper rápido y fácil de usar. En el primer mes recuperamos la inversión.",
     },
     {
         name: "Alejandro M.",
         company: "Agencia de Logística",
-        content: "Increíble el nivel de detalle y profesionalismo. Necesitábamos una plataforma a medida para que nuestros clientes rastreen envíos y lo resolvieron de una manera brillante. El soporte post-lanzamiento es excelente.",
-        rating: 5
-    }
+        content:
+            "Increíble el nivel de detalle y profesionalismo. Necesitábamos una plataforma a medida para que nuestros clientes rastreen envíos y lo resolvieron de forma brillante.",
+    },
+    {
+        name: "Lucía F.",
+        company: "Consultora de RRHH",
+        content:
+            "Sumamos una landing con el formulario de postulación integrado y se ordenó todo el proceso de selección. Los candidatos llegan mejor filtrados y ahorramos mucho tiempo.",
+    },
+    {
+        name: "Diego P.",
+        company: "Distribuidora Mayorista",
+        content:
+            "Pasamos de tomar pedidos por teléfono a tener un catálogo online con carrito para clientes mayoristas. Los pedidos entran sin errores y ganamos varias horas por día.",
+    },
 ];
+
+const getInitials = (name: string) =>
+    name
+        .split(" ")
+        .map((word) => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
 ---
 
-<section id="testimonios" class="py-20 lg:py-24 bg-black-50 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-            <span class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block">Prueba Social</span>
+<section
+    id="testimonios"
+    class="sticky top-0 z-[1] min-h-screen flex flex-col justify-center py-20 lg:py-24 bg-black-50 overflow-hidden"
+>
+    <!-- Glow decorativo tenue on-brand -->
+    <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-primary-100/50 rounded-full blur-[160px] pointer-events-none z-0"
+    >
+    </div>
+
+    <div class="testi-stage relative z-10">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-14 lg:mb-20">
+            <span
+                class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                >Prueba Social</span
+            >
             <h2 class="section-title text-center">
-                Empresas que ya <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600">escalaron</span> con nosotros
+                Empresas que ya <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
+                    >escalaron</span
+                > con nosotros
             </h2>
             <p class="section-subtitle mx-auto text-center">
-                No confíes solo en nuestra palabra, escuchá lo que dicen quienes ya trabajan con CetZz Labs.
+                No confíes solo en nuestra palabra, escuchá lo que dicen quienes
+                ya trabajan con CetZz Labs.
             </p>
         </div>
 
-        <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {testimonials.map((testimonial, index) => (
-                <div class="testimonial-card opacity-0 translate-y-8 bg-white border border-black-100 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full relative group">
-                    <!-- Detalle decorativo -->
-                    <div class="absolute top-0 right-8 w-12 h-1 bg-gradient-to-r from-primary-400 to-blue-500 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <!-- Estrellas -->
-                    <div class="flex items-center gap-1 mb-6">
-                        {Array.from({ length: testimonial.rating }).map(() => (
-                            <Star class="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                    </div>
+        <div class="testi-reveal opacity-0">
+            <div
+                id="testi-carousel"
+                class="relative mx-auto w-full max-w-[1180px] h-[520px] sm:h-[500px] lg:h-[480px] overflow-hidden [perspective:1600px]"
+                role="region"
+                aria-roledescription="carrusel"
+                aria-label="Testimonios de clientes"
+            >
+                {
+                    testimonials.map((testimonial, index) => (
+                        <article
+                            class="testi-card absolute inset-0 m-auto flex flex-col h-[420px] sm:h-[390px] lg:h-[380px] w-[86%] sm:w-[540px] lg:w-[600px] max-w-[90vw] rounded-2xl border border-black-100 bg-white overflow-hidden will-change-transform"
+                            data-index={index}
+                            aria-roledescription="diapositiva"
+                            aria-label={`${index + 1} de ${testimonials.length}`}
+                        >
+                            <div class="grow overflow-hidden p-8 lg:p-10">
+                                <Quote class="size-14 text-primary-300 fill-primary-300 mb-4" />
+                                <p class="text-black-600 text-base lg:text-[17px] leading-relaxed line-clamp-5">
+                                    {testimonial.content}
+                                </p>
+                            </div>
 
-                    <!-- Contenido -->
-                    <p class="text-black-600 italic mb-8 flex-grow text-lg leading-relaxed">
-                        "{testimonial.content}"
-                    </p>
+                            <div class="flex items-center gap-4 border-t border-black-100 bg-primary-50/60 px-8 lg:px-10 py-5">
+                                <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-400 to-blue-500 text-white font-bold text-sm shadow-primary">
+                                    {getInitials(testimonial.name)}
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold text-black-900 leading-tight">
+                                        {testimonial.name}
+                                    </span>
+                                    <span class="text-sm font-medium text-primary-500">
+                                        {testimonial.company}
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
 
-                    <!-- Autor -->
-                    <div class="mt-auto pt-6 border-t border-black-50 flex flex-col">
-                        <span class="font-bold text-black-900 text-lg">{testimonial.name}</span>
-                        <span class="text-sm text-black-500 font-medium">{testimonial.company}</span>
-                    </div>
+            <!-- Controles -->
+            <div class="mt-8 flex items-center justify-center gap-4">
+                <button
+                    id="testi-prev"
+                    type="button"
+                    aria-label="Testimonio anterior"
+                    class="grid place-items-center size-11 rounded-full bg-white border border-black-100 shadow-soft text-primary-400 hover:text-primary-600 hover:border-primary-200 hover:-translate-y-0.5 transition-all duration-pro active:scale-95 cursor-pointer"
+                >
+                    <ChevronLeft class="size-5 pointer-events-none" />
+                </button>
+
+                <div id="testi-dots" class="flex items-center gap-2">
+                    {
+                        testimonials.map((_, index) => (
+                            <button
+                                type="button"
+                                class="testi-dot size-1.5 rounded-full bg-black-300 transition-all duration-pro cursor-pointer"
+                                data-dot={index}
+                                aria-label={`Ir al testimonio ${index + 1}`}
+                            />
+                        ))
+                    }
                 </div>
-            ))}
+
+                <button
+                    id="testi-next"
+                    type="button"
+                    aria-label="Siguiente testimonio"
+                    class="grid place-items-center size-11 rounded-full bg-white border border-black-100 shadow-soft text-primary-400 hover:text-primary-600 hover:border-primary-200 hover:-translate-y-0.5 transition-all duration-pro active:scale-95 cursor-pointer"
+                >
+                    <ChevronRight class="size-5 pointer-events-none" />
+                </button>
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+    .testi-reveal {
+        transform: translateY(40px);
+    }
+    /* Difuminado lateral para integrar las tarjetas con el fondo de la página */
+    @media (min-width: 1024px) {
+        #testi-carousel {
+            -webkit-mask-image: linear-gradient(
+                to right,
+                transparent 0,
+                #000 13%,
+                #000 87%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to right,
+                transparent 0,
+                #000 13%,
+                #000 87%,
+                transparent 100%
+            );
+        }
+    }
+    .testi-card {
+        box-shadow: 0 8px 24px -14px rgba(15, 23, 42, 0.12);
+    }
+    .testi-card.is-active {
+        box-shadow: 0 30px 60px -18px rgba(15, 23, 42, 0.2);
+    }
+</style>
 
 <script>
     import { gsap } from "gsap";
@@ -71,20 +187,150 @@ const testimonials = [
     gsap.registerPlugin(ScrollTrigger);
 
     document.addEventListener("DOMContentLoaded", () => {
-        const grid = document.querySelector(".testimonials-grid");
+        const carousel = document.getElementById("testi-carousel");
+        const reveal = document.querySelector<HTMLElement>(".testi-reveal");
+        const section = document.getElementById("testimonios");
+        if (!carousel || !reveal) return;
 
-        if (grid) {
-            gsap.to(".testimonial-card", {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: grid,
-                    start: "top 95%",
+        const cards = Array.from(
+            document.querySelectorAll<HTMLElement>(".testi-card"),
+        );
+        const dots = Array.from(
+            document.querySelectorAll<HTMLElement>(".testi-dot"),
+        );
+        const btnPrev = document.getElementById("testi-prev");
+        const btnNext = document.getElementById("testi-next");
+        const total = cards.length;
+        if (!total) return;
+
+        const reduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        let current = 0;
+        let isAnimating = false;
+        let autoplay: number | undefined;
+
+        const mod = (n: number) => ((n % total) + total) % total;
+
+        const layout = () => {
+            const wide = window.innerWidth >= 1024;
+
+            cards.forEach((card, i) => {
+                let target: gsap.TweenVars;
+
+                if (i === current) {
+                    target = { xPercent: 0, yPercent: 0, scale: 1, opacity: 1 };
+                    card.style.zIndex = "30";
+                    card.style.pointerEvents = "auto";
+                } else if (i === mod(current - 1)) {
+                    target = wide
+                        ? { xPercent: -100, yPercent: 9, scale: 0.96, opacity: 0.9 }
+                        : { xPercent: -28, yPercent: 0, scale: 0.9, opacity: 0 };
+                    card.style.zIndex = "20";
+                    card.style.pointerEvents = wide ? "auto" : "none";
+                } else if (i === mod(current + 1)) {
+                    target = wide
+                        ? { xPercent: 100, yPercent: 9, scale: 0.96, opacity: 0.9 }
+                        : { xPercent: 28, yPercent: 0, scale: 0.9, opacity: 0 };
+                    card.style.zIndex = "20";
+                    card.style.pointerEvents = wide ? "auto" : "none";
+                } else {
+                    target = { xPercent: 0, yPercent: 0, scale: 0.9, opacity: 0 };
+                    card.style.zIndex = "10";
+                    card.style.pointerEvents = "none";
                 }
+
+                gsap.to(card, {
+                    ...target,
+                    duration: reduced ? 0 : 0.7,
+                    ease: "power3.out",
+                    overwrite: "auto",
+                });
+
+                card.classList.toggle("is-active", i === current);
+                card.setAttribute(
+                    "aria-hidden",
+                    i === current ? "false" : "true",
+                );
             });
-        }
+
+            dots.forEach((dot, i) => {
+                const active = i === current;
+                dot.classList.toggle("bg-primary-500", active);
+                dot.classList.toggle("size-2.5", active);
+                dot.classList.toggle("bg-black-300", !active);
+                dot.classList.toggle("size-1.5", !active);
+            });
+        };
+
+        const go = (index: number) => {
+            if (isAnimating) return;
+            const next = mod(index);
+            if (next === current) return;
+            isAnimating = true;
+            current = next;
+            layout();
+            window.setTimeout(() => (isAnimating = false), reduced ? 0 : 700);
+        };
+
+        const stopAutoplay = () => {
+            if (autoplay) window.clearInterval(autoplay);
+            autoplay = undefined;
+        };
+        const startAutoplay = () => {
+            if (reduced) return;
+            stopAutoplay();
+            autoplay = window.setInterval(() => go(current + 1), 6000);
+        };
+
+        btnPrev?.addEventListener("click", () => {
+            go(current - 1);
+            startAutoplay();
+        });
+        btnNext?.addEventListener("click", () => {
+            go(current + 1);
+            startAutoplay();
+        });
+        dots.forEach((dot, i) =>
+            dot.addEventListener("click", () => {
+                go(i);
+                startAutoplay();
+            }),
+        );
+        cards.forEach((card, i) =>
+            card.addEventListener("click", () => {
+                if (i === current) return;
+                go(i);
+                startAutoplay();
+            }),
+        );
+
+        section?.addEventListener("mouseenter", stopAutoplay);
+        section?.addEventListener("mouseleave", startAutoplay);
+
+        let resizeRaf = 0;
+        window.addEventListener("resize", () => {
+            cancelAnimationFrame(resizeRaf);
+            resizeRaf = requestAnimationFrame(layout);
+        });
+
+        // Estado inicial (sin transición) + posición correcta
+        gsap.set(cards, { xPercent: 0, scale: 0.9, opacity: 0 });
+        layout();
+
+        // Entrada al hacer scroll
+        gsap.to(reveal, {
+            opacity: 1,
+            y: 0,
+            duration: reduced ? 0 : 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: reveal,
+                start: "top 85%",
+            },
+        });
+
+        startAutoplay();
     });
 </script>

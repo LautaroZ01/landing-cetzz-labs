@@ -1,86 +1,361 @@
 ---
 import { Image } from "astro:assets";
-import Facebook from "../svg/social/Facebook.astro";
-import Instagram from "../svg/social/Instagram.astro";
-import WhatsApp from "../svg/social/WhatsApp.astro";
-import { socials, whatsApp } from "../../data/data";
+import { Menu, X } from "@lucide/astro";
 
-const facebookUrl = socials.find((s) => s.name === "Facebook")?.url || "#";
-const instagramUrl = socials.find((s) => s.name === "Instagram")?.url || "#";
-const whatsappUrl = whatsApp?.url || "#";
+const navLinks = [
+    { href: "#quienes-somos", label: "Nosotros" },
+    { href: "#servicios", label: "Servicios" },
+    { href: "#procesos", label: "Proceso" },
+    { href: "#portafolio", label: "Portafolio" },
+    { href: "#contacto", label: "Contacto" },
+];
 ---
 
-<header class="fixed w-full flex mt-4 z-50 justify-center items-center px-4">
-  <div
-    class="w-full max-w-6xl bg-white/90 backdrop-blur-lg border border-black-100 shadow-sm rounded-full px-5 py-3 md:px-6 md:py-3.5 flex items-center justify-between"
-  >
-    <!-- Logo -->
-    <a
-      href="#"
-      class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 z-10"
+<header
+    id="site-header"
+    class="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 ease-out"
+>
+    <div
+        class="header-bar relative w-full max-w-6xl flex items-center justify-between gap-4 rounded-full px-5 py-3 transition-all duration-300 ease-out md:px-6 md:py-3.5"
     >
-      <Image
-        src="/logo.webp"
-        alt=""
-        width={26}
-        height={26}
-        class="rounded-full"
-      />
-      <span class="text-lg font-bold text-black-900 hidden sm:block"
-        >CetZz Labs</span
-      >
-    </a>
+        <!-- Logo -->
+        <a
+            href="#"
+            class="header-logo flex items-center gap-2 z-10 transition-opacity duration-300 hover:opacity-80"
+        >
+            <Image
+                src="/logo.webp"
+                alt="CetZz Labs"
+                width={28}
+                height={28}
+                class="header-logo-img rounded-full transition-all duration-300"
+            />
+            <span class="text-lg font-bold text-black-900 hidden sm:block"
+                >CetZz Labs</span
+            >
+        </a>
 
-    <!-- Desktop Navigation Center -->
-    <nav
-      class="hidden lg:flex items-center gap-8 text-sm text-black-600 font-medium absolute left-1/2 -translate-x-1/2"
-    >
-      <a href="#quienes-somos" class="hover:text-primary-600 transition-colors"
-        >Nosotros</a
-      >
-      <a href="#servicios" class="hover:text-primary-600 transition-colors"
-        >Servicios</a
-      >
-      <a href="#portafolio" class="hover:text-primary-600 transition-colors"
-        >Portafolio</a
-      >
-      <a href="#procesos" class="hover:text-primary-600 transition-colors"
-        >Procesos</a
-      >
-      <a href="#contacto" class="hover:text-primary-600 transition-colors"
-        >Contacto</a
-      >
-    </nav>
+        <!-- Navegación desktop -->
+        <nav
+            class="hidden lg:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2"
+        >
+            {
+                navLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        data-nav-link
+                        class="nav-link text-black-600"
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+        </nav>
 
-    <!-- Redes Sociales (Siempre visibles, en Mobile y Desktop) -->
-    <div class="flex items-center gap-4 z-10">
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-black-500 hover:text-primary-500 transition-colors"
-        aria-label="WhatsApp"
-      >
-        <WhatsApp class="w-5 h-5" />
-      </a>
-      <a
-        href={facebookUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-black-500 hover:text-primary-500 transition-colors"
-        aria-label="Facebook"
-      >
-        <Facebook class="w-5 h-5" />
-      </a>
-      <a
-        href={instagramUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-black-500 hover:text-primary-500 transition-colors"
-        aria-label="Instagram"
-      >
-        <Instagram class="w-5 h-5" />
-      </a>
+        <!-- Cluster derecho -->
+        <div class="flex items-center gap-3 z-10">
+            <a href="#contacto" class="cta-btn hidden lg:inline-flex">
+                Hablemos
+            </a>
+
+            <!-- Botón menú mobile -->
+            <button
+                id="menu-toggle"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                class="lg:hidden grid place-items-center size-9 rounded-full border border-transparent bg-transparent text-black-700 transition-all duration-300 hover:text-primary-600 active:scale-95"
+            >
+                <Menu id="icon-open" class="w-5 h-5" />
+                <X id="icon-close" class="w-5 h-5 hidden" />
+            </button>
+        </div>
+
+        <!-- Menú mobile -->
+        <div
+            id="mobile-menu"
+            class="hidden lg:hidden absolute left-0 right-0 top-full mt-3 origin-top rounded-3xl border border-black-100 bg-white/95 p-4 shadow-soft backdrop-blur-xl"
+        >
+            <nav class="flex flex-col gap-1">
+                {
+                    navLinks.map((link) => (
+                        <a
+                            href={link.href}
+                            data-nav-link
+                            class="mobile-link rounded-xl px-4 py-3 text-base font-semibold text-black-700 transition-colors hover:bg-primary-50 hover:text-primary-600"
+                        >
+                            {link.label}
+                        </a>
+                    ))
+                }
+            </nav>
+            <div class="mt-3 border-t border-black-100 pt-4">
+                <a href="#contacto" class="cta-btn cta-btn--block">Hablemos</a>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
+
+<style>
+    /* Entrada al cargar la página.
+       OJO: usamos "backwards" y NO "forwards"/"both" a propósito: si el header
+       quedara con un transform aplicado al terminar, crearía un containing block
+       y el backdrop-filter de .header-bar dejaría de ver el fondo de la página. */
+    #site-header {
+        animation: header-drop 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+    @keyframes header-drop {
+        from {
+            transform: translateY(-130%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Al inicio el header es transparente; al hacer scroll aparece la "píldora" */
+    #site-header[data-scrolled] .header-bar {
+        transform: scale(0.95);
+        background-color: rgb(255 255 255 / 0.7);
+        border-color: var(--color-black-100);
+        box-shadow:
+            0 1px 3px 0 rgb(15 23 42 / 0.08),
+            0 1px 2px -1px rgb(15 23 42 / 0.06);
+        backdrop-filter: blur(14px) saturate(180%);
+        -webkit-backdrop-filter: blur(14px) saturate(180%);
+    }
+
+    /* Subrayado animado de los enlaces */
+    .nav-link {
+        position: relative;
+        transition: color 0.2s ease;
+    }
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.4rem;
+        height: 2px;
+        border-radius: 9999px;
+        background: linear-gradient(
+            to right,
+            var(--color-primary-500),
+            var(--color-primary-600)
+        );
+        transform: scaleX(0);
+        transition: transform 0.25s ease;
+    }
+    .nav-link:hover {
+        color: var(--color-primary-600);
+    }
+    .nav-link:hover::after,
+    .nav-link[aria-current="true"]::after {
+        transform: scaleX(1);
+    }
+    .nav-link[aria-current="true"] {
+        color: var(--color-primary-600);
+    }
+
+    .mobile-link[aria-current="true"] {
+        color: var(--color-primary-600);
+        background-color: var(--color-primary-50);
+    }
+
+    /* ---- Botón CTA "Hablemos" ---- */
+    .cta-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.4rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        isolation: isolate;
+        overflow: hidden;
+        background-image: linear-gradient(
+            110deg,
+            var(--color-primary-600) 0%,
+            var(--color-primary-500) 25%,
+            var(--color-primary-400) 50%,
+            var(--color-primary-500) 75%,
+            var(--color-primary-600) 100%
+        );
+        background-size: 220% 100%;
+        background-position: 0% 50%;
+        box-shadow:
+            0 4px 14px -4px rgb(59 130 246 / 0.45),
+            inset 0 1px 0 rgb(255 255 255 / 0.25);
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            background-position 0.6s ease;
+    }
+
+    /* Destello diagonal que barre el botón */
+    .cta-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 45%;
+        height: 100%;
+        background: linear-gradient(
+            100deg,
+            transparent,
+            rgb(255 255 255 / 0.55),
+            transparent
+        );
+        transform: translateX(-180%) skewX(-20deg);
+        z-index: -1;
+    }
+
+    .cta-btn:hover {
+        transform: translateY(-2px);
+        background-position: 100% 50%;
+        box-shadow:
+            0 12px 30px -6px rgb(59 130 246 / 0.6),
+            0 0 0 4px rgb(59 130 246 / 0.14),
+            inset 0 1px 0 rgb(255 255 255 / 0.4);
+    }
+    .cta-btn:hover::before {
+        animation: cta-shine 0.9s ease;
+    }
+    .cta-btn:active {
+        transform: translateY(0);
+    }
+
+    @keyframes cta-shine {
+        to {
+            transform: translateX(320%) skewX(-20deg);
+        }
+    }
+
+    .cta-btn--block {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding-top: 0.85rem;
+        padding-bottom: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #site-header,
+        .header-bar,
+        .header-logo-img,
+        .nav-link,
+        .nav-link::after,
+        .cta-btn,
+        .cta-btn::before {
+            animation: none;
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    const header = document.getElementById("site-header");
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+
+    /* ---- Condensar el header al hacer scroll ---- */
+    let ticking = false;
+    const syncScroll = () => {
+        if (header) {
+            if (window.scrollY > 16) header.setAttribute("data-scrolled", "");
+            else header.removeAttribute("data-scrolled");
+        }
+        ticking = false;
+    };
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (!ticking) {
+                requestAnimationFrame(syncScroll);
+                ticking = true;
+            }
+        },
+        { passive: true },
+    );
+    syncScroll();
+
+    /* ---- Menú mobile ---- */
+    let menuOpen = false;
+    const setMenu = (open: boolean) => {
+        if (!menu || !toggle) return;
+        menuOpen = open;
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+        iconOpen?.classList.toggle("hidden", open);
+        iconClose?.classList.toggle("hidden", !open);
+
+        if (open) {
+            menu.classList.remove("hidden", "animation-menu-close");
+            menu.classList.add("animation-menu");
+        } else {
+            menu.classList.remove("animation-menu");
+            menu.classList.add("animation-menu-close");
+            window.setTimeout(() => {
+                if (!menuOpen) menu.classList.add("hidden");
+            }, 300);
+        }
+    };
+
+    toggle?.addEventListener("click", () => setMenu(!menuOpen));
+    menu?.querySelectorAll("a").forEach((link) =>
+        link.addEventListener("click", () => setMenu(false)),
+    );
+    document.addEventListener("click", (e) => {
+        if (
+            menuOpen &&
+            menu &&
+            toggle &&
+            !menu.contains(e.target as Node) &&
+            !toggle.contains(e.target as Node)
+        ) {
+            setMenu(false);
+        }
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuOpen) setMenu(false);
+    });
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+        if (e.matches && menuOpen) setMenu(false);
+    });
+
+    /* ---- Enlace activo según la sección visible ---- */
+    const navAnchors = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
+    );
+    const targets = [
+        ...new Set(navAnchors.map((a) => a.hash).filter((h) => h.length > 1)),
+    ]
+        .map((hash) => document.querySelector(hash))
+        .filter((el): el is Element => Boolean(el));
+
+    if (targets.length) {
+        const spy = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const id = `#${entry.target.id}`;
+                    navAnchors.forEach((a) => {
+                        if (a.hash === id)
+                            a.setAttribute("aria-current", "true");
+                        else a.removeAttribute("aria-current");
+                    });
+                });
+            },
+            { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+        );
+        targets.forEach((el) => spy.observe(el));
+    }
+</script>
