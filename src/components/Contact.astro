@@ -206,6 +206,8 @@ import Icons from "./ui/Icons.astro";
 
 <script>
     // Lógica opcional del lado del cliente para construir el mensaje de WhatsApp
+    import { getWhatsappUrl } from "../data/data";
+
     const form = document.getElementById("whatsapp-form");
 
     if (form) {
@@ -222,16 +224,12 @@ import Icons from "./ui/Icons.astro";
                 document.getElementById("mensaje") as HTMLTextAreaElement
             ).value;
 
-            // Reemplaza esto con tu número de teléfono real con código de área (sin el +)
-            const numeroDestino = "5493875636478";
-
             let textoWhatsApp = `Hola! Soy ${nombre}. Me interesa el servicio de ${servicio}.`;
             if (mensaje) {
                 textoWhatsApp += `\n\nTe comento un poco: ${mensaje}`;
             }
-            const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
 
-            window.open(url, "_blank");
+            window.open(getWhatsappUrl(textoWhatsApp), "_blank");
         });
     }
 </script>

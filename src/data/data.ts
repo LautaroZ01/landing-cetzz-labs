@@ -7,6 +7,23 @@ interface IContact extends ISocial{
     info: string
 }
 
+/* ── Fuente única del número de contacto ─────────────────────────────
+   Cambiá SOLO estos valores para actualizar el número en toda la web. */
+const PHONE_DIGITS = "5493875450419" // solo dígitos, con código de país, sin "+"
+const PHONE_DISPLAY = "+54 9 3875 45-0419" // formato legible para mostrar en pantalla
+const WHATSAPP_DEFAULT_TEXT = "Hola! Estoy interesado en sus servicios web. Quiero más información."
+
+/** Construye una URL de WhatsApp (wa.me) con un mensaje opcional. */
+export const getWhatsappUrl = (text: string = WHATSAPP_DEFAULT_TEXT) =>
+    `https://wa.me/${PHONE_DIGITS}?text=${encodeURIComponent(text)}`
+
+export const phone = {
+    digits: PHONE_DIGITS,            // para enlaces wa.me / API de WhatsApp
+    display: PHONE_DISPLAY,          // para mostrar en la UI
+    tel: `tel:+${PHONE_DIGITS}`,     // para enlaces de llamada
+    whatsappUrl: getWhatsappUrl()    // enlace de WhatsApp con el mensaje por defecto
+}
+
 export const socials: ISocial[] = [
     {
         name: "Instagram",
@@ -30,8 +47,8 @@ export const contacts: IContact[] = [
     },
     {
         name: "Phone",
-        info: "+54 9 387 563 6478",
-        url: "tel:+5493875636478"
+        info: phone.display,
+        url: phone.tel
     },
     {
         name: "Address",
@@ -42,6 +59,6 @@ export const contacts: IContact[] = [
 
 export const whatsApp: IContact = {
     name: "WhatsApp",
-    info: "+54 9 387 563 6478",
-    url: "https://wa.me/5493875636478?text=Hola!%20Estoy%20interesado%20en%20sus%20servicios%20web.%20Quiero%20más%20información."
+    info: phone.display,
+    url: phone.whatsappUrl
 }
