@@ -16,17 +16,16 @@
         <div class="text-center mb-16">
             <span
                 class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
-                >Resultados Reales</span
+                >Resultados de clientes</span
             >
             <h2 class="section-title text-center">
-                No hacemos webs, creamos <span
+                Números de clientes, <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
-                    >activos digitales</span
+                    >no promesas</span
                 >
             </h2>
             <p class="section-subtitle mx-auto text-center">
-                El impacto que generamos en los negocios que deciden dar el
-                salto tecnológico con nosotros.
+                Salen de las cuentas publicitarias de cada cliente.
             </p>
         </div>
 
@@ -44,16 +43,15 @@
                 <div
                     class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
                 >
-                    <span class="text-primary-500">+</span><span
-                        class="counter"
-                        data-target="300">0</span
-                    ><span class="text-primary-500">%</span>
+                    <span class="counter" data-target="20.8" data-decimals="1"
+                        >0</span
+                    ><span class="text-primary-500">x</span>
                 </div>
                 <h3 class="text-lg font-bold text-black-900 mb-1">
-                    Más consultas
+                    de retorno en anuncios
                 </h3>
                 <p class="text-center text-black-500 text-sm font-medium">
-                    Aumento promedio en la captación de leads mensuales.
+                    Anitrendy: cada $1 en anuncios trajo $20,8 en ventas.
                 </p>
             </div>
 
@@ -68,16 +66,15 @@
                 <div
                     class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
                 >
-                    <span class="text-blue-500">+</span><span
-                        class="counter"
-                        data-target="150">0</span
-                    ><span class="text-blue-500">%</span>
+                    <span class="counter" data-target="19">0</span><span
+                        class="text-blue-500">x</span
+                    >
                 </div>
                 <h3 class="text-lg font-bold text-black-900 mb-1">
-                    Tasa de conversión
+                    veces más barata cada venta
                 </h3>
                 <p class="text-center text-black-500 text-sm font-medium">
-                    Incremento en ventas al optimizar la experiencia de usuario.
+                    Anitrendy: de $51.286 a $2.723 por compra.
                 </p>
             </div>
 
@@ -92,16 +89,16 @@
                 <div
                     class="flex items-center text-5xl lg:text-6xl font-black text-black-900 tracking-tighter mb-2"
                 >
-                    <span class="text-cyan-500">-</span><span
+                    <span class="text-cyan-500">+</span><span
                         class="counter"
-                        data-target="50">0</span
-                    ><span class="text-cyan-500">%</span>
+                        data-target="4500">0</span
+                    >
                 </div>
                 <h3 class="text-lg font-bold text-black-900 mb-1">
-                    Ahorro de tiempo
+                    consultas por WhatsApp
                 </h3>
                 <p class="text-center text-black-500 text-sm font-medium">
-                    Automatizando procesos y sistemas a medida.
+                    Implantes Salud: conversaciones iniciadas con Meta Ads, jun–nov 2026.
                 </p>
             </div>
         </div>
@@ -155,16 +152,26 @@
             // Animar el conteo numérico
             const counters = document.querySelectorAll(".counter");
             counters.forEach((counter) => {
-                const target = parseInt(
+                const target = parseFloat(
                     counter.getAttribute("data-target") || "0",
+                );
+                const decimals = parseInt(
+                    counter.getAttribute("data-decimals") || "0",
                     10,
                 );
+                const fmt = new Intl.NumberFormat("es-AR", {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals,
+                });
+                const state = { value: 0 };
 
-                gsap.to(counter, {
-                    innerHTML: target,
+                gsap.to(state, {
+                    value: target,
                     duration: 2.5,
-                    snap: { innerHTML: 1 },
                     ease: "power3.out",
+                    onUpdate: () => {
+                        counter.textContent = fmt.format(state.value);
+                    },
                     scrollTrigger: {
                         trigger: container,
                         start: "top 75%",

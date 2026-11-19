@@ -19,6 +19,23 @@ import { whatsApp } from "../../data/data";
 
 <style>
     /* Easter egg: mantené pulsado para arrastrarlo por la página */
+    /* Solo en celular/tablet, y recién cuando se pasó el hero */
+    .sticky-contact {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.35s ease,
+            visibility 0.35s ease;
+    }
+    .sticky-contact.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    @media (min-width: 1024px) {
+        .sticky-contact {
+            display: none;
+        }
+    }
     .sticky-contact {
         touch-action: none;
         user-select: none;
@@ -49,6 +66,22 @@ import { whatsApp } from "../../data/data";
     ) as HTMLAnchorElement | null;
 
     if (el && link) {
+        /* Aparece al pasar el hero */
+        const hero = document.getElementById("inicio");
+        if (hero) {
+            const showAfterHero = () => {
+                el.classList.toggle(
+                    "is-visible",
+                    hero.getBoundingClientRect().bottom <= 0,
+                );
+            };
+            window.addEventListener("scroll", showAfterHero, { passive: true });
+            window.addEventListener("resize", showAfterHero);
+            showAfterHero();
+        } else {
+            el.classList.add("is-visible");
+        }
+
         const HOLD_MS = 320; // tiempo de "mantener pulsado" para activar el arrastre
         const MOVE_TOLERANCE = 14; // px de movimiento que cancelan el hold
         const MARGIN = 8; // px mínimos respecto al borde del viewport

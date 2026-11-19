@@ -2,41 +2,88 @@
 import EcommerceIcon from "./svg/EcommerceIcon.astro";
 import InteractiveIcon from "./svg/InteractiveIcon.astro";
 import SeoIcon from "./svg/SeoIcon.astro";
-import LandingPageIcon from "./svg/LandingPageIcon.astro";
-import { ArrowRight } from "@lucide/astro";
+import {
+    ArrowRight,
+    Check,
+    ClipboardCheck,
+    CalendarCheck,
+    Store,
+    Bot,
+    Workflow,
+} from "@lucide/astro";
+import { getWhatsappUrl } from "../data/data";
+
+const doneSystems = [
+    {
+        icon: ClipboardCheck,
+        title: "Control de asistencia",
+        description: "Quién vino, a qué hora entró y cuándo se fue.",
+    },
+    {
+        icon: CalendarCheck,
+        title: "Reservas de cabañas",
+        description: "Sitio web donde el huésped reserva solo.",
+    },
+    {
+        icon: Store,
+        title: "Tienda Nube + local físico",
+        description:
+            "Conector para tiendas de ropa: lo que se vende en el local se descuenta online.",
+    },
+    {
+        icon: Bot,
+        title: "Agentes de IA para WhatsApp",
+        description: "Responden las consultas al toque.",
+    },
+    {
+        icon: Workflow,
+        title: "Automatizaciones",
+        description: "Los procesos repetitivos se hacen solos.",
+    },
+];
 
 const servicesData = [
     {
         id: "service-0",
-        title: "Página Web Única (Landing)",
-        description:
-            "Ideal para publicidad y redes sociales. Está diseñada estratégicamente para atrapar la atención al instante y conseguirte clientes rápido con un solo vistazo.",
-        glowColor: "bg-cyan-500",
-        formValue: "Página web",
+        title: "Sistemas a medida",
+        badge: "Lo que mejor hacemos",
+        description: "Para negocios que ya no entran en una planilla.",
+        bullets: [
+            "Todo tu negocio en una sola pantalla",
+            "Cada persona ve solo lo suyo",
+            "Conectado a tu WhatsApp y a tu tienda",
+        ],
+        glowColor: "bg-purple-500",
+        whatsappText:
+            "Hola! Quiero mi diagnóstico gratis. Me interesa un sistema a medida para mi negocio.",
     },
     {
         id: "service-1",
-        title: "Tienda Online",
-        description:
-            "Tu negocio en internet abierto las 24 horas. Podrás exhibir todos tus productos y vender de forma completamente segura, integrando diversos métodos de pago para facilitar la compra.",
+        title: "Tiendas online que venden",
+        badge: "",
+        description: "Pensadas para quien llega desde un anuncio.",
+        bullets: [
+            "Compra en pocos pasos",
+            "Stock sincronizado con el local",
+            "Píxel de Meta bien instalado",
+        ],
         glowColor: "bg-indigo-500",
-        formValue: "E-commerce",
+        whatsappText:
+            "Hola! Quiero mi diagnóstico gratis. Me interesa una tienda online.",
     },
     {
         id: "service-2",
-        title: "Estrategia y Ads",
-        description:
-            "Estrategia integral, creación de contenido, optimización de alcance y campañas en Meta Ads para potenciar al máximo tus conversiones.",
+        title: "Campañas en Meta",
+        badge: "",
+        description: "Anuncios en Facebook e Instagram según tu objetivo.",
+        bullets: [
+            "Ventas online o mensajes a WhatsApp",
+            "Retargeting y escalado por zonas",
+            "Consultas respondidas rápido, con respuestas automáticas o IA",
+        ],
         glowColor: "bg-blue-500",
-        formValue: "Marketing",
-    },
-    {
-        id: "service-3",
-        title: "Diseño a Medida",
-        description:
-            "Sistemas web construidos totalmente desde cero a tu gusto. Sorprendemos a tus visitantes con interacciones y flujos únicos pensados exclusivamente para destacar tu empresa sobre el resto.",
-        glowColor: "bg-purple-500",
-        formValue: "Sistema a Medida",
+        whatsappText:
+            "Hola! Quiero mi diagnóstico gratis. Me interesan campañas en Meta.",
     },
 ];
 ---
@@ -55,17 +102,16 @@ const servicesData = [
     </div>
 
     <div class="container-labs text-center mb-16">
-        <span class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block">Lo que hacemos</span>
-        <h2 class="section-title text-center">Nuestros <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600">Servicios</span></h2>
-        <p class="section-subtitle mx-auto text-center">Soluciones digitales diseñadas para impulsar tu negocio al siguiente nivel.</p>
+        <span class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block">Qué hacemos</span>
+        <h2 class="section-title text-center">Tres cosas. <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600">Bien hechas.</span></h2>
+        <p class="section-subtitle mx-auto text-center">Podés empezar por una. Funcionan mejor juntas.</p>
     </div>
-
     <div
         class="container-labs flex flex-col gap-6 lg:gap-8 relative z-10 pb-12"
     >
         {
             servicesData.map(
-                ({ id, title, description, glowColor, formValue }, index) => (
+                ({ id, title, badge, description, bullets, glowColor, whatsappText }, index) => (
                     <div
                         id={id}
                         class="sticky flex flex-col md:flex-row w-full rounded-[2.5rem] overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.05)] transition-transform duration-500 ease-in-out border border-black-100 backdrop-blur-2xl bg-white/90"
@@ -81,21 +127,38 @@ const servicesData = [
                         <div class="absolute inset-0 bg-gradient-to-br from-white/60 to-white/10 pointer-events-none z-0" />
 
                         <div class="flex flex-col justify-between p-10 md:p-14 lg:p-16 w-full md:w-1/2 relative z-20">
-                            <h3 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black-900 mb-8 tracking-tight drop-shadow-sm pr-4">
-                                {title}
-                            </h3>
+                            <div class="mb-8">
+                                {badge && (
+                                    <span class="inline-block mb-4 rounded-full bg-primary-50 border border-primary-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-600">
+                                        {badge}
+                                    </span>
+                                )}
+                                <h3 class="text-4xl md:text-5xl lg:text-5xl font-extrabold text-black-900 tracking-tight drop-shadow-sm pr-4">
+                                    {title}
+                                </h3>
+                            </div>
 
                             <div class="mt-auto">
-                                <p class="text-lg md:text-xl text-black-600 mb-10 leading-relaxed font-medium">
+                                <p class="text-lg md:text-xl text-black-600 mb-5 leading-relaxed font-medium">
                                     {description}
                                 </p>
 
+                                <ul class="mb-10 flex flex-col gap-2.5">
+                                    {bullets.map((item) => (
+                                        <li class="flex items-start gap-3 text-base text-black-700 font-medium">
+                                            <Check class="w-5 h-5 mt-0.5 shrink-0 text-primary-500" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
                                 <a
-                                    href="#contacto"
-                                    data-service={formValue}
+                                    href={getWhatsappUrl(whatsappText)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     class="service-btn inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-50 text-primary-600 font-bold rounded-xl transition-all duration-300 hover:bg-primary-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm hover:shadow-soft border border-primary-100 hover:border-primary-500"
                                 >
-                                    Me interesa
+                                    Quiero mi diagnóstico gratis
                                     <ArrowRight class="w-5 h-5" />
                                 </a>
                             </div>
@@ -103,10 +166,9 @@ const servicesData = [
 
                         <div class="w-full md:w-1/2 relative min-h-[300px] md:min-h-full flex items-center justify-center overflow-visible z-20 p-8 md:p-12">
                             <div class="w-full max-w-[500px] scale-125 md:scale-[1.4] origin-center -translate-y-48 md:-translate-y-40 drop-shadow-[0_20px_40px_rgba(0,0,0,0.1)] transform transition-transform duration-700 hover:scale-[1.35] hover:md:scale-[1.5]">
-                                {id === "service-0" && <LandingPageIcon />}
+                                {id === "service-0" && <InteractiveIcon />}
                                 {id === "service-1" && <EcommerceIcon />}
                                 {id === "service-2" && <SeoIcon />}
-                                {id === "service-3" && <InteractiveIcon />}
                             </div>
                         </div>
                     </div>
@@ -114,21 +176,31 @@ const servicesData = [
             )
         }
     </div>
+    <div class="container-labs relative z-10 pt-16 pb-24 lg:pb-32">
+        <h3 class="text-2xl md:text-3xl font-extrabold text-black-900 tracking-tight mb-8 text-center">
+            Sistemas que ya hicimos
+        </h3>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {
+                doneSystems.map((item) => (
+                    <li class="flex items-start gap-4 p-6 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+                        <span class="shrink-0 grid place-items-center size-11 rounded-2xl bg-primary-50 text-primary-600">
+                            <item.icon class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <p class="font-bold text-black-900 text-lg leading-snug">
+                                {item.title}
+                            </p>
+                            <p class="mt-1 text-black-600 font-medium leading-relaxed">
+                                {item.description}
+                            </p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+        <p class="mt-8 text-center text-lg font-semibold text-black-700">
+            ¿El tuyo no está en la lista? Lo definimos juntos en el diagnóstico.
+        </p>
+    </div>
 </section>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const serviceBtns = document.querySelectorAll(".service-btn");
-        serviceBtns.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const serviceValue = btn.getAttribute("data-service");
-                const selectElement = document.getElementById(
-                    "servicio",
-                ) as HTMLSelectElement;
-                if (selectElement && serviceValue) {
-                    selectElement.value = serviceValue;
-                }
-            });
-        });
-    });
-</script>

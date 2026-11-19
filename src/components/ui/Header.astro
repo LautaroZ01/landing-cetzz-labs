@@ -1,13 +1,17 @@
 ---
 import { Image } from "astro:assets";
 import { Menu, X } from "@lucide/astro";
+import { getWhatsappUrl } from "../../data/data";
+
+const whatsappUrl = getWhatsappUrl(
+    "Hola! Quiero mi diagnóstico gratis para mi negocio.",
+);
 
 const navLinks = [
-    { href: "#quienes-somos", label: "Nosotros" },
-    { href: "#servicios", label: "Servicios" },
-    { href: "#procesos", label: "Proceso" },
-    { href: "#portafolio", label: "Portafolio" },
-    { href: "#contacto", label: "Contacto" },
+    { href: "#servicios", label: "Qué hacemos" },
+    { href: "#portafolio", label: "Casos" },
+    { href: "#procesos", label: "Cómo trabajamos" },
+    { href: "#faq", label: "Preguntas" },
 ];
 ---
 
@@ -54,8 +58,13 @@ const navLinks = [
 
         <!-- Cluster derecho -->
         <div class="flex items-center gap-3 z-10">
-            <a href="#contacto" class="cta-btn hidden lg:inline-flex">
-                Hablemos
+            <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cta-btn"
+            >
+                Diagnóstico gratis
             </a>
 
             <!-- Botón menú mobile -->
@@ -90,9 +99,6 @@ const navLinks = [
                     ))
                 }
             </nav>
-            <div class="mt-3 border-t border-black-100 pt-4">
-                <a href="#contacto" class="cta-btn cta-btn--block">Hablemos</a>
-            </div>
         </div>
     </div>
 </header>
@@ -237,12 +243,12 @@ const navLinks = [
         }
     }
 
-    .cta-btn--block {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        padding-top: 0.85rem;
-        padding-bottom: 0.85rem;
+    /* En celular el botón sigue visible, más compacto */
+    @media (max-width: 1023px) {
+        .cta-btn {
+            padding: 0.55rem 1rem;
+            font-size: 0.8125rem;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {

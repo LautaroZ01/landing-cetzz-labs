@@ -11,7 +11,7 @@ interface IContact extends ISocial{
    Cambiá SOLO estos valores para actualizar el número en toda la web. */
 const PHONE_DIGITS = "5493875450419" // solo dígitos, con código de país, sin "+"
 const PHONE_DISPLAY = "+54 9 3875 45-0419" // formato legible para mostrar en pantalla
-const WHATSAPP_DEFAULT_TEXT = "Hola! Estoy interesado en sus servicios web. Quiero más información."
+const WHATSAPP_DEFAULT_TEXT = "Hola! Quiero mi diagnóstico gratis para mi negocio."
 
 /** Construye una URL de WhatsApp (wa.me) con un mensaje opcional. */
 export const getWhatsappUrl = (text: string = WHATSAPP_DEFAULT_TEXT) =>

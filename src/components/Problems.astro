@@ -1,0 +1,135 @@
+---
+import Icons from "./ui/Icons.astro";
+import { getWhatsappUrl } from "../data/data";
+
+const whatsappUrl = getWhatsappUrl(
+    "Hola! Me pasan varias de las cosas que cuentan en su web. Quiero mi diagnóstico gratis.",
+);
+
+const problems = [
+    {
+        problem: "Pierdo ventas porque contesto tarde el WhatsApp.",
+        service: "Agentes de IA para WhatsApp",
+        solution:
+            "Las consultas se responden al toque, con respuestas automáticas o un agente de IA. Vos entrás cuando hace falta.",
+    },
+    {
+        problem: "Pagué anuncios y no vendí.",
+        service: "Campañas en Meta",
+        solution:
+            "Campañas armadas según tu objetivo y con el píxel bien instalado, para saber qué anuncio vende y cuál no.",
+    },
+    {
+        problem: "Ya me hicieron una web que no sirvió para nada.",
+        service: "Tienda online",
+        solution:
+            "Arrancamos por entender cómo vendés. La tienda se arma para quien llega desde un anuncio y decide en segundos.",
+    },
+    {
+        problem: "Vendo algo que no hay: no sé cuánto stock tengo.",
+        service: "Sistema a medida",
+        solution:
+            "El stock del local y el de la tienda online se descuentan solos.",
+    },
+    {
+        problem: "Tengo todo en tres planillas y nadie las actualiza.",
+        service: "Sistema a medida",
+        solution:
+            "Un solo sistema donde cada persona carga lo suyo y vos ves todo junto.",
+    },
+    {
+        problem: "Me da miedo pagar un desarrollo y que no ande.",
+        service: "Cómo trabajamos",
+        solution:
+            "Lo ves dibujado antes de pagar el desarrollo, y cada pocas semanas te mostramos algo funcionando.",
+    },
+];
+---
+
+<section
+    id="problemas"
+    class="py-24 lg:py-32 bg-black-50 relative overflow-hidden"
+>
+    <div
+        class="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none z-0"
+    >
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <span
+                class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                >Qué resolvemos</span
+            >
+            <h2 class="section-title text-center">
+                ¿Te pasa <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
+                    >esto?</span
+                >
+            </h2>
+        </div>
+
+        <ol class="flex flex-col gap-4">
+            {
+                problems.map((item, index) => (
+                    <li class="problem-row grid grid-cols-1 md:grid-cols-[1fr_1.15fr] gap-5 md:gap-10 p-6 md:p-8 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-start gap-4">
+                            <span class="text-3xl font-black tracking-tighter text-primary-200 leading-none pt-1">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <p class="text-xl font-bold text-black-900 leading-snug">
+                                “{item.problem}”
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-2 md:border-l md:border-black-100 md:pl-10">
+                            <span class="w-fit rounded-full bg-primary-50 border border-primary-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-600">
+                                {item.service}
+                            </span>
+                            <p class="text-black-600 font-medium leading-relaxed">
+                                {item.solution}
+                            </p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ol>
+
+        <div class="mt-14 flex flex-col items-center gap-6 text-center">
+            <p class="text-2xl md:text-3xl font-extrabold text-black-900 tracking-tight">
+                Si te pasan dos o más, hablemos.
+            </p>
+            <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-lg rounded-xl px-8 py-4 transition-colors duration-300 shadow-md hover:shadow-lg"
+            >
+                <Icons name="whatsapp" />
+                Quiero mi diagnóstico gratis
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (reduceMotion) return;
+
+        gsap.from(".problem-row", {
+            y: 30,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: "#problemas ol", start: "top 80%" },
+        });
+    });
+</script>

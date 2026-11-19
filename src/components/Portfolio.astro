@@ -1,55 +1,90 @@
 ---
-import { ChevronLeft, ChevronRight, ArrowRight } from "@lucide/astro";
+import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import Icons from "./ui/Icons.astro";
+import { getWhatsappUrl } from "../data/data";
 
-type Project = {
-    title: string;
-    description: string;
-    image: string;
-    link: string;
-};
+const whatsappUrl = getWhatsappUrl(
+    "Hola! Vi los casos en su web. Quiero mi diagnóstico gratis para mi negocio.",
+);
 
-const projects: Project[] = [
+type Stat = { value: string; label: string };
+
+const cases = [
     {
-        title: "RestoBar",
-        description:
-            "Landing page para un restobar con un diseño moderno y responsive.",
-        image: "/projects/RestoBar.webp",
-        link: "https://resto-astro-landing-page.vercel.app/",
+        id: "anitrendy",
+        name: "Anitrendy",
+        kind: "Tienda de ropa deportiva femenina",
+        url: "https://anitrendy.com.ar",
+        urlLabel: "anitrendy.com.ar",
+        stats: [
+            { value: "20,8x", label: "de retorno: cada $1 en anuncios trajo $20,8 en ventas" },
+            { value: "19x", label: "más barata cada compra: de $51.286 a $2.723" },
+            { value: "≈ $10 M", label: "por mes en ventas por anuncios (arrancó en $330 mil)" },
+            { value: "247", label: "compras por anuncios" },
+        ] as Stat[],
+        quote: "",
+        did: "Tienda online pensada para quien llega desde un anuncio. Campañas que siguen al stock y se escalan por etapas (Salta, NOA, Buenos Aires). En desarrollo: un sistema para que cada venta del local se descuente del stock online.",
+        source: "Fuente: Meta Ads y TiendaNube, jul–nov 2026.",
     },
     {
-        title: "Soluciones de Transporte",
-        description:
-            "Landing page para cotizar servicios de transporte para personas, materiales y carga.",
-        image: "/projects/transporte.webp",
-        link: "https://lta-landing-page-transporte-salta.netlify.app/",
+        id: "implantes",
+        name: "Implantes Salud",
+        kind: "Clínica odontológica, Salta",
+        url: "https://implantessalud.com.ar",
+        urlLabel: "implantessalud.com.ar",
+        stats: [
+            { value: "+4.500", label: "conversaciones por WhatsApp" },
+            { value: "3.500", label: "trajo sola la campaña principal de implantes" },
+            { value: "≈ $66", label: "por conversación en esa campaña" },
+        ] as Stat[],
+        quote: "Llegaron tantas consultas que la recepción no daba abasto.",
+        did: "Campañas de implantes y odontología general directo a WhatsApp. Acompañamos la puesta en marcha del agente de IA de Dentalink (el agente es de Dentalink, no nuestro).",
+        source: "Fuente: Meta Ads, jun–nov 2026. Son conversaciones iniciadas, no tratamientos vendidos.",
+    },
+];
+
+// Evolución del retorno publicitario de Anitrendy
+const evolution = [
+    { value: 1.6, label: "Arranque" },
+    { value: 11, label: "Campañas de compra, foco en Salta" },
+    { value: 16, label: "Buenos Aires y retargeting" },
+    { value: 34.7, label: "Mejor mes" },
+];
+const evolutionMax = Math.max(...evolution.map((e) => e.value));
+const fmt = (n: number) => `${n.toLocaleString("es-AR")}x`;
+
+const sites = [
+    {
+        name: "Anitrendy",
+        description: "Tienda online, ropa deportiva femenina",
+        url: "https://anitrendy.com.ar",
     },
     {
-        title: "Todo Tela",
-        description:
-            "Landing page para una tienda de telas con un diseño moderno y responsive.",
-        image: "/projects/todo-tela.webp",
-        link: "https://www.tododetsalta.com.ar/",
+        name: "Implantes Salud",
+        description: "Sitio de la clínica, con consulta directa por WhatsApp",
+        url: "https://implantessalud.com.ar",
     },
     {
-        title: "AniTrendy",
+        name: "Impacto Creativo",
+        description: "Sitio institucional, agencia de marketing digital",
+        url: "https://impacto-creativo.vercel.app/",
+    },
+];
+
+const products = [
+    {
+        name: "Shear",
+        status: "En producción · todavía en construcción",
+        live: true,
         description:
-            "Tienda online de moda con catálogo dinámico y diseño orientado a conversión.",
-        image: "/projects/anitrendy.png",
-        link: "https://anitrendy.com.ar/",
+            "Sistema para estéticas, con turnos, fichas de clientas y recordatorios de retoque.",
     },
     {
-        title: "Impacto Creativo",
+        name: "Saloy",
+        status: "Próximamente",
+        live: false,
         description:
-            "Landing page moderna y vibrante para una agencia de marketing digital.",
-        image: "/projects/impactocreativo.png",
-        link: "https://impacto-creativo.vercel.app/",
-    },
-    {
-        title: "El Sabor Auténtico",
-        description:
-            "Landing page donde cada plato cuenta una historia y cada momento es único.",
-        image: "/projects/sabor-autentico.webp",
-        link: "https://resto-react-landing-page.vercel.app/",
+            "Plataforma para bares donde grupos de amigos suman puntos por salir juntos y los canjean por premios.",
     },
 ];
 ---
@@ -65,249 +100,181 @@ const projects: Project[] = [
     >
     </div>
 
-    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 w-full relative z-10">
-        <div class="mb-4 md:mb-8">
-            <div class="text-center lg:text-left mb-10 lg:mb-0 w-full lg:w-1/2">
-                <span
-                    class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
-                    >Nuestro Trabajo</span
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <!-- Encabezado -->
+        <div class="text-center mb-16">
+            <span
+                class="text-primary-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+                >Casos reales</span
+            >
+            <h2 class="section-title text-center">
+                Qué hicimos y <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-blue-600"
+                    >cómo nos fue</span
                 >
-                <h3
-                    id="portfolio-title"
-                    class="text-3xl md:text-5xl lg:text-5xl font-extrabold text-black-900 mb-4 tracking-tight drop-shadow-sm"
-                >
-                    {projects[0].title}
-                </h3>
-                <p
-                    id="portfolio-desc"
-                    class="text-lg md:text-xl text-black-600 leading-relaxed font-normal max-w-4xl min-h-[60px] md:min-h-[84px]"
-                >
-                    {projects[0].description}
-                </p>
-            </div>
+            </h2>
+            <p class="section-subtitle mx-auto text-center">
+                Con la fuente de cada dato.
+            </p>
         </div>
 
-        <div
-            class="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[580px] flex items-center justify-center perspective-[1500px]"
-        >
-            <div
-                class="absolute -top-5 right-0 md:right-4 z-40 flex items-center gap-3"
-            >
-                <button
-                    id="btn-prev"
-                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white border border-black-100 hover:bg-primary-50 hover:border-primary-300 text-black-600 hover:text-primary-600 transition-all active:scale-95 shadow-soft cursor-pointer"
-                    aria-label="Proyecto anterior"
-                >
-                    <ChevronLeft
-                        class="w-5 h-5 md:w-6 md:h-6 pointer-events-none"
-                    />
-                </button>
-                <button
-                    id="btn-next"
-                    class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white border border-black-100 hover:bg-primary-50 hover:border-primary-300 text-black-600 hover:text-primary-600 transition-all active:scale-95 shadow-soft cursor-pointer"
-                    aria-label="Siguiente proyecto"
-                >
-                    <ChevronRight
-                        class="w-5 h-5 md:w-6 md:h-6 pointer-events-none"
-                    />
-                </button>
-            </div>
+        <!-- Casos -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {
-                projects.map((project, index) => (
-                    <div
-                        class="carousel-item absolute top-0 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] h-full rounded-[2rem] overflow-hidden border border-black-100 shadow-soft-hover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer bg-white"
-                        data-index={index}
+                cases.map((c) => (
+                    <article
+                        id={`caso-${c.id}`}
+                        class="case-card flex flex-col gap-6 p-8 md:p-10 bg-white border border-black-100 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow"
                     >
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            class="w-full h-full object-cover object-top"
-                        />
+                        <header class="flex flex-col gap-1">
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-black-900 tracking-tight">
+                                {c.name}
+                            </h3>
+                            <p class="text-black-600 font-medium">
+                                {c.kind} ·{" "}
+                                <a
+                                    href={c.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-primary-600 hover:underline"
+                                >
+                                    {c.urlLabel}
+                                </a>
+                            </p>
+                        </header>
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 pointer-events-none transition-opacity duration-500" />
+                        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {c.stats.map((s) => (
+                                <div class="flex flex-col gap-1 rounded-2xl bg-black-50 border border-black-100 p-4">
+                                    <dt class="text-3xl font-black text-black-900 tracking-tighter">
+                                        {s.value}
+                                    </dt>
+                                    <dd class="text-sm text-black-600 font-medium leading-snug">
+                                        {s.label}
+                                    </dd>
+                                </div>
+                            ))}
+                        </dl>
 
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="carousel-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2 hover:bg-primary-600 bg-white/20 border border-white/30 text-white font-bold text-sm md:text-base rounded-full transition-all active:scale-95 backdrop-blur-md opacity-0 pointer-events-none translate-y-4"
-                        >
-                            Ver página
-                            <ArrowRight class="w-4 h-4 md:w-5 md:h-5 pointer-events-none" />
-                        </a>
-                    </div>
+                        {c.quote && (
+                            <blockquote class="border-l-[3px] border-primary-500 pl-4 text-lg italic text-black-700">
+                                “{c.quote}”
+                            </blockquote>
+                        )}
+
+                        {c.id === "anitrendy" && (
+                            <div>
+                                <h4 class="text-sm font-bold uppercase tracking-wide text-black-700 mb-3">
+                                    Cómo fue creciendo el retorno
+                                </h4>
+                                <ul class="flex flex-col gap-3">
+                                    {evolution.map((e) => (
+                                        <li class="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
+                                            <span class="text-sm text-black-600 font-medium">
+                                                {e.label}
+                                            </span>
+                                            <span class="text-sm font-bold text-black-900">
+                                                {fmt(e.value)}
+                                            </span>
+                                            <div class="col-span-2 h-2 rounded-full bg-black-100 overflow-hidden">
+                                                <div
+                                                    class="h-full rounded-full bg-gradient-to-r from-primary-400 to-primary-600"
+                                                    style={`width: ${Math.max((e.value / evolutionMax) * 100, 3)}%`}
+                                                />
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        <div>
+                            <h4 class="text-sm font-bold uppercase tracking-wide text-black-700 mb-2">
+                                Qué hicimos
+                            </h4>
+                            <p class="text-black-600 leading-relaxed">
+                                {c.did}
+                            </p>
+                        </div>
+
+                        <p class="text-xs text-black-500 font-medium mt-auto">
+                            {c.source}
+                        </p>
+                    </article>
                 ))
             }
         </div>
+
+        <!-- Sitios que hicimos -->
+        <div class="mt-20">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-black-900 tracking-tight mb-6">
+                Sitios que hicimos
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {
+                    sites.map((site) => (
+                        <a
+                            href={site.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group flex flex-col gap-2 p-6 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md hover:border-primary-200 transition-all"
+                        >
+                            <span class="flex items-center justify-between gap-3 text-xl font-bold text-black-900">
+                                {site.name}
+                                <ArrowUpRight class="w-5 h-5 shrink-0 text-primary-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </span>
+                            <span class="text-black-600 font-medium">
+                                {site.description}
+                            </span>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Productos propios -->
+        <div class="mt-16">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-black-900 tracking-tight mb-6">
+                Productos propios
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    products.map((p) => (
+                        <div class="flex flex-col gap-3 p-6 bg-white border border-black-100 rounded-3xl shadow-sm">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="text-xl font-bold text-black-900">
+                                    {p.name}
+                                </span>
+                                <span
+                                    class={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide border ${p.live ? "bg-primary-50 border-primary-100 text-primary-600" : "bg-black-50 border-black-100 text-black-500"}`}
+                                >
+                                    {p.status}
+                                </span>
+                            </div>
+                            <p class="text-black-600 font-medium">
+                                {p.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Cierre -->
+        <div class="mt-20 flex flex-col items-center gap-6 text-center">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-black-900 tracking-tight">
+                ¿Qué haríamos en tu negocio?
+            </h3>
+            <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-lg rounded-xl px-8 py-4 transition-colors duration-300 shadow-md hover:shadow-lg"
+            >
+                <Icons name="whatsapp" />
+                Quiero mi diagnóstico gratis
+                <ArrowRight class="w-5 h-5" />
+            </a>
+        </div>
     </div>
 </section>
-
-<script is:inline define:vars={{ projects }}>
-    window.portfolioProjects = projects;
-</script>
-
-<script>
-    import { gsap } from "gsap";
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const projects = (window as any).portfolioProjects;
-        if (!projects || !projects.length) return;
-
-        let currentIndex = 0;
-        const total = projects.length;
-
-        const items = document.querySelectorAll(".carousel-item");
-
-        const titleEl = document.getElementById("portfolio-title");
-        const descEl = document.getElementById("portfolio-desc");
-
-        const btnPrev = document.getElementById("btn-prev");
-        const btnNext = document.getElementById("btn-next");
-
-        let isAnimating = false;
-
-        const updateCarousel = () => {
-            if (titleEl && descEl) {
-                gsap.to([titleEl, descEl], {
-                    opacity: 0,
-                    y: 10,
-                    duration: 0.2,
-                    stagger: 0.05,
-                    ease: "power1.in",
-                    onComplete: () => {
-                        titleEl.textContent = projects[currentIndex].title;
-                        descEl.textContent = projects[currentIndex].description;
-
-                        gsap.to([titleEl, descEl], {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.4,
-                            stagger: 0.05,
-                            ease: "power2.out",
-                        });
-                    },
-                });
-            }
-
-            const isMobile = window.innerWidth < 768;
-            const shiftAmount = isMobile ? "15%" : "25%";
-            const scaleAmount = isMobile ? 0.9 : 0.85;
-
-            items.forEach((item, index) => {
-                const el = item as HTMLElement;
-                const btn = el.querySelector(".carousel-btn") as HTMLElement;
-
-                if (index === currentIndex) {
-                    el.style.transform = `translateX(0) scale(1) translateZ(0)`;
-                    el.style.opacity = `1`;
-                    el.style.zIndex = `30`;
-                    el.style.filter = `blur(0px) brightness(1)`;
-                    el.style.pointerEvents = "auto";
-
-                    if (btn) {
-                        btn.style.opacity = "1";
-                        btn.style.pointerEvents = "auto";
-                        btn.style.transform = "translateY(0)";
-                    }
-                } else if (index === getPrevIndex()) {
-                    el.style.transform = `translateX(-${shiftAmount}) scale(${scaleAmount}) translateZ(-50px)`;
-                    el.style.opacity = `0.6`;
-                    el.style.zIndex = `20`;
-                    el.style.filter = `blur(2px) brightness(0.6)`;
-                    el.style.pointerEvents = "auto";
-
-                    if (btn) {
-                        btn.style.opacity = "0";
-                        btn.style.pointerEvents = "none";
-                        btn.style.transform = "translateY(1rem)";
-                    }
-                } else if (index === getNextIndex()) {
-                    el.style.transform = `translateX(${shiftAmount}) scale(${scaleAmount}) translateZ(-50px)`;
-                    el.style.opacity = `0.6`;
-                    el.style.zIndex = `20`;
-                    el.style.filter = `blur(2px) brightness(0.6)`;
-                    el.style.pointerEvents = "auto";
-
-                    if (btn) {
-                        btn.style.opacity = "0";
-                        btn.style.pointerEvents = "none";
-                        btn.style.transform = "translateY(1rem)";
-                    }
-                } else {
-                    el.style.transform = `translateX(0) scale(0.6) translateZ(-100px)`;
-                    el.style.opacity = `0`;
-                    el.style.zIndex = `10`;
-                    el.style.filter = `blur(10px) brightness(0)`;
-                    el.style.pointerEvents = "none";
-
-                    if (btn) {
-                        btn.style.opacity = "0";
-                        btn.style.pointerEvents = "none";
-                    }
-                }
-            });
-        };
-
-        const getPrevIndex = () => (currentIndex - 1 + total) % total;
-        const getNextIndex = () => (currentIndex + 1) % total;
-
-        let autoplayTimer: ReturnType<typeof setInterval>;
-
-        const resetAutoplay = () => {
-            clearInterval(autoplayTimer);
-            autoplayTimer = setInterval(() => {
-                if (!isAnimating) {
-                    isAnimating = true;
-                    currentIndex = getNextIndex();
-                    updateCarousel();
-                    setTimeout(() => (isAnimating = false), 700);
-                }
-            }, 5000);
-        };
-
-        const goToPrev = () => {
-            if (isAnimating) return;
-            isAnimating = true;
-            currentIndex = getPrevIndex();
-            updateCarousel();
-            resetAutoplay();
-            setTimeout(() => (isAnimating = false), 700);
-        };
-
-        const goToNext = () => {
-            if (isAnimating) return;
-            isAnimating = true;
-            currentIndex = getNextIndex();
-            updateCarousel();
-            resetAutoplay();
-            setTimeout(() => (isAnimating = false), 700);
-        };
-
-        btnPrev?.addEventListener("click", goToPrev);
-        btnNext?.addEventListener("click", goToNext);
-
-        items.forEach((item, index) => {
-            item.addEventListener("click", (e) => {
-                const target = e.target as HTMLElement;
-                const isBtn = target.closest(".carousel-btn");
-
-                if (index !== currentIndex && !isBtn) {
-                    e.preventDefault();
-                    if (isAnimating) return;
-                    isAnimating = true;
-                    currentIndex = index;
-                    updateCarousel();
-                    resetAutoplay();
-                    setTimeout(() => (isAnimating = false), 700);
-                }
-            });
-        });
-
-        window.addEventListener("resize", () => {
-            updateCarousel();
-        });
-
-        updateCarousel();
-        resetAutoplay();
-    });
-</script>
