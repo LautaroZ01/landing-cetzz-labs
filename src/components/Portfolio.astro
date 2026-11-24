@@ -12,6 +12,8 @@ type Stat = { value: string; label: string };
 const cases = [
     {
         id: "anitrendy",
+        image: "/projects/anitrendy.webp",
+        imageFit: "object-cover object-top",
         name: "Anitrendy",
         kind: "Tienda de ropa deportiva femenina",
         url: "https://anitrendy.com.ar",
@@ -28,6 +30,8 @@ const cases = [
     },
     {
         id: "implantes",
+        image: "/projects/implantes_salud_web.webp",
+        imageFit: "object-cover object-top",
         name: "Implantes Salud",
         kind: "Clínica odontológica, Salta",
         url: "https://implantessalud.com.ar",
@@ -58,22 +62,27 @@ const sites = [
         name: "Anitrendy",
         description: "Tienda online, ropa deportiva femenina",
         url: "https://anitrendy.com.ar",
+        image: "/projects/anitrendy.webp",
     },
     {
         name: "Implantes Salud",
         description: "Sitio de la clínica, con consulta directa por WhatsApp",
         url: "https://implantessalud.com.ar",
+        image: "/projects/implantes_salud.png",
+        imageFit: "object-contain p-6 bg-white",
     },
     {
         name: "Impacto Creativo",
         description: "Sitio institucional, agencia de marketing digital",
         url: "https://impacto-creativo.vercel.app/",
+        image: "/projects/impactocreativo.webp",
     },
 ];
 
 const products = [
     {
         name: "Shear",
+        image: "/projects/shear.webp",
         status: "En producción · todavía en construcción",
         live: true,
         description:
@@ -81,6 +90,7 @@ const products = [
     },
     {
         name: "Saloy",
+        image: "/projects/lgoosaloy.webp",
         status: "Próximamente",
         live: false,
         description:
@@ -126,6 +136,15 @@ const products = [
                         id={`caso-${c.id}`}
                         class="case-card flex flex-col gap-6 p-8 md:p-10 bg-white border border-black-100 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow"
                     >
+                        <div class="aspect-[16/9] w-full overflow-hidden rounded-2xl bg-black-50 border border-black-100">
+                            <img
+                                src={c.image}
+                                alt={`Captura o logo de ${c.name}`}
+                                loading="lazy"
+                                class={`w-full h-full ${c.imageFit}`}
+                            />
+                        </div>
+
                         <header class="flex flex-col gap-1">
                             <h3 class="text-3xl md:text-4xl font-extrabold text-black-900 tracking-tight">
                                 {c.name}
@@ -219,6 +238,12 @@ const products = [
                             rel="noopener noreferrer"
                             class="group flex flex-col gap-2 p-6 bg-white border border-black-100 rounded-3xl shadow-sm hover:shadow-md hover:border-primary-200 transition-all"
                         >
+                            <img
+                                src={site.image}
+                                alt={`Imagen del sitio de ${site.name}`}
+                                loading="lazy"
+                                class={`w-full aspect-[16/9] rounded-2xl border border-black-100 mb-2 ${site.imageFit ?? "object-cover object-top"}`}
+                            />
                             <span class="flex items-center justify-between gap-3 text-xl font-bold text-black-900">
                                 {site.name}
                                 <ArrowUpRight class="w-5 h-5 shrink-0 text-primary-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -241,6 +266,12 @@ const products = [
                 {
                     products.map((p) => (
                         <div class="flex flex-col gap-3 p-6 bg-white border border-black-100 rounded-3xl shadow-sm">
+                            <img
+                                src={p.image}
+                                alt={`Logo de ${p.name}`}
+                                loading="lazy"
+                                class="w-full aspect-[16/9] object-cover rounded-2xl border border-black-100 mb-1"
+                            />
                             <div class="flex flex-wrap items-center gap-3">
                                 <span class="text-xl font-bold text-black-900">
                                     {p.name}

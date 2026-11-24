@@ -1,10 +1,8 @@
 ---
-/* Fotos reales del equipo en la oficina.
-   Para activarlas: copiá las 2 fotos a /public (ej: /public/team/oficina-1.webp)
-   y completá esta lista. Mientras esté vacía se muestra el video de siempre. */
+/* Fotos reales del equipo en la oficina. Si la lista queda vacía se muestra el video. */
 const teamPhotos: { src: string; alt: string }[] = [
-    // { src: "/team/oficina-1.webp", alt: "El equipo de CetZz Labs en la oficina" },
-    // { src: "/team/oficina-2.webp", alt: "El equipo de CetZz Labs trabajando" },
+    { src: "/team/oficina-1.webp", alt: "Alguien del equipo de CetZz Labs programando en la oficina" },
+    { src: "/team/oficina-2.webp", alt: "El equipo de CetZz Labs trabajando junto en la oficina" },
 ];
 ---
 
@@ -16,16 +14,16 @@ const teamPhotos: { src: string; alt: string }[] = [
         class="about-stage max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center relative z-10"
     >
         <div
-            class="about-video relative w-full aspect-square md:aspect-[4/3] flex justify-center items-center opacity-0 lg:-ml-6"
+            class={`about-video relative w-full flex justify-center items-center opacity-0 lg:-ml-6 ${teamPhotos.length > 0 ? "" : "aspect-square md:aspect-[4/3]"}`}
         >
             {teamPhotos.length > 0 ? (
-                <div class="grid grid-cols-2 gap-4 w-full h-full">
+                <div class={`grid items-center gap-3 sm:gap-5 w-full mx-auto ${teamPhotos.length > 1 ? "grid-cols-2 max-w-[26rem] sm:max-w-[34rem] lg:max-w-[34rem]" : "grid-cols-1 max-w-[16rem] sm:max-w-[20rem]"}`}>
                     {teamPhotos.slice(0, 2).map((photo, i) => (
                         <img
                             src={photo.src}
                             alt={photo.alt}
                             loading="lazy"
-                            class={`w-full h-full object-cover rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl shadow-primary-900/10 ring-1 ring-black-100 ${i === 1 ? "mt-8 lg:mt-12" : "mb-8 lg:mb-12"}`}
+                            class={`w-full min-w-0 aspect-[9/16] object-cover rounded-[1.5rem] lg:rounded-[2rem] shadow-2xl shadow-primary-900/10 ring-1 ring-black-100 ${teamPhotos.length > 1 ? (i === 1 ? "mt-8 lg:mt-12" : "mb-8 lg:mb-12") : ""}`}
                         />
                     ))}
                 </div>
